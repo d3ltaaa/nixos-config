@@ -2,6 +2,6 @@
 {
   import = [
     ./directories.nix
-    ./user.nix
+    ./general.nix
   ];
 }

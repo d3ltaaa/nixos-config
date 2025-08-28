@@ -1,9 +1,8 @@
 { ... }:
 {
   import = [
-    ./hyprland-desktop/cliphist.nix
-    ./autoLogin.nix
-    ./autoShutdown.nix
+    ./hyprland-desktop/default.nix
+    ./session.nix
     ./theme.nix
   ];
 }
