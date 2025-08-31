@@ -8,9 +8,9 @@
     let
       cfg = config.system.networking.bridgedNetwork;
     in
-    lib.mkIf cfg {
+    lib.mkIf cfg.enable {
       # bridged network
-      nat = lib.mkIf cfg.enable {
+      networking.nat = lib.mkIf cfg.enable {
         enable = true;
         externalInterface = config.system.networking.general.lanInterface;
         internalInterfaces = [ "wg0" ];

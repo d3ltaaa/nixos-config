@@ -1,24 +1,26 @@
 { lib, config, ... }:
 {
   options = {
-    system.desktop.hyprland-desktop.hypridle.enable = lib.mkEnableOption "Enables hypridle";
+    system.desktop.hyprland-desktop.hypridle = {
+      enable = lib.mkEnableOption "Enables hypridle";
+    };
   };
 
   config =
     let
-      cfg = config.system.desktop.hyprland-desktop.hypridle.enable;
+      cfg = config.system.desktop.hyprland-desktop.hypridle;
     in
-    lib.mkIf cfg {
+    lib.mkIf cfg.enable {
       services = {
         hypridle.enable = cfg.enable;
       };
-      home-manager.users.${config.settings.users.primary} =
+      home-manager.users.${config.system.user.general.primary} =
         let
-          cfg = cfg;
+          nixos-cfg = cfg;
         in
         { ... }:
         {
-          services.hypridle = lib.mkIf cfg.enable {
+          services.hypridle = lib.mkIf nixos-cfg.enable {
             enable = true;
             settings = {
               general = {

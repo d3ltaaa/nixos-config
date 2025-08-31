@@ -36,9 +36,9 @@
             prefixLength = 24;
           }
         ];
-        defaultGateway = config.settings.networking.defaultGateway;
+        defaultGateway = config.system.networking.general.defaultGateway;
         nameservers = [
-          config.settings.networking.defaultGateway
+          config.system.networking.general.defaultGateway
         ]; # or your router's DNS
       };
       services.samba-wsdd = {

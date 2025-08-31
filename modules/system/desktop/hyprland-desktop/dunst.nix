@@ -6,10 +6,10 @@
 
   config =
     let
-      cfg = config.system.desktop.hyprland-desktop.dunst.enable;
+      cfg = config.system.desktop.hyprland-desktop.dunst;
     in
     lib.mkIf cfg.enable {
-      home-manager.users.${config.settings.users.primary} =
+      home-manager.users.${config.system.user.general.primary} =
         { config, ... }:
         {
           services.dunst = {

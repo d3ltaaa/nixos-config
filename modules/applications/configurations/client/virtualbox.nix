@@ -11,7 +11,7 @@
       cfg = config.applications.configurations.client.virtualbox;
     in
     lib.mkIf cfg.enable {
-      users.groups.vboxusers.members = [ "${config.settings.users.primary}" ];
+      users.groups.vboxusers.members = [ "${config.system.user.general.primary}" ];
 
       virtualisation.virtualbox = {
         host = {

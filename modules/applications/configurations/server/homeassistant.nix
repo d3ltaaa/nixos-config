@@ -28,8 +28,8 @@
                 "/var/lib/homeassistant:/config"
               ];
               environment = {
-                TZ = config.settings.general.timeZone;
-                PUID = toString config.users.users.${config.settings.users.primary}.uid;
+                TZ = config.system.locale.timeZone;
+                PUID = toString config.users.users.${config.system.user.general.primary}.uid;
                 PGID = toString config.users.groups.users.gid;
               };
             };

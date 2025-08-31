@@ -15,7 +15,7 @@
     let
       cfg = config.hardware.powerManagement;
     in
-    lib.mkIf cfg.enable {
+    {
       services.upower.enable = cfg.upower.enable;
 
       services.tlp.enable = cfg.upower.enable;

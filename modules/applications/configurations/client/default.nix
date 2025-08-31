@@ -1,6 +1,6 @@
 { ... }:
 {
-  import = [
+  imports = [
     ./neovim/default.nix
     ./firefox.nix
     ./fileSharing.nix
@@ -13,6 +13,8 @@
     ./ssh.nix
     ./thunar.nix
     ./thunderbird.nix
+    ./tmux.nix
     ./virtualbox.nix
+    ./zsh.nix
   ];
 }

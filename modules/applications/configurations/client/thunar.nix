@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   options = {
     applications.configurations.client.thunar = {
@@ -40,7 +45,7 @@
       #   };
       # };
 
-      home-manager.users.${config.settings.users.primary} =
+      home-manager.users.${config.system.user.general.primary} =
         { config, ... }:
         {
           xdg.mimeApps = {

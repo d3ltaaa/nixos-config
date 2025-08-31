@@ -14,7 +14,7 @@
       cfg = config.system.desktop.hyprland-desktop.rofi;
     in
     lib.mkIf cfg.enable {
-      home-manager.users.${config.settings.users.primary} =
+      home-manager.users.${config.system.user.general.primary} =
         { config, ... }:
         {
           programs.rofi =

@@ -39,14 +39,13 @@
         networkmanager.enable = true;
         networkmanager.dns = lib.mkIf (cfg.nameservers != [ "1.1.1.1" ]) "none";
 
-        useDHCP = lib.mkIf cfg.staticIp != null false;
-        interfaces.${cfg.lanInterface}.ipv4.addresses =
-          lib.mkIf cfg.staticIp != null [
-            {
-              address = cfg.staticIp;
-              prefixLength = 24;
-            }
-          ];
+        useDHCP = lib.mkIf (cfg.staticIp != null) false;
+        interfaces.${cfg.lanInterface}.ipv4.addresses = lib.mkIf (cfg.staticIp != null) [
+          {
+            address = cfg.staticIp;
+            prefixLength = 24;
+          }
+        ];
         defaultGateway = lib.mkIf (cfg.defaultGateway != null) cfg.defaultGateway;
         nameservers = cfg.nameservers;
 

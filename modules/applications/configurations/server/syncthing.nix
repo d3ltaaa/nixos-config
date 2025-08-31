@@ -25,8 +25,8 @@
       ];
       services.syncthing = {
         enable = true;
-        dataDir = "/home/${config.settings.users.primary}";
-        user = config.settings.users.primary;
+        dataDir = "/home/${config.system.user.general.primary}";
+        user = config.system.user.general.primary;
         openDefaultPorts = lib.mkIf cfg.gui true;
         guiAddress = lib.mkIf cfg.gui "0.0.0.0:8384";
         settings = {

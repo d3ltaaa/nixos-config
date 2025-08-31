@@ -13,7 +13,7 @@
     let
       cfg = config.system.networking.wakeOnLan;
     in
-    lib.mkIf cfg {
+    lib.mkIf cfg.enable {
       systemd.services.wakeonlan = lib.mkIf cfg.enable {
         description = "Re-enable Wake-on-LAN every boot";
         after = [ "network.target" ];

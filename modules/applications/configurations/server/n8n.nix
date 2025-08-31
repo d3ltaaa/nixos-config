@@ -2,6 +2,7 @@
 {
   options = {
     applications.configurations.server.n8n = {
+      enable = lib.mkEnableOption "Enables n8n";
     };
   };
 

@@ -105,7 +105,7 @@
         };
       };
       theme = {
-        colorScheme = null; # a
+        colorSchemes = null; # a
 
         gtk = {
           enable = true; # a
@@ -454,31 +454,31 @@
                 {
                   "Proxmox" = {
                     icon = "proxmox.png";
-                    href = "https://proxmox.${config.settings.general.serverAddress}";
+                    href = "https://proxmox.${config.secrets.serverAddress}";
                   };
                 }
                 {
                   "Wireguard" = {
                     icon = "wireguard.png";
-                    href = "https://wg.${config.settings.general.serverAddress}";
+                    href = "https://wg.${config.secrets.serverAddress}";
                   };
                 }
                 {
                   "Ntfy" = {
                     icon = "ntfy.png";
-                    href = "https://ntfy.${config.settings.general.serverAddress}";
+                    href = "https://ntfy.${config.secrets.serverAddress}";
                   };
                 }
                 {
                   "Litellm" = {
                     icon = "anything-llm-light.png";
-                    href = "https://litellm.${config.settings.general.serverAddress}";
+                    href = "https://litellm.${config.secrets.serverAddress}";
                   };
                 }
                 {
                   "Radicale" = {
                     icon = "radicale.png";
-                    href = "https://radicale.${config.settings.general.serverAddress}";
+                    href = "https://radicale.${config.secrets.serverAddress}";
                   };
                 }
               ];
@@ -488,43 +488,43 @@
                 {
                   "Syncthing" = {
                     icon = "syncthing.png";
-                    href = "https://syncthing.${config.settings.general.serverAddress}";
+                    href = "https://syncthing.${config.secrets.serverAddress}";
                   };
                 }
                 {
                   "n8n" = {
                     icon = "n8n.png";
-                    href = "https://n8n.${config.settings.general.serverAddress}";
+                    href = "https://n8n.${config.secrets.serverAddress}";
                   };
                 }
                 {
                   "Vaultwarden" = {
                     icon = "vaultwarden.png";
-                    href = "https://vault.${config.settings.general.serverAddress}";
+                    href = "https://vault.${config.secrets.serverAddress}";
                   };
                 }
                 {
                   "Homeassistant" = {
                     icon = "home-assistant.png";
-                    href = "https://homeassistant.${config.settings.general.serverAddress}";
+                    href = "https://homeassistant.${config.secrets.serverAddress}";
                   };
                 }
                 {
                   "Open-Webui" = {
                     icon = "open-webui.png";
-                    href = "https://open-webui.${config.settings.general.serverAddress}";
+                    href = "https://open-webui.${config.secrets.serverAddress}";
                   };
                 }
                 {
                   "Jellyfin" = {
                     icon = "jellyfin.png";
-                    href = "https://jf.${config.settings.general.serverAddress}";
+                    href = "https://jf.${config.secrets.serverAddress}";
                   };
                 }
                 {
                   "Grafana" = {
                     icon = "grafana.png";
-                    href = "https://grafana.${config.settings.general.serverAddress}";
+                    href = "https://grafana.${config.secrets.serverAddress}";
                   };
                 }
               ];
@@ -540,7 +540,7 @@
                 {
                   "3D Printer" = {
                     icon = "mainsail.png";
-                    href = "https://dp.${config.settings.general.serverAddress}";
+                    href = "https://dp.${config.secrets.serverAddress}";
                   };
                 }
               ];
@@ -594,7 +594,7 @@
 
           folders = {
             "Dokumente" = {
-              path = "/home/${config.settings.users.primary}/Dokumente";
+              path = "/home/${config.system.user.general.primary}/Dokumente";
               devices = [
                 "PC"
                 # "T480"
@@ -603,7 +603,7 @@
               ];
             }; # a
             "Bilder" = {
-              path = "/home/${config.settings.users.primary}/Bilder";
+              path = "/home/${config.system.user.general.primary}/Bilder";
               devices = [
                 "PC"
                 # "T480"

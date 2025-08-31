@@ -9,7 +9,11 @@
       cfg = config.system.desktop.hyprland-desktop.waybar;
     in
     lib.mkIf cfg.enable {
-      home-manager.users.${config.settings.users.primary} =
+      home-manager.users.${config.system.user.general.primary} =
+        let
+          nixos-config = config;
+          nixos-cfg = cfg;
+        in
         { config, ... }:
         {
 

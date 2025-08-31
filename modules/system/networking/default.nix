@@ -1,6 +1,6 @@
 { ... }:
 {
-  import = [
+  imports = [
     ./acme.nix
     ./bridgedNetwork.nix
     ./dnsmasq.nix
@@ -8,6 +8,6 @@
     ./general.nix
     ./nginx.nix
     ./wakeOnLan.nix
-    ./wireguard.nix
+    ./vpn.nix
   ];
 }

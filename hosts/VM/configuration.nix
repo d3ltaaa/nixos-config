@@ -1,20 +1,19 @@
 { lib, config, ... }:
 {
   # accessible for root at /etc/credentials
+  imports = [
+    ./hardware-configuration.nix
+  ];
   secrets = {
     serverAddress = lib.strings.trim (builtins.readFile "/etc/credentials/server_address");
     ipv64KeyFile = lib.strings.trim (builtins.readFile "/etc/credentials/acmeIPV64.cert");
     acmeEmail = lib.strings.trim (builtins.readFile "/etc/credentials/acmeEmail");
-    githubUserename = lib.strings.trim (builtins.readFile "/etc/credentials/github/username");
+    githubUsername = lib.strings.trim (builtins.readFile "/etc/credentials/github/username");
     githubEmail = lib.strings.trim (builtins.readFile "/etc/credentials/github/email");
     privateWireguardKey = lib.strings.trim (
       builtins.readFile "/etc/credentials/wireguard-keys/private"
     );
   };
-
-  imports = [
-    ./hardware-configuration.nix
-  ];
 
   system = {
     general = {
@@ -35,7 +34,7 @@
       defaultEntry = 0; # a
       extraEntries = null; # a
     };
-    destkop = {
+    desktop = {
       hyprland-desktop = {
         hyprland = {
           enable = true; # a
@@ -77,8 +76,7 @@
         };
       };
       theme = {
-        colorScheme = null; # a
-
+        colorSchemes = null; # a
         gtk = {
           enable = true; # a
           theme.name = "Adwaita"; # a
@@ -102,27 +100,27 @@
         };
         autoShutdown = {
           enable = false; # a
-          watchPort = config.services.ollama.port; # a
+          watchPort = toString config.services.ollama.port; # a
           shutdownTime = "1800"; # seconds # a
         };
       };
     };
-    security = {
-      # TODO
-      monitoring = { };
-      features = {
-        opensnitch = { };
-        fail2ban = { };
-        passwords = { };
-        snapshots = { };
-        backups = { };
-        bleachBit = { };
-        apparmor = { };
-        firejail = { };
-        clamav = { };
-        gnupg = { };
-      };
-    };
+    # security = {
+    #   # TODO
+    #   monitoring = { };
+    #   features = {
+    #     opensnitch = { };
+    #     fail2ban = { };
+    #     passwords = { };
+    #     snapshots = { };
+    #     backups = { };
+    #     bleachBit = { };
+    #     apparmor = { };
+    #     firejail = { };
+    #     clamav = { };
+    #     gnupg = { };
+    #   };
+    # };
     networking = {
       general = {
         lanInterface = "enp0s31f6"; # a
@@ -131,7 +129,7 @@
         defaultGateway = null; # a
         nameservers = [ "1.1.1.1" ]; # a
       };
-      firewall = { }; # a
+      # firewall = { }; # a
       bridgedNetwork = {
         enable = true; # a (for wireguard)
       };
@@ -323,9 +321,9 @@
     usb = {
       enable = true; # a
     };
-    partitioning = {
-      enable = true; # TODO
-    };
+    # partitioning = {
+    # enable = true; # TODO
+    # };
   };
   applications = {
     configurations = {
@@ -379,6 +377,7 @@
         };
         git = {
           enable = true; # a
+          # username = config.system.user.general.primary; # a
           username = config.secrets.githubUsername; # a
           email = config.secrets.githubEmail; # a
         };

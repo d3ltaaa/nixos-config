@@ -151,14 +151,14 @@
 
       cfg = config.applications.packages.nixpkgs;
     in
-    lib.mkIf cfg.enable {
+    {
       # Allow unfree packages
       nixpkgs.config.allowUnfree = true;
 
       # Install system packages
       environment.systemPackages =
         [ ]
-        ++ cfg.stable.extraPackages
+        ++ cfg.extraPackages
         ++ (pkgs.lib.optionals cfg.stable.system.default stable-system-pkgs)
         ++ (pkgs.lib.optionals cfg.stable.system.base stable-base-pkgs)
         ++ (pkgs.lib.optionals cfg.stable.system.lang stable-lang-pkgs)
@@ -169,7 +169,7 @@
         ++ (pkgs.lib.optionals cfg.unstable.system.default unstable-system-pkgs);
 
       # Install user packages
-      users.users.${config.settings.users.primary}.packages =
+      users.users.${config.system.user.general.primary}.packages =
         [ ]
         ++ (pkgs.lib.optionals cfg.stable.user.default stable-user-pkgs)
         ++ (pkgs.lib.optionals cfg.unstable.user.default unstable-user-pkgs);

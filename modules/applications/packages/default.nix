@@ -1,7 +1,6 @@
 { ... }:
 {
-  import = [
-    ./derivations/default.nix
+  imports = [
     ./derivations.nix
     ./flatpaks.nix
     ./nixpkgs.nix

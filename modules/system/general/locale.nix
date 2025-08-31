@@ -21,7 +21,7 @@
     let
       cfg = config.system.general.locale;
     in
-    lib.mkIf cfg {
+    {
       time.timeZone = cfg.timeZone;
 
       i18n.defaultLocale = lib.mkIf (cfg.language == "en") "en_US.UTF-8";

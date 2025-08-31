@@ -2,12 +2,13 @@
   lib,
   config,
   pkgs,
+  nix-colors,
   ...
 }:
 {
   options = {
     system.desktop.theme = {
-      colorScheme = {
+      colorSchemes = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
       };
       gtk = {
@@ -54,7 +55,7 @@
       cfg = config.system.desktop.theme;
     in
     {
-      home-manager.users.${config.settings.users.primary} =
+      home-manager.users.${config.system.user.general.primary} =
         let
           nixos-config = config;
         in
@@ -65,7 +66,7 @@
           ];
 
           colorScheme =
-            if cfg.colorScheme == null then
+            if cfg.colorSchemes == null then
               {
                 name = "catppuccin-macchiato";
                 palette = {
@@ -88,13 +89,13 @@
                 };
               }
             else
-              cfg.colorScheme;
+              inputs.nix-colors.colorSchemes.${cfg.colorSchemes};
 
           gtk = lib.mkIf cfg.gtk.enable {
             enable = true;
             theme.name = cfg.gtk.theme.name;
             theme.package = lib.mkIf (cfg.gtk.theme.package != null) pkgs.${cfg.gtk.theme.package};
-            cursorTheme.name = cfg.gtk.theme.package;
+            cursorTheme.name = cfg.gtk.cursor.name;
             cursorTheme.package = lib.mkIf (cfg.gtk.cursor.package != null) pkgs.${cfg.gtk.cursor.package};
             iconTheme.name = cfg.gtk.icon.name;
             iconTheme.package = lib.mkIf (cfg.gtk.icon.package != null) pkgs.${cfg.gtk.icon.package};
@@ -109,4 +110,5 @@
           };
         };
     };
+
 }

@@ -11,12 +11,12 @@
       autoShutdown = {
         enable = lib.mkEnableOption "Enables shutting down, if for shutdownTime there was no activity noticed on port watchport";
         watchPort = lib.mkOption {
-          type = lib.types.int;
-          default = config.services.ollama.port;
+          type = lib.types.str;
+          default = toString config.services.ollama.port;
         };
         shutdownTime = lib.mkOption {
-          type = lib.types.int;
-          default = 1800;
+          type = lib.types.str;
+          default = "1800";
         };
       };
     };
@@ -29,7 +29,7 @@
     {
       # autologin
       services = {
-        getty.autologinUser = lib.mkIf cfg.autoLogin.enable "${config.settings.users.primary}";
+        getty.autologinUser = lib.mkIf cfg.autoLogin.enable "${config.system.user.general.primary}";
       };
 
       # autoShutdown

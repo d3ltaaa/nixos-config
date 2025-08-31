@@ -30,7 +30,7 @@
     in
     {
       nixosConfigurations = {
-        "T480" = nixpkgs-stable.lib.nixosSystem {
+        "VM" = nixpkgs-stable.lib.nixosSystem {
           # nixpkgs-stable -> pkgs
           system = "x86_64-linux";
           specialArgs = {
@@ -41,7 +41,7 @@
             };
           };
           modules = [
-            ./hosts/T480/configuration.nix
+            ./hosts/VM/configuration.nix
             ./modules/default.nix
             inputs.home-manager.nixosModules.home-manager
             inputs.nix-flatpak.nixosModules.nix-flatpak

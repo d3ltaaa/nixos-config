@@ -5,15 +5,15 @@
 
   config =
     let
-      cfg = config;
+      cfg = config.system.networking.general;
     in
-    lib.mkIf cfg {
+    {
+      # TODO
       # idk what this is for
-      firewall.allowedTCPPorts =
-        lib.mkIf cfg.staticIp != null [
-          53
-          80
-          443
-        ];
+      networking.firewall.allowedTCPPorts = lib.mkIf (cfg.staticIp != null) [
+        53
+        80
+        443
+      ];
     };
 }

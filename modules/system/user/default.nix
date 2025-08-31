@@ -1,6 +1,6 @@
 { ... }:
 {
-  import = [
+  imports = [
     ./directories.nix
     ./general.nix
   ];

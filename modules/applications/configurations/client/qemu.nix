@@ -24,8 +24,8 @@
 
       virtualisation.spiceUSBRedirection.enable = true;
 
-      users.groups.libvirtd.members = [ "${config.settings.general.users.primary}" ];
-      users.groups.libvirt.members = [ "${config.settings.general.users.primary}" ];
+      users.groups.libvirtd.members = [ "${config.system.user.general.primary}" ];
+      users.groups.libvirt.members = [ "${config.system.user.general.primary}" ];
 
       environment.variables.LIBVIRT_DEFAULT_URI = "qemu:///system";
 
@@ -59,7 +59,7 @@
         libosinfo
       ];
       # Home Manager as NixOS module
-      home-manager.users.${config.settings.users.primary} =
+      home-manager.users.${config.system.user.general.primary} =
         { config, ... }:
         {
           dconf.settings = {

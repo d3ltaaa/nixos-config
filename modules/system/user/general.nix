@@ -18,7 +18,7 @@
     let
       cfg = config.system.user.general;
     in
-    lib.mkIf cfg.enable {
+    {
       users.users.${cfg.primary} = {
         isNormalUser = true;
         initialPassword = "${cfg.primary}";

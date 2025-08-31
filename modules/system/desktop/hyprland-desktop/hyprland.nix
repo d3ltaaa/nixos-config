@@ -30,13 +30,14 @@
         xwayland.enable = true;
       };
 
-      home-manager.users.${config.settings.users.primary} =
+      home-manager.users.${config.system.user.general.primary} =
         let
-          cfg = cfg;
+          nixos-config = config;
+          nixos-cfg = cfg;
         in
         { config, ... }:
         {
-          wayland.windowManager.hyprland = lib.mkIf cfg.enable {
+          wayland.windowManager.hyprland = lib.mkIf nixos-cfg.enable {
             enable = true;
             xwayland.enable = true;
             systemd.enable = true;
@@ -46,14 +47,6 @@
               source=~/.config/hypr/monitors.conf
               source=~/.config/hypr/workspaces.conf
               ";
-
-            monitor = lib.mkIf (
-              config.system.desktop.hyprland-desktop.settings.nwg-displays.enable != true && cfg.monitor != null
-            ) cfg.monitor;
-            workspace = lib.mkIf (
-              config.system.desktop.hyprland-desktop.settings.nwg-displays.enable != true
-              && cfg.workspaces != null
-            ) cfg.workspaces;
 
             settings = {
 
@@ -83,12 +76,21 @@
                 allow_tearing = false;
               };
 
+              monitor = lib.mkIf (
+                nixos-config.system.desktop.hyprland-desktop.settings.nwg-displays.enable != true
+                && nixos-cfg.monitor != null
+              ) nixos-cfg.monitor;
+              workspace = lib.mkIf (
+                nixos-config.system.desktop.hyprland-desktop.settings.nwg-displays.enable != true
+                && nixos-cfg.workspaces != null
+              ) nixos-cfg.workspaces;
+
               plugin = {
                 hyprbars = {
                   bar_height = 30;
                   bar_title_enabled = false;
                   bar_part_of_window = false;
-                  bar_precedence_over_border = false;
+                  bar_precedenixos-confige_over_border = false;
                   bar_color = "rgb(${config.colorScheme.palette.base00})";
                   bar_blur = true;
                   col.text = "rgb(${config.colorScheme.palette.base05})";
@@ -239,7 +241,7 @@
               binde = [
                 ",XF86AudioMute, exec, scr_volume mute"
                 ",XF86AudioLowerVolume, exec, scr_volume dec"
-                ",XF86AudioRaiseVolume, exec, scr_volume inc"
+                ",XF86AudioRaiseVolume, exec, scr_volume inixos-config"
                 ",XF86MonBrightnessUp, exec, scr_light up"
                 ",XF86MonBrightnessDown, exec, scr_light down"
                 ",XF86AudioPlay, exec, playerctl play-pause"
@@ -247,7 +249,7 @@
                 ",XF86AudioNext, exec, playerctl next"
               ];
 
-              exec-once = "start-hyprland-env.sh";
+              exec-onixos-confige = "start-hyprland-env.sh";
             };
 
             plugins = [

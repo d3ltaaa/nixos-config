@@ -19,7 +19,7 @@
     let
       cfg = config.system.boot;
     in
-    lib.mkIf cfg {
+    {
       boot.loader.systemd-boot.enable = false;
       boot.loader = {
         efi = {
@@ -31,7 +31,7 @@
           device = "nodev";
           useOSProber = cfg.osProber;
           efiSupport = true;
-          configurationName = "NixOS (${config.settings.general.name})";
+          configurationName = "NixOS (${config.system.general.nixos.name})";
           default = lib.mkIf (cfg.defaultEntry != null) cfg.defaultEntry;
           extraEntries =
             let

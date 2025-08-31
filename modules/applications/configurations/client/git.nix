@@ -2,7 +2,6 @@
   lib,
   config,
   pkgs,
-  pkgs,
   ...
 }:
 {
@@ -33,7 +32,7 @@
         config.credential.credentialstore = "cache";
       };
 
-      home-manager.users.${config.settings.users.primary} =
+      home-manager.users.${config.system.user.general.primary} =
         let
           nixos-config = config;
         in
@@ -41,8 +40,8 @@
         {
           programs.git = {
             enable = true;
-            userName = nixos-config.applications.configuration.git.username;
-            userEmail = nixos-config.applications.configuration.git.email;
+            userName = nixos-config.applications.configurations.client.git.username;
+            userEmail = nixos-config.applications.configurations.client.git.email;
           };
         };
     };

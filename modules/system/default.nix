@@ -1,6 +1,6 @@
 { ... }:
 {
-  import = [
+  imports = [
     ./boot/default.nix
     ./desktop/default.nix
     ./general/default.nix

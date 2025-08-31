@@ -24,14 +24,14 @@
     {
       networking.hostName = cfg.name;
 
-      nix.system.experimental-features = [
+      nix.settings.experimental-features = [
         "nix-command"
         "flakes"
       ];
 
       system.stateVersion = cfg.nixosStateVersion;
 
-      home-manager.users.${config.system.users.primary} =
+      home-manager.users.${config.system.user.general.primary} =
         let
           nixos-config = config;
         in
@@ -40,8 +40,8 @@
 
           programs.home-manager.enable = true;
 
-          home.username = "${nixos-config.system.users.primary}";
-          home.homeDirectory = "/home/${nixos-config.system.users.primary}";
+          home.username = "${nixos-config.system.user.general.primary}";
+          home.homeDirectory = "/home/${nixos-config.system.user.general.primary}";
 
           home.stateVersion = cfg.homeManagerStateVersion;
         };

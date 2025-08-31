@@ -6,14 +6,14 @@
 }:
 {
   options = {
-    XXX = {
+    applications.configurations.client.spotify = {
       enable = lib.mkEnableOption "Enables Spotify module";
     };
   };
 
   config =
     let
-      cfg = config.XXX;
+      cfg = config.applications.configurations.client.spotify;
     in
     lib.mkIf cfg.enable {
       environment.systemPackages = with pkgs; [ spotify ];

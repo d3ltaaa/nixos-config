@@ -7,7 +7,7 @@
 {
   options = {
     applications.packages.flatpaks = {
-      flatpaks.default = lib.mkEnableOption "Enables Flatpaks";
+      enable = lib.mkEnableOption "Enables Flatpaks";
     };
   };
 
@@ -26,7 +26,7 @@
     in
     lib.mkIf cfg.enable {
       # has to be enabled in order for flatpaks to work!
-      xdg.portal = lib.mkIf config.applications.packages.libraries.flatpaks.default {
+      xdg.portal = lib.mkIf config.applications.packages.flatpaks.enable {
         enable = true;
         extraPortals = with pkgs; [
           xdg-desktop-portal-wlr
@@ -34,7 +34,7 @@
           xdg-desktop-portal-hyprland
         ];
       };
-      services.flatpak = lib.mkIf config.applications.packages.libraries.flatpaks.default {
+      services.flatpak = lib.mkIf config.applications.packages.flatpaks.enable {
         enable = true;
         remotes = lib.mkOptionDefault [
           {

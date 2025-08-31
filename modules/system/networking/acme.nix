@@ -1,21 +1,23 @@
 { lib, config, ... }:
 {
   options = {
-    enable = lib.mkEnableOption "Enables acme configuration";
-    domain = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-    };
-    email = lib.mkOption {
-      type = lib.types.str;
-      default = "hil.falk@protonmail.com";
-    };
-    dnsProvider = lib.mkOption {
-      type = lib.types.str;
-      default = "ipv64";
-    };
-    domainNames = lib.mkOption {
-      type = lib.types.listOf (lib.types.str);
+    system.networking.acme = {
+      enable = lib.mkEnableOption "Enables acme configuration";
+      domain = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+      };
+      email = lib.mkOption {
+        type = lib.types.str;
+        default = "hil.falk@protonmail.com";
+      };
+      dnsProvider = lib.mkOption {
+        type = lib.types.str;
+        default = "ipv64";
+      };
+      domainNames = lib.mkOption {
+        type = lib.types.listOf (lib.types.str);
+      };
     };
   };
 

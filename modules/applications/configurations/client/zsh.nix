@@ -1,20 +1,20 @@
 { lib, config, ... }:
 {
   options = {
-    applications.configurations.zsh = {
+    applications.configurations.client.zsh = {
       enable = lib.mkEnableOption "Enables Zsh module";
     };
   };
 
   config =
     let
-      cfg = config.applications.configurations.zsh;
+      cfg = config.applications.configurations.client.zsh;
     in
     lib.mkIf cfg.enable {
       programs.zsh.enable = true;
 
       # Home Manager as NixOS module
-      home-manager.users.${config.settings.users.primary} =
+      home-manager.users.${config.system.user.general.primary} =
         { config, ... }:
         {
           programs.zsh = {

@@ -9,7 +9,7 @@
       cfg = config.system.desktop.hyprland-desktop.cliphist;
     in
     lib.mkIf cfg.enable {
-      home-manager.users.${config.settings.users.primary} =
+      home-manager.users.${config.system.user.general.primary} =
         { ... }:
         {
           services.cliphist.enable = true;

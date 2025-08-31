@@ -1,8 +1,7 @@
 { ... }:
 {
-  import = [
+  imports = [
     ./fileSharing.nix
-    ./grafana.nix
     ./homeassistant.nix
     ./homepage.nix
     ./jellyfin.nix
