@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    # ./features/default.nix
+    ./features/default.nix
     # ./monitoring.nix
   ];
 }

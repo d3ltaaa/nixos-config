@@ -111,22 +111,25 @@
         enable = true; # a
       };
     };
-    # security = {
-    #   # TODO
-    #   monitoring = { };
-    #   features = {
-    #     opensnitch = { };
-    #     fail2ban = { };
-    #     passwords = { };
-    #     snapshots = { };
-    #     backups = { };
-    #     bleachBit = { };
-    #     apparmor = { };
-    #     firejail = { };
-    #     clamav = { };
-    #     gnupg = { };
-    #   };
-    # };
+    security = {
+      #   # TODO
+      #   monitoring = { };
+      features = {
+        #     opensnitch = { };
+        #     fail2ban = { };
+        #     passwords = { };
+        #     snapshots = { };
+        #     backups = { };
+        #     bleachBit = { };
+        #     apparmor = { };
+        #     firejail = { };
+        #     clamav = { };
+        #     gnupg = { };
+        polkit = {
+          enable = true;
+        };
+      };
+    };
     networking = {
       general = {
         lanInterface = "ens18"; # a
