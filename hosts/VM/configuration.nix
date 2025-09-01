@@ -30,7 +30,7 @@
     };
     boot = {
       primaryBoot = true; # a
-      osProber = true; # a
+      osProber = false; # a
       defaultEntry = 0; # a
       extraEntries = null; # a
     };
