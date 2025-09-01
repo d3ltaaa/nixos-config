@@ -10,8 +10,6 @@
     lib.mkIf cfg.enable {
       environment.variables = {
         EDITOR = "nvim";
-        ELECTRON_OZONE_PLATFORM_HINT = "auto"; # TODO does that belong here?
-        WLR_RENDERER_ALLOW_SOFTWARE = 1;
       };
 
       security.sudo.extraConfig = "Defaults        !sudoedit_checkdir"; # for neovim + lf with root owned files

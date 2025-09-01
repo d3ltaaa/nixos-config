@@ -107,6 +107,9 @@
           shutdownTime = "1800"; # seconds # a
         };
       };
+      environment = {
+        enable = true; # a
+      };
     };
     # security = {
     #   # TODO
@@ -137,7 +140,7 @@
         enable = true; # a (for wireguard)
       };
       wakeOnLan = {
-        enable = true; # a
+        enable = false; # a
       };
       vpn = {
         wireguard = {
