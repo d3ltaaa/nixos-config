@@ -11,7 +11,7 @@
     in
     lib.mkIf cfg.enable {
       environment.variables = {
-        ELECTRON_OZONE_PLATFORM_HINT = "auto"; # TODO does that belong here?
+        ELECTRON_OZONE_PLATFORM_HINT = "auto";
         WLR_RENDERER_ALLOW_SOFTWARE = 1;
       };
     };

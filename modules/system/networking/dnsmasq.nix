@@ -31,10 +31,9 @@
           ];
 
           listen-address = [
-            "127.0.0.1"
-            "::1"
-            "${config.system.networking.general.staticIp}" # TODO What is this for? If static IP is null, it wont work.
-            "fd00::11"
+            "127.0.0.1" # ipv4 localhost
+            "::1" # ipv6 localhost
+            "${config.system.networking.general.staticIp}"
           ];
 
           address = cfg.address;
