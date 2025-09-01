@@ -18,7 +18,7 @@
   system = {
     general = {
       nixos = {
-        name = "T480"; # a
+        name = "VM"; # a
         nixosStateVersion = "25.05"; # a
         homeManagerStateVersion = "25.05"; # a
       };
@@ -30,7 +30,7 @@
     };
     boot = {
       primaryBoot = true; # a
-      osProber = false; # a
+      osProber = true; # a
       defaultEntry = 0; # a
       extraEntries = null; # a
     };
@@ -40,10 +40,13 @@
           enable = true; # a
         };
         hypridle = {
-          enable = true; # a
+          enable = false; # a
         };
         hyprlock = {
-          enable = true; # a
+          enable = false; # a
+        };
+        hyprpolkitagent = {
+          enable = false;
         };
         waybar = {
           enable = true; # a
@@ -123,8 +126,8 @@
     # };
     networking = {
       general = {
-        lanInterface = "enp0s31f6"; # a
-        wifiInterface = "wlp3s0"; # a
+        lanInterface = "ens18"; # a
+        # wifiInterface = "wlp3s0"; # a
         staticIp = null; # a
         defaultGateway = null; # a
         nameservers = [ "1.1.1.1" ]; # a
@@ -413,4 +416,5 @@
       };
     };
   };
+  services.openssh.enable = true;
 }

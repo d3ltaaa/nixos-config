@@ -21,7 +21,7 @@
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = true;
-          ExecStart = "${pkgs.ethtool}/sbin/ethtool -s eno1 wol g";
+          ExecStart = "${pkgs.ethtool}/sbin/ethtool -s ${config.system.networking.general.lanInterface} wol g";
         };
       };
     };

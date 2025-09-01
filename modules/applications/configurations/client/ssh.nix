@@ -13,7 +13,7 @@
     lib.mkIf cfg.enable {
       services.openssh = {
         enable = true;
-        passwordAuthentication = false;
+        passwordAuthentication = true; # TODO change
         permitRootLogin = "no";
       };
     };
