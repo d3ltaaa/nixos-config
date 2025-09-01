@@ -22,6 +22,7 @@
   config =
     let
       cfg = config.system.desktop.hyprland-desktop.hyprland;
+      cfg-hyprland = config.system.desktop.hyprland-desktop;
     in
     lib.mkIf cfg.enable {
 
@@ -29,6 +30,29 @@
         enable = true;
         xwayland.enable = true;
       };
+
+      environment.systemPackages = [
+        (pkgs.writeScriptBin "hyprland-start-script" ''
+          #!${pkgs.bash}/bin/bash
+
+          ${lib.optionalString cfg-hyprland.hyprlock.enable ''
+            hyprlock &
+          ''}
+          ${lib.optionalString cfg-hyprland.hyprpolkitagent.enable ''
+            systemctl --user start hyprpolkitagent &
+          ''}
+          ${lib.optionalString cfg-hyprland.swww.enable ''
+            swww-daemon &
+            swww img ~/.config/wall/paper &
+          ''}
+
+          hyprpm reload -n
+
+          ${lib.optionalString cfg-hyprland.waybar.enable ''
+            waybar &
+          ''}
+        '')
+      ];
 
       home-manager.users.${config.system.user.general.primary} =
         let
@@ -249,7 +273,7 @@
                 ",XF86AudioNext, exec, playerctl next"
               ];
 
-              exec-onixos-confige = "start-hyprland-env.sh";
+              exec-once = "hyprland-start-script";
             };
 
             plugins = [
