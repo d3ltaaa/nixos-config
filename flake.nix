@@ -10,7 +10,7 @@
     nixvim.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     nix-colors.url = "github:misterio77/nix-colors";
-    nix-colors.inputs.nixpkgs.follows = "nixpkgs-stable";
+    # nix-colors.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak"; # stable branch. Use github:gmodena/nix-flatpak/?ref=<tag> to pin releases.
 
