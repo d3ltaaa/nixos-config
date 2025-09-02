@@ -25,7 +25,10 @@
     lib.mkIf cfg.enable (
       lib.mkMerge [
         (lib.mkIf (cfg.monitorType == "internal") {
-          environment.systemPackages = with pkgs; [ brillo ];
+          environment.systemPackages = with pkgs; [
+            brillo
+            brightnessctl
+          ];
           environment.variables.MONITOR_TYPE = "internal";
         })
         (lib.mkIf (cfg.monitorType == "external") {
