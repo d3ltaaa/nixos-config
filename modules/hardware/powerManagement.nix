@@ -117,10 +117,12 @@
             enable_thresholds = cfg.auto-cpufreq.thresholds.enable;
             start_threshold = cfg.auto-cpufreq.thresholds.start_threshold;
             stop_threshold = cfg.auto-cpufreq.thresholds.stop_threshold;
-            scaling_min_freq =
-              lib.mkIf (cfg.auto-cpufreq.scaling.enable) cfg.auto-cpufreq.scaling.min_freq_MHz * 1000;
-            scaling_max_freq =
-              lib.mkIf (cfg.auto-cpufreq.scaling.enable) cfg.auto-cpufreq.scaling.max_freq_MHz * 1000;
+            scaling_min_freq = lib.mkIf (cfg.auto-cpufreq.scaling.enable) (
+              cfg.auto-cpufreq.scaling.min_freq_MHz * 1000
+            );
+            scaling_max_freq = lib.mkIf (cfg.auto-cpufreq.scaling.enable) (
+              cfg.auto-cpufreq.scaling.max_freq_MHz * 1000
+            );
           };
           charger = {
             governor = "performance";
