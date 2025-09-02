@@ -30,6 +30,33 @@
     in
     {
       nixosConfigurations = {
+        "FW13" = nixpkgs-stable.lib.nixosSystem {
+          # nixpkgs-stable -> pkgs
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            inherit scripts;
+            nixpkgs-unstable = import nixpkgs-unstable {
+              config.allowUnfree = true;
+            };
+          };
+          modules = [
+            ./hosts/FW13/configuration.nix
+            ./modules/default.nix
+            inputs.home-manager.nixosModules.home-manager
+            inputs.nix-flatpak.nixosModules.nix-flatpak
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+              };
+              home-manager.users.${user}.imports = [
+                inputs.nixvim.homeManagerModules.nixvim
+              ];
+            }
+          ];
+        };
         "VM" = nixpkgs-stable.lib.nixosSystem {
           # nixpkgs-stable -> pkgs
           system = "x86_64-linux";
@@ -45,146 +72,6 @@
             ./modules/default.nix
             inputs.home-manager.nixosModules.home-manager
             inputs.nix-flatpak.nixosModules.nix-flatpak
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-              };
-              home-manager.users.${user}.imports = [
-                inputs.nixvim.homeManagerModules.nixvim
-              ];
-            }
-          ];
-        };
-
-        "T440P" = nixpkgs-stable.lib.nixosSystem {
-          # nixpkgs-stable -> pkgs
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs;
-            inherit scripts;
-            nixpkgs-unstable = import nixpkgs-unstable {
-              config.allowUnfree = true;
-            };
-          };
-          modules = [
-            ./hosts/T440P/configuration.nix
-            ./modules/default.nix
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-              };
-              home-manager.users.${user}.imports = [
-                inputs.nixvim.homeManagerModules.nixvim
-              ];
-            }
-          ];
-        };
-
-        "PC" = nixpkgs-stable.lib.nixosSystem {
-          # nixpkgs-stable -> pkgs
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs;
-            inherit scripts;
-            nixpkgs-unstable = import nixpkgs-unstable {
-              config.allowUnfree = true;
-            };
-          };
-          modules = [
-            ./hosts/PC/configuration.nix
-            ./modules/default.nix
-            inputs.nix-flatpak.nixosModules.nix-flatpak
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-              };
-              home-manager.users.${user}.imports = [
-                inputs.nixvim.homeManagerModules.nixvim
-              ];
-            }
-          ];
-        };
-
-        "WIREGUARD-SERVER" = nixpkgs-stable.lib.nixosSystem {
-          # nixpkgs-stable -> pkgs
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs;
-            inherit scripts;
-            nixpkgs-unstable = import nixpkgs-unstable {
-              config.allowUnfree = true;
-            };
-          };
-          modules = [
-            ./hosts/WIREGUARD-SERVER/configuration.nix
-            ./modules/default.nix
-            inputs.nix-flatpak.nixosModules.nix-flatpak
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-              };
-              home-manager.users.${user}.imports = [
-                inputs.nixvim.homeManagerModules.nixvim
-              ];
-            }
-          ];
-        };
-
-        "SERVER" = nixpkgs-stable.lib.nixosSystem {
-          # nixpkgs-stable -> pkgs
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs;
-            inherit scripts;
-            nixpkgs-unstable = import nixpkgs-unstable {
-              config.allowUnfree = true;
-            };
-          };
-          modules = [
-            ./hosts/SERVER/configuration.nix
-            ./modules/default.nix
-            inputs.nix-flatpak.nixosModules.nix-flatpak
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-              };
-              home-manager.users.${user}.imports = [
-                inputs.nixvim.homeManagerModules.nixvim
-              ];
-            }
-          ];
-        };
-
-        "PC-SERVER" = nixpkgs-stable.lib.nixosSystem {
-          # nixpkgs-stable -> pkgs
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs;
-            inherit scripts;
-            nixpkgs-unstable = import nixpkgs-unstable {
-              config.allowUnfree = true;
-              system = "x86_64-linux"; # ?
-            };
-          };
-          modules = [
-            ./hosts/PC-SERVER/configuration.nix
-            ./modules/default.nix
-            inputs.nix-flatpak.nixosModules.nix-flatpak
-            inputs.home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
