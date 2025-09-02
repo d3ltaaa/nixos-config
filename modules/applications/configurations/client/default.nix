@@ -2,6 +2,7 @@
 {
   imports = [
     ./neovim/default.nix
+    ./brave.nix
     ./firefox.nix
     ./fileSharing.nix
     ./foot.nix
