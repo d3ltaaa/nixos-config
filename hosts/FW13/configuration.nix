@@ -132,8 +132,8 @@
     };
     networking = {
       general = {
-        lanInterface = "enp0s31f6"; # a
-        wifiInterface = "wlp3s0"; # a
+        # lanInterface = "enp0s31f6"; # a
+        wifiInterface = "wlp1s0"; # a
         staticIp = null; # a
         defaultGateway = null; # a
         nameservers = [ "1.1.1.1" ]; # a
