@@ -15,6 +15,8 @@
       cfg = config.system.desktop.hyprland-desktop.hyprpolkitagent;
     in
     lib.mkIf cfg.enable {
-      security.polkit.package = pkgs.hyprpolkitagent;
+      environment.systemPackages = [
+        pkgs.hyprpolkitagent
+      ];
     };
 }
