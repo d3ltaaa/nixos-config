@@ -1,12 +1,37 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   options = {
     hardware.powerManagement = {
+      gnome-power-manager.enable = lib.mkEnableOption "Enables the gnome-power-manager-gui";
       upower.enable = lib.mkEnableOption "Enables Upower";
+      thermald.enable = lib.mkEnableOption "Enables Thermald";
+      powertop.enable = lib.mkEnableOption "Enables Powertop";
       tlp.enable = lib.mkEnableOption "Enables Tlp";
       auto-cpufreq = {
         enable = lib.mkEnableOption "Enables Auto-cpufreq";
-        thresholds = lib.mkEnableOption "Enables thresholds";
+        thresholds = {
+          enable = lib.mkEnableOption "Enables thresholds";
+          start_threshold = lib.mkOption {
+            type = lib.types.int;
+          };
+          stop_threshold = lib.mkOption {
+            type = lib.types.int;
+          };
+        };
+        scaling = {
+          enable = lib.mkEnableOption "Enables Auto-cpufreq cpu-scaling";
+          min_freq_MHz = lib.mkOption {
+            type = lib.types.int;
+          };
+          max_freq_MHz = lib.mkOption {
+            type = lib.types.int;
+          };
+        };
       };
     };
   };
@@ -16,11 +41,22 @@
       cfg = config.hardware.powerManagement;
     in
     {
+
+      # power-profiles-daemon conflicts with tlp and auto-cpufreq
+      services.power-profiles-daemon.enable = lib.mkIf (
+        config.hardware.powerManagement.auto-cpufreq.enable == true
+        || config.hardware.powerManagement.tlp.enable == true
+      ) (lib.mkForce false);
+
       services.upower.enable = cfg.upower.enable;
 
-      services.tlp.enable = cfg.upower.enable;
+      powerManagement.powertop.enable = cfg.powertop.enable;
+
+      services.thermald.enable = cfg.thermald.enable;
+
       services.tlp = {
         settings = {
+          enable = cfg.tlp.enable;
           CPU_SCALING_GOVERNOR_ON_AC = "";
           CPU_SCALING_GOVERNOR_ON_BAT = "";
 
@@ -69,17 +105,22 @@
 
         };
       };
-      services.auto-cpufreq.enable = cfg.auto-cpufreq.enable;
+
       services.auto-cpufreq = {
+        enable = cfg.auto-cpufreq.enable;
         settings = {
           battery = {
             governor = "powersave";
             energy_performance_bias = "power";
             energy_performance_preference = "power";
             turbo = "auto";
-            enable_thresholds = cfg.auto-cpufreq.thresholds;
-            start_threshold = 90;
-            stop_threshold = 95;
+            enable_thresholds = cfg.auto-cpufreq.thresholds.enable;
+            start_threshold = cfg.auto-cpufreq.thresholds.start_threshold;
+            stop_threshold = cfg.auto-cpufreq.thresholds.stop_threshold;
+            scaling_min_freq =
+              lib.mkIf (cfg.auto-cpufreq.scaling.enable) cfg.auto-cpufreq.scaling.min_freq_MHz * 1000;
+            scaling_max_freq =
+              lib.mkIf (cfg.auto-cpufreq.scaling.enable) cfg.auto-cpufreq.scaling.max_freq_MHz * 1000;
           };
           charger = {
             governor = "performance";
@@ -87,5 +128,9 @@
           };
         };
       };
+
+      environment.systemPackages = lib.mkIf cfg.gnome-power-manager.enable [
+        pkgs.gnome-power-manager
+      ];
     };
 }
