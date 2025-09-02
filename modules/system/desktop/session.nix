@@ -33,7 +33,7 @@
       };
 
       # autoShutdown
-      systemd.services.init-activity-timestamp = lib.mkIf cfg.autoShutdown {
+      systemd.services.init-activity-timestamp = lib.mkIf cfg.autoShutdown.enable {
         description = "Initialize server activity timestamp on boot";
         wantedBy = [ "multi-user.target" ]; # Run at boot
         before = [ "inactivity-shutdown.service" ]; # Ensure it's run before the shutdown check
@@ -46,7 +46,7 @@
         serviceConfig.Type = "oneshot";
       };
 
-      systemd.services.update-activity = lib.mkIf cfg.autoShutdown {
+      systemd.services.update-activity = lib.mkIf cfg.autoShutdown.enable {
         description = "Monitors server activity (Port: ${cfg.autoShutdown.watchPort})";
         path = with pkgs; [
           procps
@@ -70,7 +70,7 @@
         '';
         serviceConfig.Type = "oneshot";
       };
-      systemd.timers.update-activity = lib.mkIf cfg.autoShutdown {
+      systemd.timers.update-activity = lib.mkIf cfg.autoShutdown.enable {
         wantedBy = [ "timers.target" ];
         timerConfig = {
           OnBootSec = "5s";
@@ -79,7 +79,7 @@
         };
       };
 
-      systemd.services.inactivity-shutdown = lib.mkIf cfg.autoShutdown {
+      systemd.services.inactivity-shutdown = lib.mkIf cfg.autoShutdown.enable {
         description = "Shutdown server after ${cfg.autoShutdown.shutdownTime}s";
         path = with pkgs; [ coreutils ];
         script = ''
@@ -109,7 +109,7 @@
         '';
         serviceConfig.Type = "oneshot";
       };
-      systemd.timers.inactivity-shutdown = lib.mkIf cfg.autoShutdown {
+      systemd.timers.inactivity-shutdown = lib.mkIf cfg.autoShutdown.enable {
         wantedBy = [ "timers.target" ];
         timerConfig = {
           OnBootSec = "10min";
