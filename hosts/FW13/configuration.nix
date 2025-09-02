@@ -199,10 +199,10 @@
       gnome-power-manager.enable = true; # a
       upower.enable = true; # a
       powertop.enable = false;
-      thermald.enable = false;
-      tlp.enable = false; # a
+      thermald.enable = true;
+      tlp.enable = true; # a
       auto-cpufreq = {
-        enable = false; # a
+        enable = true; # a
         thresholds = {
           enable = true; # a
           start_threshold = 90; # a
