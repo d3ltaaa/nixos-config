@@ -262,12 +262,15 @@
 
               ];
 
+              bindel = [
+                ",XF86MonBrightnessUp, exec, scr_light up"
+                ",XF86MonBrightnessDown, exec, scr_light down"
+              ];
+
               binde = [
                 ",XF86AudioMute, exec, scr_volume mute"
                 ",XF86AudioLowerVolume, exec, scr_volume dec"
                 ",XF86AudioRaiseVolume, exec, scr_volume inixos-config"
-                ",XF86MonBrightnessUp, exec, scr_light up"
-                ",XF86MonBrightnessDown, exec, scr_light down"
                 ",XF86AudioPlay, exec, playerctl play-pause"
                 ",XF86AudioPrev, exec, playerctl previous"
                 ",XF86AudioNext, exec, playerctl next"
