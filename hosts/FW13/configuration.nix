@@ -196,8 +196,8 @@
       monitorType = "internal"; # a
     };
     powerManagement = {
-      gnome-power-manager.enable = true;
-      upower.enable = false; # a
+      gnome-power-manager.enable = true; # a
+      upower.enable = true; # a
       powertop.enable = false;
       thermald.enable = false;
       tlp.enable = false; # a

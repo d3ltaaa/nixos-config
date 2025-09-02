@@ -129,8 +129,20 @@
         };
       };
 
-      environment.systemPackages = lib.mkIf cfg.gnome-power-manager.enable [
+      environment.systemPackages = lib.mkIf (cfg.gnome-power-manager.enable && cfg.upower.enable) [
         pkgs.gnome-power-manager
       ];
+
+      home-manager.users.${config.system.user.general.primary} =
+        { config, ... }:
+        {
+          xdg.desktopEntries.open-webui = lib.mkIf (cfg.gnome-power-manager.enable && cfg.upower.enable) {
+            name = "Gnome Power Manager";
+            exec = "gnome-power-statistics";
+            startupNotify = false;
+            terminal = false;
+            icon = "gnome-power-manager";
+          };
+        };
     };
 }
