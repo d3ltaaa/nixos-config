@@ -147,7 +147,7 @@
       };
       vpn = {
         wireguard = {
-          wireguard-client = {
+          client = {
             enable = true;
             address = [ "10.100.0.5/32" ];
             dns = [
@@ -196,11 +196,23 @@
       monitorType = "internal"; # a
     };
     powerManagement = {
+      gnome-power-manager.enable = true;
       upower.enable = false; # a
+      powertop.enable = false;
+      thermald.enable = false;
       tlp.enable = false; # a
       auto-cpufreq = {
         enable = false; # a
-        thresholds = true; # a
+        thresholds = {
+          enable = true; # a
+          start_threshold = 90; # a
+          stop_threshold = 95; # a
+        };
+        scaling = {
+          enable = true; # a
+          min_freq_MHz = 400; # a
+          max_freq_MHz = 1000; # a
+        };
       };
     };
     usb = {
@@ -243,6 +255,9 @@
           enable = true; # a
         };
         firefox = {
+          enable = true; # a
+        };
+        brave = {
           enable = true; # a
         };
         foot = {
