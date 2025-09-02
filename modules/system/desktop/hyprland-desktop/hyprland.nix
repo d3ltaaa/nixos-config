@@ -270,7 +270,7 @@
               binde = [
                 ",XF86AudioMute, exec, scr_volume mute"
                 ",XF86AudioLowerVolume, exec, scr_volume dec"
-                ",XF86AudioRaiseVolume, exec, scr_volume inixos-config"
+                ",XF86AudioRaiseVolume, exec, scr_volume inc"
                 ",XF86AudioPlay, exec, playerctl play-pause"
                 ",XF86AudioPrev, exec, playerctl previous"
                 ",XF86AudioNext, exec, playerctl next"
