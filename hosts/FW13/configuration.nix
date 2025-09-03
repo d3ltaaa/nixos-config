@@ -118,7 +118,9 @@
         #     opensnitch = { };
         #     fail2ban = { };
         #     passwords = { };
-        #     snapshots = { };
+        snapshots = {
+          enable = true;
+        };
         #     backups = { };
         #     bleachBit = { };
         #     apparmor = { };

@@ -10,6 +10,6 @@
     # ./opensnitch.nix
     # ./passwords.nix
     ./polkit.nix
-    # ./snapshots.nix
+    ./snapshots.nix
   ];
 }
