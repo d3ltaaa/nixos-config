@@ -17,6 +17,7 @@
     scripts.url = "github:d3ltaaa/fscripts";
     scripts.flake = false;
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
   outputs =
     {
@@ -43,6 +44,7 @@
           modules = [
             ./hosts/FW13/configuration.nix
             ./modules/default.nix
+            inputs.nixos-hardware.nixosModules.framework-13-7040-amd
             inputs.home-manager.nixosModules.home-manager
             inputs.nix-flatpak.nixosModules.nix-flatpak
             {
