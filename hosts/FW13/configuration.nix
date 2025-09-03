@@ -198,7 +198,7 @@
     powerManagement = {
       gnome-power-manager.enable = true; # a
       upower.enable = true; # a
-      powertop.enable = false;
+      powertop.enable = true;
       thermald.enable = true;
       tlp.enable = true; # a
       auto-cpufreq = {
@@ -218,9 +218,10 @@
     usb = {
       enable = true; # a
     };
-    # partitioning = {
-    # enable = true; # TODO
-    # };
+    partitioning = {
+      enable = true; # a
+      diskAmount = 1; # a
+    };
   };
   applications = {
     configurations = {
@@ -258,6 +259,9 @@
           enable = true; # a
         };
         brave = {
+          enable = true; # a
+        };
+        open-webui = {
           enable = true; # a
         };
         foot = {
@@ -313,5 +317,5 @@
       };
     };
   };
-  services.openssh.enable = true;
+  services.fwupd.enable = true;
 }

@@ -111,18 +111,22 @@
         settings = {
           battery = {
             governor = "powersave";
-            energy_performance_bias = "power";
+
+            energy_perf_bias = 15;
             energy_performance_preference = "power";
-            turbo = "auto";
-            enable_thresholds = cfg.auto-cpufreq.thresholds.enable;
-            start_threshold = cfg.auto-cpufreq.thresholds.start_threshold;
-            stop_threshold = cfg.auto-cpufreq.thresholds.stop_threshold;
+            platform_profile = "low-power";
+            turbo = "never";
+
             scaling_min_freq = lib.mkIf (cfg.auto-cpufreq.scaling.enable) (
               cfg.auto-cpufreq.scaling.min_freq_MHz * 1000
             );
             scaling_max_freq = lib.mkIf (cfg.auto-cpufreq.scaling.enable) (
               cfg.auto-cpufreq.scaling.max_freq_MHz * 1000
             );
+
+            enable_thresholds = cfg.auto-cpufreq.thresholds.enable;
+            start_threshold = cfg.auto-cpufreq.thresholds.start_threshold;
+            stop_threshold = cfg.auto-cpufreq.thresholds.stop_threshold;
           };
           charger = {
             governor = "performance";
@@ -138,13 +142,15 @@
       home-manager.users.${config.system.user.general.primary} =
         { config, ... }:
         {
-          xdg.desktopEntries.open-webui = lib.mkIf (cfg.gnome-power-manager.enable && cfg.upower.enable) {
-            name = "Gnome Power Manager";
-            exec = "gnome-power-statistics";
-            startupNotify = false;
-            terminal = false;
-            icon = "gnome-power-manager";
-          };
+          xdg.desktopEntries.gnome-power-manager =
+            lib.mkIf (cfg.gnome-power-manager.enable && cfg.upower.enable)
+              {
+                name = "Gnome Power Manager";
+                exec = "gnome-power-statistics";
+                startupNotify = false;
+                terminal = false;
+                icon = "gnome-power-manager";
+              };
         };
     };
 }
