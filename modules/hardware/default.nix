@@ -7,7 +7,7 @@
     ./brightness.nix
     ./drawingTablet.nix
     ./nvidiaGpu.nix
-    # ./partitioning.nix # TODO
+    ./partitioning.nix
     ./powerManagement.nix
     ./printing.nix
     ./usb.nix
