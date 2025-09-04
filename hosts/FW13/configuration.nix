@@ -6,10 +6,13 @@
   ];
   secrets = {
     serverAddress = lib.strings.trim (builtins.readFile "/etc/credentials/server_address");
+    mailHost = lib.strings.trim (builtins.readFile "/etc/credentials/mail/host");
+    mailEmail = lib.strings.trim (builtins.readFile "/etc/credentials/mail/email");
     ipv64KeyFile = lib.strings.trim (builtins.readFile "/etc/credentials/acmeIPV64.cert");
     acmeEmail = lib.strings.trim (builtins.readFile "/etc/credentials/acmeEmail");
     githubUsername = lib.strings.trim (builtins.readFile "/etc/credentials/github/username");
     githubEmail = lib.strings.trim (builtins.readFile "/etc/credentials/github/email");
+    monitoringEmail = lib.strings.trim (builtins.readFile "/etc/credentials/monitoring/email");
     privateWireguardKey = lib.strings.trim (
       builtins.readFile "/etc/credentials/wireguard-keys/private"
     );
@@ -113,7 +116,20 @@
     };
     security = {
       #   # TODO
-      #   monitoring = { };
+      monitoring = {
+        OnBootSec = "5min";
+        OnUnitActiveSec = "1h";
+        services = [
+          {
+            notify = "${config.secrets.monitoringEmail}";
+            flag = 0;
+            service = "syncthing.service";
+            pattern = "error|warning|critical";
+            title = "Syncthing service alert";
+            timeframe = "1 day ago";
+          }
+        ];
+      };
       features = {
         #     opensnitch = { };
         #     fail2ban = { };
@@ -279,6 +295,9 @@
           enable = false; # a
         };
         ssh = {
+          enable = true; # a
+        };
+        msmtp = {
           enable = true; # a
         };
         thunar = {

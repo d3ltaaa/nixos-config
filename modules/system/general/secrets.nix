@@ -6,6 +6,14 @@
         type = lib.types.str;
         default = "";
       };
+      mailHost = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+      };
+      mailEmail = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+      };
       ipv64KeyFile = lib.mkOption {
         type = lib.types.str;
         default = "";
@@ -19,6 +27,10 @@
         default = "";
       };
       githubEmail = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+      };
+      monitoringEmail = lib.mkOption {
         type = lib.types.str;
         default = "";
       };
