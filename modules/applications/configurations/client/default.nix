@@ -8,6 +8,7 @@
     ./foot.nix
     ./git.nix
     ./lf.nix
+    ./msmtp.nix
     ./open-webui.nix
     ./protonmail.nix
     ./qemu.nix
