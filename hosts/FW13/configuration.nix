@@ -231,7 +231,7 @@
       };
       client = {
         fileSharing = {
-          enable = false; # a
+          enable = true; # a
           items = [
             {
               share = {
@@ -241,6 +241,36 @@
               };
             }
           ]; # a
+        };
+        syncthing = {
+          enable = true;
+          devices = {
+            "PC".id = "MIR6FXD-EEKYM5S-GQFPDZT-DWNCTYW-XGZNIGY-6CNO5C2-VOR6YPG-T3JCMAX";
+            "PX8".id = "UPROPYX-AFK4Q5X-P5WRKRE-4VXJ5XU-QKTXML3-2SFWBV7-ELVVPDH-AOWS2QY";
+            "T480".id = "Z3EA4H3-RNVAKPJ-JIWF4HD-L4AISEX-DUZZ4SV-P3E45GU-AKA3DHG-VYQNRAK";
+            "T440P".id = "CAWY2HI-K3QLENX-QABH4C4-QDGBZAB-GH22BRL-ZB6YBG5-PXVDZTR-4MSF7QY";
+            "SERVER".id = "OP5RCKE-UFEQ4IT-DRMANC2-425AFHE-RS4PG3Y-35VLH6F-7UJXUIJ-EAVK5A3";
+          };
+          folders = {
+            "Dokumente" = {
+              path = "/home/${config.system.user.general.primary}/Dokumente";
+              devices = [
+                "PC"
+                # "T480"
+                "T440P"
+                "SERVER"
+              ];
+            };
+            "Bilder" = {
+              path = "/home/${config.system.user.general.primary}/Bilder";
+              devices = [
+                "PC"
+                # "T480"
+                "T440P"
+                "SERVER"
+              ];
+            };
+          };
         };
         virtualbox = {
           enable = false; # a

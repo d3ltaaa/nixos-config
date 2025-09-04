@@ -1,7 +1,7 @@
 { lib, config, ... }:
 {
   options = {
-    applications.configurations.server.syncthing = {
+    applications.configurations.client.syncthing = {
       enable = lib.mkEnableOption "Enables Syncthing module";
       devices = lib.mkOption {
         type = lib.types.attrsOf lib.types.anything;
@@ -17,7 +17,7 @@
 
   config =
     let
-      cfg = config.applications.configurations.server.syncthing;
+      cfg = config.applications.configurations.client.syncthing;
     in
     lib.mkIf cfg.enable {
       networking.firewall.allowedTCPPorts = lib.mkIf cfg.gui [

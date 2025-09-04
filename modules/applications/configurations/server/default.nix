@@ -11,7 +11,6 @@
     ./ollama.nix
     ./open-webui.nix
     ./radicale.nix
-    ./syncthing.nix
     ./vaultwarden.nix
   ];
 }

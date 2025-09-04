@@ -13,6 +13,7 @@
     ./qemu.nix
     ./spotify.nix
     ./ssh.nix
+    ./syncthing.nix
     ./thunar.nix
     ./thunderbird.nix
     ./tmux.nix
