@@ -133,7 +133,9 @@
       features = {
         #     opensnitch = { };
         #     fail2ban = { };
-        #     passwords = { };
+        passwords = {
+          vaultwarden.enable = true;
+        };
         snapshots = {
           enable = true;
         };

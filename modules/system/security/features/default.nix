@@ -8,7 +8,7 @@
     # ./fail2ban.nix
     # ./firejail.nix
     # ./opensnitch.nix
-    # ./passwords.nix
+    ./passwords.nix
     ./polkit.nix
     ./snapshots.nix
   ];
