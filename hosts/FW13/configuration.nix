@@ -144,10 +144,15 @@
         backups = {
           enable = true;
         };
-        #     bleachBit = { };
+        bleachBit = {
+          enable = true;
+        };
         #     apparmor = { };
         #     firejail = { };
-        #     clamav = { };
+        clamav = {
+          enable = true;
+          interval = "*-*-* 17:00:00";
+        };
         gnupg = {
           enable = true;
         };

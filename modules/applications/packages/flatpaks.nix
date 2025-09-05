@@ -15,12 +15,9 @@
     let
       cfg = config.applications.packages.flatpaks;
       flatpak-pkgs = [
-        "org.gnome.Decibels"
         "io.emeric.toolblex"
         "com.obsproject.Studio"
         "net.mkiol.SpeechNote"
-        "app.zen_browser.zen"
-        "org.bleachbit.BleachBit"
         "com.borgbase.Vorta" # Vorta backups
       ];
     in
