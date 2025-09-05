@@ -2,10 +2,11 @@
 {
   imports = [
     # ./apparmor.nix
-    # ./backups.nix
+    ./backups.nix
     # ./bleachBit.nix
     # ./clamav.nix
-    # ./fail2ban.nix
+    ./gnupg.nix
+    ./fail2ban.nix
     # ./firejail.nix
     # ./opensnitch.nix
     ./passwords.nix
