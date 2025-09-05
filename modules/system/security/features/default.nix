@@ -3,8 +3,8 @@
   imports = [
     # ./apparmor.nix
     ./backups.nix
-    # ./bleachBit.nix
-    # ./clamav.nix
+    ./bleachBit.nix
+    ./clamav.nix
     ./gnupg.nix
     ./fail2ban.nix
     # ./firejail.nix
