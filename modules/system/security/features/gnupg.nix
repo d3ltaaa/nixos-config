@@ -18,7 +18,7 @@
     lib.mkIf cfg.enable {
       programs.gnupg.agent = {
         enable = true;
-        package = pkgs.pinentry-gnome3;
+        pinentryPackage = pkgs.pinentry-gnome3;
       };
     };
 }
