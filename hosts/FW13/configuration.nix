@@ -120,31 +120,37 @@
         OnBootSec = "5min";
         OnUnitActiveSec = "1h";
         services = [
-          {
-            notify = "${config.secrets.monitoringEmail}";
-            flag = 0;
-            service = "syncthing.service";
-            pattern = "error|warning|critical";
-            title = "Syncthing service alert";
-            timeframe = "1 day ago";
-          }
+          # {
+          #   notify = "${config.secrets.monitoringEmail}";
+          #   flag = 0;
+          #   service = "syncthing.service";
+          #   pattern = "error|warning|critical";
+          #   title = "Syncthing service alert";
+          #   timeframe = "1 day ago";
+          # }
         ];
       };
       features = {
         #     opensnitch = { };
-        #     fail2ban = { };
+        fail2ban = {
+          enable = true;
+        };
         passwords = {
           vaultwarden.enable = true;
         };
         snapshots = {
           enable = true;
         };
-        #     backups = { };
+        backups = {
+          enable = true;
+        };
         #     bleachBit = { };
         #     apparmor = { };
         #     firejail = { };
         #     clamav = { };
-        #     gnupg = { };
+        gnupg = {
+          enable = true;
+        };
         polkit = {
           enable = true;
         };
