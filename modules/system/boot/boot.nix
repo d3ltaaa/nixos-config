@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   options = {
     system.boot = {
@@ -20,7 +25,36 @@
       cfg = config.system.boot;
     in
     {
+      boot.initrd.systemd.enable = true;
+      boot.initrd.verbose = false;
       boot.loader.systemd-boot.enable = false;
+      boot = {
+        plymouth = {
+          enable = true;
+          # theme = "spinner_alt";
+          # themePackages = with pkgs; [
+          #   # By default we would install all themes
+          #   (adi1090x-plymouth-themes.override {
+          #     selected_themes = [ "spinner_alt" ];
+          #   })
+          # ];
+          logo = "${pkgs.nixos-icons}/share/icons/hicolor/48x48/apps/nix-snowflake-white.png";
+        };
+
+        # Enable "Silent boot"
+        consoleLogLevel = 3;
+        kernelParams = [
+          "quiet"
+          "splash"
+          "boot.shell_on_fail"
+          "udev.log_priority=3"
+          "rd.systemd.show_status=auto"
+        ];
+        # Hide the OS choice for bootloaders.
+        # It's still possible to open the bootloader list by pressing any key
+        # It will just not appear on screen unless a key is pressed
+
+      };
       boot.loader = {
         efi = {
           efiSysMountPoint = "/boot";
@@ -29,6 +63,8 @@
         grub = {
           enable = true;
           device = "nodev";
+          gfxmodeEfi = "1920x1200x32";
+          theme = pkgs.minimal-grub-theme;
           useOSProber = cfg.osProber;
           efiSupport = true;
           configurationName = "NixOS (${config.system.general.nixos.name})";
