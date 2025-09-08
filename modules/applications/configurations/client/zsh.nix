@@ -15,7 +15,10 @@
 
       # Home Manager as NixOS module
       home-manager.users.${config.system.user.general.primary} =
-        { config, ... }:
+        { ... }:
+        let
+          nixos-config = config;
+        in
         {
           programs.zsh = {
             enable = true;
@@ -47,15 +50,23 @@
             history.size = 1000;
             history.share = true;
             # viMode = true;
-            initContent = ''
-              if pgrep -f Hyprland > /dev/null; then
-                if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]]; then
-              	tmux
+            initContent =
+              let
+                tmuxCheck = lib.optionalString nixos-config.applications.configurations.client.tmux.enable ''
+                  if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]]; then
+                    tmux
+                  fi
+                '';
+
+                hyprlandLaunch = lib.optionalString nixos-config.system.desktop.hyprland-desktop.hyprland.enable "Hyprland";
+              in
+              ''
+                if pgrep -f Hyprland > /dev/null; then
+                  ${tmuxCheck}
+                else
+                  ${hyprlandLaunch}
                 fi
-              else
-                Hyprland
-              fi
-            '';
+              '';
           };
           programs.starship = {
             enable = true;
