@@ -72,9 +72,9 @@
         dconf = {
           enable = true; # a
         };
-        nwg-dock = {
-          enable = true; # TODO
-        };
+        # nwg-dock = {
+        #   enable = true;
+        # };
         settings = {
           nwg-displays = {
             enable = true; # a
@@ -115,7 +115,6 @@
       };
     };
     security = {
-      #   # TODO
       monitoring = {
         OnBootSec = "5min";
         OnUnitActiveSec = "1h";
@@ -131,7 +130,7 @@
         ];
       };
       features = {
-        #     opensnitch = { };
+        # opensnitch = { };
         fail2ban = {
           enable = true;
         };
@@ -147,8 +146,11 @@
         bleachBit = {
           enable = true;
         };
-        #     apparmor = { };
-        #     firejail = { };
+        # apparmor = { };
+        # firejail = { };
+        # smartd = {
+        #   enable = true;
+        # };
         clamav = {
           enable = true;
           interval = "*-*-* 17:00:00";
@@ -276,6 +278,7 @@
           devices = {
             "PC".id = "MIR6FXD-EEKYM5S-GQFPDZT-DWNCTYW-XGZNIGY-6CNO5C2-VOR6YPG-T3JCMAX";
             "PX8".id = "UPROPYX-AFK4Q5X-P5WRKRE-4VXJ5XU-QKTXML3-2SFWBV7-ELVVPDH-AOWS2QY";
+            "FW13".id = "N6F2GRB-VUPQC4F-DVNYES5-5KNJ36R-GGVAP2R-ZHHBV4U-UATR2JY-BRQ2NQ2";
             "T480".id = "Z3EA4H3-RNVAKPJ-JIWF4HD-L4AISEX-DUZZ4SV-P3E45GU-AKA3DHG-VYQNRAK";
             "T440P".id = "CAWY2HI-K3QLENX-QABH4C4-QDGBZAB-GH22BRL-ZB6YBG5-PXVDZTR-4MSF7QY";
             "SERVER".id = "OP5RCKE-UFEQ4IT-DRMANC2-425AFHE-RS4PG3Y-35VLH6F-7UJXUIJ-EAVK5A3";
@@ -286,6 +289,7 @@
               devices = [
                 "PC"
                 # "T480"
+                "FW13"
                 "T440P"
                 "SERVER"
               ];
@@ -295,6 +299,7 @@
               devices = [
                 "PC"
                 # "T480"
+                "FW13"
                 "T440P"
                 "SERVER"
               ];
