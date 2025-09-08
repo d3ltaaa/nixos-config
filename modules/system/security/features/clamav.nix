@@ -22,19 +22,22 @@
           service = "clamav-daemon.service";
           pattern = "error|found";
           title = "Clamav service alert";
-          timeframe = "1 day ago";
+          timeframe = "1 hour ago";
         }
       ];
 
       services.clamav = {
-        settings = {
-          ExcludePath = "^/hom/falk/.local/share/containers";
+        daemon = {
+          enable = true;
+          settings = {
+            ExcludePath = "^/hom/falk/.local/share/containers";
+          };
         };
+        scanner = {
+          enable = true;
+          interval = cfg.interval;
+        };
+        updater.enable = true;
       };
-      scanner = {
-        enable = true;
-        interval = cfg.interval;
-      };
-      updater.enable = true;
     };
 }
