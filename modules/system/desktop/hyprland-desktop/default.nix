@@ -8,7 +8,7 @@
     ./hyprland.nix
     ./hyprlock.nix
     ./hyprpolkitagent.nix
-    ./nwg-dock.nix # TODO
+    # ./nwg-dock.nix
     ./rofi.nix
     ./swappy.nix
     ./swww.nix
