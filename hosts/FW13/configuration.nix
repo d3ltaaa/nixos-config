@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   # accessible for root at /etc/credentials
   imports = [
@@ -203,6 +208,10 @@
     };
   };
   hardware = {
+    fingerprint = {
+      enable = true;
+      # package = ;
+    };
     drawingTablet = {
       enable = true; # a
     };
@@ -386,5 +395,4 @@
       };
     };
   };
-  services.fwupd.enable = true;
 }

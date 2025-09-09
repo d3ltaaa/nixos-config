@@ -6,6 +6,7 @@
     ./bluetooth.nix
     ./brightness.nix
     ./drawingTablet.nix
+    ./fingerprint.nix
     ./nvidiaGpu.nix
     ./partitioning.nix
     ./powerManagement.nix
