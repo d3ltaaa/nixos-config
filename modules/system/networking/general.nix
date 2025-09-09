@@ -38,6 +38,7 @@
       networking = {
         networkmanager.enable = true;
         networkmanager.wifi.powersave = true;
+        networkmanager.wifi.backend = "iwd";
         networkmanager.dns = lib.mkIf (cfg.nameservers != [ "1.1.1.1" ]) "none";
 
         useDHCP = lib.mkIf (cfg.staticIp != null) false;

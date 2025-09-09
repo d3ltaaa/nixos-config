@@ -83,6 +83,8 @@
 
         zathura
         pandoc
+
+        hyprpicker
       ];
 
       stable-tool-pkgs = with pkgs; [
@@ -98,6 +100,7 @@
         pulsemixer
         libpulseaudio
         pavucontrol
+        impala
 
         busybox
         dnsutils
