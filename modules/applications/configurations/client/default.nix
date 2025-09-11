@@ -7,6 +7,7 @@
     ./fileSharing.nix
     ./foot.nix
     ./git.nix
+    ./kitty.nix
     ./lf.nix
     ./msmtp.nix
     ./nautilus.nix
@@ -20,6 +21,7 @@
     ./thunderbird.nix
     ./tmux.nix
     ./virtualbox.nix
+    ./yazi.nix
     ./zsh.nix
   ];
 }
