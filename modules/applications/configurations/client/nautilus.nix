@@ -16,10 +16,14 @@
       cfg = config.applications.configurations.client.nautilus;
     in
     lib.mkIf cfg.enable {
+      environment.variables = {
+        FILEMANAGER = "nautilus";
+      };
+      environment.systemPackages = with pkgs; [ nautilus ];
+      services.gvfs.enable = true;
       services.gnome.tinysparql.enable = true;
       services.gnome.localsearch.enable = true;
       programs.nautilus-open-any-terminal.enable = true;
-      programs.nautilus-open-any-terminal.terminal = lib.mkIf config.applications.configurations.client.foot.enable "foot";
       services.gnome.sushi.enable = true;
 
       home-manager.users.${config.system.user.general.primary} =
@@ -33,6 +37,9 @@
               "applications/x-gnome-saved-search" = [ "org.gnome.Nautilus.desktop" ];
             };
           };
+          wayland.windowManager.hyprland.settings.bind = [
+            "$mod, E, exec, nautilus"
+          ];
         };
     };
 }

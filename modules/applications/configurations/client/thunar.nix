@@ -16,6 +16,9 @@
       cfg = config.applications.configurations.client.thunar;
     in
     lib.mkIf cfg.enable {
+      environment.variables = {
+        FILEMANAGER = "thunar";
+      };
       services = {
         gvfs.enable = true; # set of backends like trash management
         tumbler.enable = true; # thumbnails
