@@ -37,7 +37,6 @@
     let
       stable-base-pkgs = with pkgs; [
         wget
-        lf
         unzip
         tldr
         ripgrep
@@ -101,6 +100,7 @@
         libpulseaudio
         pavucontrol
         impala
+        bluetui
 
         busybox
         dnsutils
@@ -148,6 +148,7 @@
         nerd-fonts.ubuntu-mono
         nerd-fonts.fira-code
         nerd-fonts.hack
+        nerd-fonts.roboto-mono
       ];
 
       unstable-font-pkgs = with nixpkgs-unstable; [ ];

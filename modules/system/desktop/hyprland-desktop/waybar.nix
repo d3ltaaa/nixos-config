@@ -94,13 +94,11 @@
                   "󰤨"
                 ];
                 format-ethernet = "󰀂";
-                format-alt = "󱛇";
                 format-disconnected = "󰖪";
                 tooltip-format-wifi = "{icon} {essid}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}";
                 tooltip-format-ethernet = "󰀂  {ifname}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}";
                 tooltip-format-disconnected = "Disconnected";
-                on-click = "~/.config/rofi/ &";
-                on-click-right = "~/.config/rofi/ &";
+                on-click = "menu_options wifi";
                 interval = 5;
                 nospacing = 1;
               };
@@ -119,7 +117,8 @@
                     ""
                   ];
                 };
-                on-click = "pulsemixer --toggle-mute";
+                on-click = "menu_options vol";
+                on-click-right = "pulsemixer --toggle-mute";
                 scroll-step = 5;
               };
 

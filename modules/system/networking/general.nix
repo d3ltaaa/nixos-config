@@ -35,6 +35,14 @@
       cfg = config.system.networking.general;
     in
     {
+      system.activationScripts = {
+        rfkillUnblockWlan = {
+          text = ''
+            rfkill unblock wlan
+          '';
+          deps = [ ];
+        };
+      };
       networking = {
         networkmanager.enable = true;
         networkmanager.wifi.powersave = true;
