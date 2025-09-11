@@ -69,7 +69,7 @@
               {
                 # Time-Hour
                 monitor = "";
-                text = ''cmd[update:1000] echo "<span>$(date +"%I")</span>"'';
+                text = ''cmd[update:1000] echo "<span>$(date +"%H")</span>"'';
                 color = "rgb(${config.colorScheme.palette.base05})";
                 font_size = 125;
                 font_family = "StretchPro";
