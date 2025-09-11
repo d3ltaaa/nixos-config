@@ -328,6 +328,9 @@
           enable = true; # a
         };
         thunar = {
+          enable = false; # a
+        };
+        nautilus = {
           enable = true; # a
         };
         spotify = {
@@ -345,7 +348,13 @@
         foot = {
           enable = true; # a
         };
+        kitty = {
+          enable = false; # a
+        };
         lf = {
+          enable = false; # a
+        };
+        yazi = {
           enable = true; # a
         };
         tmux = {
