@@ -11,6 +11,11 @@
       cfg = config.applications.configurations.client.foot;
     in
     lib.mkIf cfg.enable {
+      environment.variables = {
+        TERMINAL = "foot";
+      };
+      programs.nautilus-open-any-terminal.terminal = "foot";
+
       # Home Manager as NixOS module
       home-manager.users.${config.system.user.general.primary} =
         { config, ... }:
@@ -24,10 +29,10 @@
               settings = {
                 main = {
                   term = "xterm-256color";
-                  font = "UbuntuMonoNerdFont:size=12";
-                  font-bold = "UbuntuMonoNerdFont:size=12";
-                  font-italic = "UbuntuMonoNerdFont:size=12";
-                  font-bold-italic = "UbuntuMonoNerdFont:size=12";
+                  font = "RobotoMonoNerdFont:size=10";
+                  font-bold = "RobotoMonoNerdFont:size=10";
+                  font-italic = "RobotoMonoNerdFont:size=10";
+                  font-bold-italic = "RobotoMonoNerdFont:size=10";
                   pad = "2x2"; # 5x5
                 };
                 cursor = {

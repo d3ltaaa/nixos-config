@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   options = {
     applications.configurations.client.yazi = {
@@ -17,6 +22,69 @@
 
           programs.yazi = {
             enable = true;
+            plugins = {
+              uiPlugin = pkgs.writeTextDir "init.lua" ''
+                function Folder:icon(file) return ui.Span(" " .. file:icon() .. "  ") end
+              '';
+            };
+            theme = {
+              icon = {
+                dirs = [
+                  {
+                    name = "**";
+                    text = "󰉋";
+                  }
+                  {
+                    name = "Desktop";
+                    text = "";
+                  }
+                  {
+                    name = "Dokumente";
+                    text = "";
+                  }
+                  {
+                    name = "Downloads";
+                    text = "";
+                  }
+                  {
+                    name = "Bilder";
+                    text = "";
+                  }
+                  {
+                    name = "Audio";
+                    text = "";
+                  }
+                  {
+                    name = "Movies";
+                    text = "";
+                  }
+                  {
+                    name = "Videos";
+                    text = "";
+                  }
+                  {
+                    name = "Public";
+                    text = "";
+                  }
+                  {
+                    name = "Library";
+                    text = "";
+                  }
+                  {
+                    name = "Code";
+                    text = "";
+                  }
+                  {
+                    name = ".config";
+                    text = "";
+                  }
+                  {
+                    name = "nixos-config";
+                    text = "󱄅";
+                  }
+                ];
+              };
+            };
             settings = {
               mgr = {
                 ratio = [
@@ -29,7 +97,7 @@
                 sort_reverse = false;
                 sort_dir_first = true;
                 linemode = "none";
-                show_hidden = true;
+                show_hidden = false;
                 show_symlink = true;
               };
 
@@ -54,6 +122,7 @@
                 macro_workers = 10;
                 bizarre_retry = 5;
               };
+
             };
           };
         };
