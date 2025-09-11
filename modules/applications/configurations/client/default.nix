@@ -9,6 +9,7 @@
     ./git.nix
     ./lf.nix
     ./msmtp.nix
+    ./nautilus.nix
     ./open-webui.nix
     ./protonmail.nix
     ./qemu.nix
