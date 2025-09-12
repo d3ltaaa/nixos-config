@@ -59,7 +59,7 @@
             }
           ];
         };
-        "VM" = nixpkgs-stable.lib.nixosSystem {
+        "PC" = nixpkgs-stable.lib.nixosSystem {
           # nixpkgs-stable -> pkgs
           system = "x86_64-linux";
           specialArgs = {
@@ -70,7 +70,7 @@
             };
           };
           modules = [
-            ./hosts/VM/configuration.nix
+            ./hosts/PC/configuration.nix
             ./modules/default.nix
             inputs.home-manager.nixosModules.home-manager
             inputs.nix-flatpak.nixosModules.nix-flatpak
