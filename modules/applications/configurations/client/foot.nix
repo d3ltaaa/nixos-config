@@ -76,6 +76,9 @@
                 };
               };
             };
+          wayland.windowManager.hyprland.settings.bind = [
+            "$mod SHIFT, RETURN, exec, foot"
+          ];
         };
     };
 }

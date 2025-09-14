@@ -59,6 +59,9 @@
               "applications/x-gnome-saved-search" = [ "thunar.desktop" ];
             };
           };
+          wayland.windowManager.hyprland.settings.bind = [
+            "$mod, E, exec, thunar"
+          ];
         };
     };
 }

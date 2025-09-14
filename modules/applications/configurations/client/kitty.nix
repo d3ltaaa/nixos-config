@@ -73,6 +73,9 @@
                 inactive_tab_background #${palette.base00} 
               '';
             };
+          wayland.windowManager.hyprland.settings.bind = [
+            "$mod SHIFT, RETURN, exec, kitty"
+          ];
         };
     };
 }

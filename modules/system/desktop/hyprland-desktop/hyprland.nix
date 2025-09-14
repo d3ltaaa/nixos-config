@@ -176,10 +176,8 @@
               "$mod" = "SUPER";
               bind = [
 
-                "$mod SHIFT, RETURN, exec, ${nixos-config.environment.variables.TERMINAL}"
                 "$mod, X, killactive, "
                 "$mod, M, exit,"
-                "$mod, E, exec, ${nixos-config.environment.variables.FILEMANAGER}"
                 "$mod, C, exec, menu_options updates"
                 "$mod, T, togglefloating,"
                 "$mod, F, fullscreen,"
