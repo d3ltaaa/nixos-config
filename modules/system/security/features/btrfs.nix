@@ -7,7 +7,7 @@
 {
   options = {
     system.security.features.btrfs = {
-      eneable = lib.mkEnableOption "Enables the btrfs monitoring service";
+      enable = lib.mkEnableOption "Enables the btrfs monitoring service";
     };
   };
 
@@ -22,16 +22,14 @@
       ''}";
     in
     lib.mkIf cfg.enable {
-      systemd.user.units.btrfs-monitor = {
+      systemd.services.btrfs-monitor = {
         description = "Enable thunar-daemon";
-        after = [ "network.target" ];
-        wantedBy = [ "default.target" ];
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = true;
           ExecStart = "${btrfs-monitor-script}/bin/btrfs-monitor-script";
         };
       };
-      environment.systemPackages = [ btrfs-monitor-script ];
+      # environment.systemPackages = [ btrfs-monitor-script ];
     };
 }

@@ -139,6 +139,9 @@
         fail2ban = {
           enable = true;
         };
+        btrfs = {
+          enable = true;
+        };
         passwords = {
           vaultwarden.enable = true;
         };

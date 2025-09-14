@@ -4,6 +4,7 @@
     # ./apparmor.nix
     ./backups.nix
     ./bleachBit.nix
+    ./btrfs.nix
     ./clamav.nix
     ./gnupg.nix
     ./fail2ban.nix
