@@ -198,7 +198,7 @@
               };
 
               "custom/system_stats" = {
-                interval = 2;
+                interval = if nixos-config.hardware.brightness.monitorType == "internal" then 2 else 10;
                 format = "{}";
                 on-click = "menu_options energy";
                 return-type = "json";
