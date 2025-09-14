@@ -29,14 +29,21 @@
       home-manager.users.${config.system.user.general.primary} =
         { config, ... }:
         {
-          xdg.mimeApps = {
-            enable = true;
-            defaultApplications = {
-              "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
-              "x-scheme-handler/file" = [ "org.gnome.Nautilus.desktop" ];
-              "applications/x-gnome-saved-search" = [ "org.gnome.Nautilus.desktop" ];
+          # override default desktop entry, due to problems (opening twice after boot)
+          xdg.desktopEntries = {
+            "org.gnome.Nautilus" = {
+              name = "Files";
+              genericName = "Nautilus File Manager";
+              exec = "nautilus --no-desktop --new-window %U";
+              icon = "org.gnome.Nautilus";
+              categories = [
+                "System"
+                "FileManager"
+              ];
+              terminal = false;
             };
           };
+
           wayland.windowManager.hyprland.settings.bind = [
             "$mod, E, exec, nautilus"
           ];
