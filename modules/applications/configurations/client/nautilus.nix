@@ -34,7 +34,7 @@
             "org.gnome.Nautilus" = {
               name = "Files";
               genericName = "Nautilus File Manager";
-              exec = "nautilus --no-desktop --new-window %U";
+              exec = "nautilus --new-window %U";
               icon = "org.gnome.Nautilus";
               categories = [
                 "System"
@@ -45,7 +45,7 @@
           };
 
           wayland.windowManager.hyprland.settings.bind = [
-            "$mod, E, exec, nautilus"
+            "$mod, E, exec, nautilus --new-window"
           ];
         };
     };
