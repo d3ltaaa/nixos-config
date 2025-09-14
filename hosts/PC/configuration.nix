@@ -255,9 +255,9 @@
       monitorType = "external";
     };
     powerManagement = {
-      gnome-power-manager.enable = true;
-      upower.enable = true;
-      powertop.enable = true;
+      gnome-power-manager.enable = false;
+      upower.enable = false;
+      powertop.enable = false;
       thermald.enable = false;
       tlp.enable = false;
       auto-cpufreq = {
