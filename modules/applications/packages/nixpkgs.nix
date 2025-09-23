@@ -37,6 +37,7 @@
     let
       stable-base-pkgs = with pkgs; [
         bat
+        bat-extras.batman
         wget
         unzip
         tldr

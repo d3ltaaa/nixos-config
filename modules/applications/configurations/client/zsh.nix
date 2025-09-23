@@ -38,6 +38,7 @@
               "v" = "nvim";
               "build" = "cd ~/flakes/ && sudo nixos-rebuild switch --flake #.T440P";
               "cat" = "bat -p";
+              "man" = "batman";
             };
             completionInit = ''
               autoload -U compinit
