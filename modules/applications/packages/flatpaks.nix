@@ -15,6 +15,7 @@
     let
       cfg = config.applications.packages.flatpaks;
       flatpak-pkgs = [
+        "org.gnome.Connections"
         "io.emeric.toolblex"
         "com.obsproject.Studio"
         "net.mkiol.SpeechNote"
