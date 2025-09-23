@@ -36,6 +36,7 @@
   config =
     let
       stable-base-pkgs = with pkgs; [
+        bat
         wget
         unzip
         tldr

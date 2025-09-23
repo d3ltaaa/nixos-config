@@ -37,6 +37,7 @@
               "grep" = "grep --color=auto";
               "v" = "nvim";
               "build" = "cd ~/flakes/ && sudo nixos-rebuild switch --flake #.T440P";
+              "cat" = "bat -p";
             };
             completionInit = ''
               autoload -U compinit
