@@ -27,7 +27,7 @@
             auth = {
               pam = {
                 enabled = true;
-                module = "su";
+                # module = "su";
               };
               fingerprint = lib.mkIf nixos-config.hardware.fingerprint.enable {
                 enabled = true;
