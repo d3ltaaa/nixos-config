@@ -13,6 +13,7 @@
     lib.mkIf cfg.enable {
       users.groups.vboxusers.members = [ "${config.system.user.general.primary}" ];
 
+      boot.blacklistedKernelModules = [ "kvm-amd" ];
       virtualisation.virtualbox = {
         host = {
           enable = true;
