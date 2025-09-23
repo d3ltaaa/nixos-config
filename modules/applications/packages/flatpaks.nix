@@ -16,6 +16,12 @@
       cfg = config.applications.packages.flatpaks;
       flatpak-pkgs = [
         "org.gnome.Connections"
+        # "org.endlessos.Key"
+        "com.github.hopsan.Hopsan"
+        "com.simulide.simulide"
+        "org.fritzing.Fritzing"
+        "cc.arduino.IDE2"
+        # "io.github.hamza_algohary.Coulomb"
         "io.emeric.toolblex"
         "com.obsproject.Studio"
         "net.mkiol.SpeechNote"
