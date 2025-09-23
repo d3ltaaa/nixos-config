@@ -319,7 +319,7 @@
           };
         };
         virtualbox = {
-          enable = false; # a
+          enable = true; # a
         };
         qemu = {
           enable = false; # a
