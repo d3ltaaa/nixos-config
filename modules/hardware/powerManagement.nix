@@ -8,7 +8,10 @@
   options = {
     hardware.powerManagement = {
       gnome-power-manager.enable = lib.mkEnableOption "Enables the gnome-power-manager-gui";
-      upower.enable = lib.mkEnableOption "Enables Upower";
+      upower = {
+        enable = lib.mkEnableOption "Enables Upower";
+        criticalPowerHibernate = lib.mkEnableOption "Go into hibernate when battery reaches critical Level";
+      };
       thermald.enable = lib.mkEnableOption "Enables Thermald";
       powertop.enable = lib.mkEnableOption "Enables Powertop";
       tlp.enable = lib.mkEnableOption "Enables Tlp";
@@ -49,6 +52,7 @@
       ) (lib.mkForce false);
 
       services.upower.enable = cfg.upower.enable;
+      services.upower.criticalPowerAction = lib.mkIf cfg.upower.criticalPowerHibernate "Hibernate";
 
       powerManagement.powertop.enable = cfg.powertop.enable;
 

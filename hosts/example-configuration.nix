@@ -341,7 +341,10 @@
       monitorType = "internal"; # a
     };
     powerManagement = {
-      upower.enable = true; # a
+      upower = {
+        enable = true; # a
+        criticalPowerHibernate = true;
+      };
       tlp.enable = true; # a
       auto-cpufreq = {
         enable = true; # a

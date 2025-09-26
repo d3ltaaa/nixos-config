@@ -242,7 +242,10 @@
     };
     powerManagement = {
       gnome-power-manager.enable = true; # a
-      upower.enable = true; # a
+      upower = {
+        enable = true; # a
+        criticalPowerHibernate = true;
+      };
       powertop.enable = true;
       thermald.enable = true;
       tlp.enable = true; # a
