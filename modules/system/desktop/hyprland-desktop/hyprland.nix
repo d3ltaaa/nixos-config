@@ -43,7 +43,7 @@
           ''}
           ${lib.optionalString cfg-hyprland.swww.enable ''
             swww-daemon &
-            swww img ~/.config/wall/paper &
+            swww restore &
           ''}
 
           hyprpm reload -n
