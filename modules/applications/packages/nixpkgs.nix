@@ -71,6 +71,8 @@
         hyprshade
         xdg-desktop-portal-hyprland
         rofi-wayland
+        waypaper
+        # hyprpaper
         swww
         dunst
         nwg-look
@@ -81,6 +83,7 @@
         feh
         grim
         swappy
+        pinta
 
         zathura
         pandoc
