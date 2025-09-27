@@ -23,7 +23,7 @@
               rofi-theme = {
 
                 "*" = {
-                  background-color = mkLiteral "#${config.colorScheme.palette.base00}";
+                  background-color = mkLiteral "transparent";
                   text-color = mkLiteral "#${config.colorScheme.palette.base05}";
                   border-color = mkLiteral "#${config.colorScheme.palette.base05}";
                   dpadding = mkLiteral "10px";
@@ -33,6 +33,7 @@
                 };
 
                 "window" = {
+                  background-color = mkLiteral "#${config.colorScheme.palette.base00}bf";
                   border = mkLiteral "@sborder";
                   border-radius = mkLiteral "@rborder";
                   children = [ "mainbox" ];
@@ -52,7 +53,7 @@
                 };
 
                 "inputbar" = {
-                  background-color = mkLiteral "#${config.colorScheme.palette.base02}";
+                  background-color = mkLiteral "#${config.colorScheme.palette.base02}bf";
                   border = mkLiteral "@sborder";
                   border-radius = mkLiteral "@rborder";
                   children = [
@@ -102,7 +103,7 @@
                 "element normal urgent" = { };
                 "element selected active" = { };
                 "element selected normal" = {
-                  background-color = mkLiteral "#${config.colorScheme.palette.base02}";
+                  background-color = mkLiteral "#${config.colorScheme.palette.base02}bf";
                   border = mkLiteral "@sborder";
                   border-radius = mkLiteral "@rborder";
                 };
