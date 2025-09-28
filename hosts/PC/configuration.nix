@@ -341,6 +341,9 @@
         qemu = {
           enable = false;
         };
+        podman = {
+          enable = true;
+        };
         ssh = {
           enable = true;
         };
