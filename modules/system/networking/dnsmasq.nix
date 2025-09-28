@@ -17,6 +17,9 @@
       cfg = config.system.networking.dnsmasq;
     in
     lib.mkIf cfg.enable {
+      networking.firewall.allowedTCPPorts = lib.mkIf (cfg.staticIp != null) [
+        53
+      ];
       services.dnsmasq = {
         enable = cfg.enable;
         settings = {

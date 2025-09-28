@@ -17,6 +17,10 @@
       cfg = config.system.networking.nginx;
     in
     lib.mkIf cfg.enable {
+      networking.firewall.allowedTCPPorts = [
+        80
+        443
+      ];
       services.nginx = {
         enable = cfg.enable;
         virtualHosts = cfg.virtualHosts;
