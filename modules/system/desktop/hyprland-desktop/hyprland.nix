@@ -110,6 +110,16 @@
               ) nixos-cfg.workspaces;
 
               plugin = {
+                hyprspace = {
+                };
+                # hyprexpo = {
+                #   columns = 3;
+                #   gap_size = 5;
+                #   skip_empty = true;
+                #   bg_col = "rgb(${config.colorScheme.palette.base00})";
+                #   workspace_method = "center current"; # [center/first] [workspace] e.g. first 1 or center m+1
+                #   gesture_distance = 300; # how far is the "max" for the gesture
+                # };
                 hyprbars = {
                   bar_height = 20;
                   bar_title_enabled = false;
@@ -277,6 +287,7 @@
             plugins = [
               # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
               pkgs.hyprlandPlugins.hyprbars
+              pkgs.hyprlandPlugins.hyprexpo
             ];
           };
         };

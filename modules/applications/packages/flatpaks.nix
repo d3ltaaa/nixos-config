@@ -15,6 +15,7 @@
     let
       cfg = config.applications.packages.flatpaks;
       flatpak-pkgs = [
+        "com.usebottles.bottles"
         "org.gnome.Connections"
         # "org.endlessos.Key"
         "com.github.hopsan.Hopsan"
