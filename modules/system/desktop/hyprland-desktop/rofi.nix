@@ -33,7 +33,7 @@
                 };
 
                 "window" = {
-                  background-color = mkLiteral "#${config.colorScheme.palette.base00}bf";
+                  background-color = mkLiteral "#${config.colorScheme.palette.base00}e5";
                   border = mkLiteral "@sborder";
                   border-radius = mkLiteral "@rborder";
                   children = [ "mainbox" ];
@@ -53,7 +53,7 @@
                 };
 
                 "inputbar" = {
-                  background-color = mkLiteral "#${config.colorScheme.palette.base02}bf";
+                  background-color = mkLiteral "#${config.colorScheme.palette.base02}e5";
                   border = mkLiteral "@sborder";
                   border-radius = mkLiteral "@rborder";
                   children = [
@@ -103,7 +103,7 @@
                 "element normal urgent" = { };
                 "element selected active" = { };
                 "element selected normal" = {
-                  background-color = mkLiteral "#${config.colorScheme.palette.base02}bf";
+                  background-color = mkLiteral "#${config.colorScheme.palette.base02}e5";
                   border = mkLiteral "@sborder";
                   border-radius = mkLiteral "@rborder";
                 };
