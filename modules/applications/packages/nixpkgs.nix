@@ -125,6 +125,7 @@
         vlc
         remnote
         tor-browser-bundle-bin
+        bottles
       ];
 
       stable-power-pkgs = with pkgs; [
