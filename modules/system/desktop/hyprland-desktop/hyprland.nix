@@ -92,7 +92,7 @@
               general = {
                 gaps_in = 10;
                 gaps_out = 20;
-                border_size = 4;
+                border_size = 3;
                 "col.active_border" = "rgb(${config.colorScheme.palette.base05})";
                 "col.inactive_border" = "rgb(${config.colorScheme.palette.base02})";
 
@@ -111,20 +111,20 @@
 
               plugin = {
                 hyprbars = {
-                  bar_height = 30;
+                  bar_height = 20;
                   bar_title_enabled = false;
                   bar_part_of_window = false;
                   bar_precedenixos-confige_over_border = false;
                   bar_color = "rgb(${config.colorScheme.palette.base00})";
                   bar_blur = true;
                   col.text = "rgb(${config.colorScheme.palette.base05})";
-                  bar_padding = 10;
+                  bar_padding = 5;
                   bar_button_padding = 15;
                   hyprbars-button = [
-                    "rgb(${config.colorScheme.palette.base00}), 20,  , hyprctl dispatch killactive"
-                    "rgb(${config.colorScheme.palette.base00}), 20,  , hyprctl dispatch fullscreen 1"
-                    "rgb(${config.colorScheme.palette.base00}), 20,  , hyprctl dispatch togglefloating"
-                    "rgb(${config.colorScheme.palette.base00}), 20, 󰋴 , resize_window.sh"
+                    "rgb(${config.colorScheme.palette.base00}), 16,  , hyprctl dispatch killactive"
+                    "rgb(${config.colorScheme.palette.base00}), 16,  , hyprctl dispatch fullscreen 1"
+                    "rgb(${config.colorScheme.palette.base00}), 16,  , hyprctl dispatch togglefloating"
+                    "rgb(${config.colorScheme.palette.base00}), 16, 󰋴 , resize_window.sh"
 
                   ];
                 };
@@ -147,7 +147,7 @@
               };
 
               decoration = {
-                rounding = 10;
+                rounding = 5;
                 blur = {
                   enabled = true;
                   size = 5;
@@ -177,26 +177,17 @@
 
               "$mod" = "SUPER";
               bind = [
+                "$mod SHIFT, M, exit,"
 
                 "$mod, X, killactive, "
-                "$mod, M, exit,"
-                "$mod, C, exec, menu_options updates"
-                "$mod, T, togglefloating,"
-                "$mod, F, fullscreen,"
-                "$mod, SPACE, exec, rofi -show drun -case-insensitive"
-                "$mod, P, exec, menu_options energy"
                 "$mod, Z, togglesplit"
-                "$mod SHIFT, W, exec, pkill waybar; waybar"
+                "$mod, F, fullscreen,"
+                "$mod, T, togglefloating,"
 
                 "$mod, L, movefocus, r"
                 "$mod, H, movefocus, l"
                 "$mod, K, movefocus, u"
                 "$mod, J, movefocus, d"
-
-                "$mod CONTROLALT, L, swapwindow, r"
-                "$mod CONTROLALT, H, swapwindow, l"
-                "$mod CONTROLALT, K, swapwindow, u"
-                "$mod CONTROLALT, J, swapwindow, d"
 
                 "$mod SHIFT, L, movewindow, r"
                 "$mod SHIFT, H, movewindow, l"
@@ -235,24 +226,24 @@
                 "$mod SHIFT, I, movetoworkspace, e+1"
                 "$mod SHIFT, U, movetoworkspace, e-1"
 
-                "$mod CONTROL, S, togglespecialworkspace, magic"
-                "$mod CONTROL SHIFT, S, movetoworkspace, special:magic"
+                "$mod, D, togglespecialworkspace, magic"
+                "$mod SHIFT, D, movetoworkspace, special:magic"
 
+                "$mod, S, exec, menu_options"
+                "$mod SHIFT, S, exec, menu_system"
+                "$mod, C, exec, menu_options updates"
+                "$mod, P, exec, menu_options energy"
                 "$mod, V, exec, toggle_vpn.sh"
 
-                "$mod CONTROL, L, resizeactive, 40 0"
-                "$mod CONTROL, H, resizeactive, -40 0"
-                "$mod CONTROL, K, resizeactive, 0 -40"
-                "$mod CONTROL, J, resizeactive, 0 40"
-                "$mod, S, exec, menu_options"
-                "$mod SHIFT, S, exec, menu_system &"
+                "$mod, SPACE, exec, rofi -show drun -case-insensitive"
+
+                "$mod SHIFT, W, exec, pkill waybar; waybar"
 
                 "$mod SHIFT, N, exec, dunstctl history-pop"
                 "$mod, N, exec, dunstctl close"
                 "$mod CONTROL, N, exec, dunstctl close-all && dunstctl history-clear"
 
                 "$mod, Q, exec, grim -g \"$(slurp)\" - | swappy -f -"
-                # "$mod, Q, exec, screenshot_save.sh"
                 "$mod, G, exec, hyprlock"
               ];
 
@@ -274,6 +265,11 @@
                 ",XF86AudioPlay, exec, playerctl play-pause"
                 ",XF86AudioPrev, exec, playerctl previous"
                 ",XF86AudioNext, exec, playerctl next"
+
+                "$mod CONTROL, L, resizeactive, 40 0"
+                "$mod CONTROL, H, resizeactive, -40 0"
+                "$mod CONTROL, K, resizeactive, 0 -40"
+                "$mod CONTROL, J, resizeactive, 0 40"
               ];
 
               exec-once = "hyprland-start-script";
