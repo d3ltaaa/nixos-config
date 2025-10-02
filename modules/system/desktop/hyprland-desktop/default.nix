@@ -10,6 +10,7 @@
     ./hyprpolkitagent.nix
     # ./nwg-dock.nix
     ./rofi.nix
+    ./satty.nix
     ./swappy.nix
     ./swww.nix
     ./settings.nix

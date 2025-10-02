@@ -243,7 +243,6 @@
                 "$mod, N, exec, dunstctl close"
                 "$mod CONTROL, N, exec, dunstctl close-all && dunstctl history-clear"
 
-                "$mod, Q, exec, grim -g \"$(slurp)\" - | swappy -f -"
                 "$mod, G, exec, hyprlock"
               ];
 

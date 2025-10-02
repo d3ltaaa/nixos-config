@@ -63,6 +63,9 @@
           enable = true; # a
         };
         swappy = {
+          enable = false; # a
+        };
+        satty = {
           enable = true; # a
         };
         swww = {
@@ -410,4 +413,6 @@
       };
     };
   };
+
+  services.hardware.bolt.enable = true; # Thunderbolt device manager
 }

@@ -76,6 +76,9 @@
           enable = true;
         };
         swappy = {
+          enable = false;
+        };
+        satty = {
           enable = true;
         };
         swww = {

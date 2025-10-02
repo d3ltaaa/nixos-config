@@ -7,10 +7,14 @@
   config =
     let
       cfg = config.system.desktop.hyprland-desktop.swappy;
+      cfg-hyprland = config.system.desktop.hyprland-desktop;
     in
     lib.mkIf cfg.enable {
       home-manager.users.${config.system.user.general.primary} =
         { config, ... }:
+        let
+          nixos-cfg-hyprland = cfg-hyprland;
+        in
         {
           xdg.configFile."swappy/config".text = ''
             [Default]
@@ -26,6 +30,13 @@
             auto_save=false
             custom_color=rgba(193,125,17,1)
           '';
+          wayland.windowManager.hyprland = lib.mkIf nixos-cfg-hyprland.enable {
+            settings = {
+              bind = [
+                "$mod, Q, exec, grim -g \"$(slurp)\" - | swappy -f -"
+              ];
+            };
+          };
         };
     };
 }

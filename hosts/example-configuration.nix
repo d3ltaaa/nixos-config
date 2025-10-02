@@ -81,6 +81,9 @@
           enable = true; # a
         };
         swappy = {
+          enable = false; # a
+        };
+        satty = {
           enable = true; # a
         };
         swww = {
