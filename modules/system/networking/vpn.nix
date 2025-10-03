@@ -60,6 +60,12 @@
         }
 
         (lib.mkIf cfg.client.enable {
+          systemd.services.wg-quick-wg0 = {
+            serviceConfig = {
+              Restart = "on-failure";
+              RestartSec = 5;
+            };
+          };
           networking = {
             wg-quick.interfaces.wg0 = {
               address = cfg.client.address;
