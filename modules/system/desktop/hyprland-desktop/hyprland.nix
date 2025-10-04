@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  nixpkgs-stable,
   pkgs,
   ...
 }:
@@ -28,6 +29,7 @@
 
       programs.hyprland = lib.mkIf cfg.enable {
         enable = true;
+        package = nixpkgs-stable.hyprland;
         xwayland.enable = true;
       };
 
@@ -63,6 +65,7 @@
         {
           wayland.windowManager.hyprland = lib.mkIf nixos-cfg.enable {
             enable = true;
+            package = nixpkgs-stable.hyprland;
             xwayland.enable = true;
             systemd.enable = true;
 
@@ -171,9 +174,9 @@
                 preserve_split = "yes";
               };
 
-              gestures = {
-                workspace_swipe = "on";
-              };
+              # gestures = {
+              #   workspace_swipe = "on";
+              # };
 
               misc = {
                 force_default_wallpaper = 0;
@@ -285,9 +288,9 @@
             };
 
             plugins = [
-              # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
-              pkgs.hyprlandPlugins.hyprbars
-              pkgs.hyprlandPlugins.hyprexpo
+              # inputs.hyprland-plugins.packages.${nixpkgs-stable.stdenv.hostPlatform.system}.hyprbars
+              nixpkgs-stable.hyprlandPlugins.hyprbars
+              nixpkgs-stable.hyprlandPlugins.hyprexpo
             ];
           };
         };

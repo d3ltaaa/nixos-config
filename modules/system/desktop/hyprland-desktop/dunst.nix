@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     system.desktop.hyprland-desktop.dunst.enable = lib.mkEnableOption "Enables Dunst module";
@@ -14,6 +19,7 @@
         {
           services.dunst = {
             enable = true;
+            package = nixpkgs-stable.dunst;
             settings = {
               global = {
                 monitor = 1;

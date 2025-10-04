@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     system.desktop.hyprland-desktop.hypridle = {
@@ -13,6 +18,7 @@
     lib.mkIf cfg.enable {
       services = {
         hypridle.enable = cfg.enable;
+        hypridle.package = nixpkgs-stable.hypridle;
       };
       home-manager.users.${config.system.user.general.primary} =
         let
@@ -22,6 +28,7 @@
         {
           services.hypridle = lib.mkIf nixos-cfg.enable {
             enable = true;
+            package = nixpkgs-stable.hypridle;
             settings = {
               general = {
                 lock_cmd = "pidof hyprlock || hyprlock"; # avoid starting multiple hyprlock instances.

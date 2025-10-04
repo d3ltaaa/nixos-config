@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -19,7 +20,7 @@
     lib.mkIf cfg.enable {
       programs.virt-manager = {
         enable = true;
-        package = pkgs.virt-manager;
+        package = nixpkgs-stable.virt-manager;
       };
 
       virtualisation.spiceUSBRedirection.enable = true;
@@ -31,9 +32,9 @@
 
       virtualisation.libvirtd = {
         enable = true;
-        package = pkgs.libvirt;
+        package = nixpkgs-stable.libvirt;
         qemu = {
-          package = pkgs.qemu_kvm;
+          package = nixpkgs-stable.qemu_kvm;
           runAsRoot = true;
           swtpm.enable = true;
           ovmf = {
@@ -48,7 +49,7 @@
         };
       };
 
-      environment.systemPackages = with pkgs; [
+      environment.systemPackages = with nixpkgs-stable; [
         virt-viewer
         vde2
         dnsmasq

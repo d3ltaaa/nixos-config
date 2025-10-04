@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     system.desktop.hyprland-desktop.swww.enable = lib.mkEnableOption "Enables Swww module";
@@ -12,7 +17,10 @@
       home-manager.users.${config.system.user.general.primary} =
         { ... }:
         {
-          services.swww.enable = true;
+          services.swww = {
+            enable = true;
+            package = nixpkgs-stable.swww;
+          };
         };
     };
 }

@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     applications.configurations.server.fileSharing = {
@@ -47,6 +52,7 @@
       };
       services.samba = {
         enable = true;
+        package = nixpkgs-stable.samba;
         openFirewall = true;
         settings =
           let

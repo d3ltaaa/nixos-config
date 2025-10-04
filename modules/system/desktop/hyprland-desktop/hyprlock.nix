@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     system.desktop.hyprland-desktop.hyprlock.enable = lib.mkEnableOption "Enables Hyplock";
@@ -17,6 +22,7 @@
         { config, ... }:
         lib.mkIf nixos-cfg.enable {
           programs.hyprlock.enable = true;
+          programs.hyprlock.package = nixpkgs-stable.hyprlock;
           programs.hyprlock.settings = {
             background = {
               monitor = "";

@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -31,13 +31,13 @@
     in
     {
       nixosConfigurations = {
-        "FW13" = nixpkgs-stable.lib.nixosSystem {
+        "FW13" = nixpkgs-unstable.lib.nixosSystem {
           # nixpkgs-stable -> pkgs
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
             inherit scripts;
-            nixpkgs-unstable = import nixpkgs-unstable {
+            nixpkgs-stable = import nixpkgs-stable {
               config.allowUnfree = true;
             };
           };
@@ -59,13 +59,13 @@
             }
           ];
         };
-        "PC" = nixpkgs-stable.lib.nixosSystem {
+        "PC" = nixpkgs-unstable.lib.nixosSystem {
           # nixpkgs-stable -> pkgs
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
             inherit scripts;
-            nixpkgs-unstable = import nixpkgs-unstable {
+            nixpkgs-stable = import nixpkgs-stable {
               config.allowUnfree = true;
             };
           };

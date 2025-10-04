@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -33,7 +33,7 @@
       # has to be enabled in order for flatpaks to work!
       xdg.portal = lib.mkIf config.applications.packages.flatpaks.enable {
         enable = true;
-        extraPortals = with pkgs; [
+        extraPortals = with nixpkgs-stable; [
           xdg-desktop-portal-wlr
           xdg-desktop-portal-gtk
           xdg-desktop-portal-hyprland

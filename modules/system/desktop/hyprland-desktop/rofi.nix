@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -129,7 +129,7 @@
             {
               enable = true;
               theme = rofi-theme;
-              package = pkgs.rofi-wayland;
+              package = nixpkgs-stable.rofi;
               extraConfig = {
                 kb-row-up = "Up,alt+k,Shift+Tab,Shift+ISO_Left_Tab";
                 kb-row-down = "Down,alt+j";

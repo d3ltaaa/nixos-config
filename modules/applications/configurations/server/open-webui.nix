@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -18,11 +18,11 @@
     in
     lib.mkIf cfg.enable {
       environment.systemPackages = [
-        pkgs.python313Packages.hf-xet
+        nixpkgs-stable.python313Packages.hf-xet
       ];
       services.open-webui = {
         enable = true;
-        package = pkgs.open-webui;
+        package = nixpkgs-stable.open-webui;
         host = "0.0.0.0";
         openFirewall = true;
       };

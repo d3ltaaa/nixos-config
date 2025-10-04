@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }:
 {
@@ -38,22 +37,33 @@
     };
     boot = {
       primaryBoot = true;
-      osProber = false;
-      defaultEntry = 1;
+      bootloader = "limine";
+      secureBoot = true;
       extraEntries = ''
-        menuentry "NixOs (PC-SERVER)" {
-            insmod part_gpt
-            insmod fat
-            search --no-floppy --label SERVER_BOOT --set=root
-            chainloader /EFI/NixOS-boot/grubx64.efi
-        }
-        menuentry "Windows 10 " {
-            insmod part_gpt
-            insmod fat
-            search --no-floppy --label W10_BOOT --set=root
-            chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-        }
+        /NixOS (PC-SERVER)
+          protocol: efi
+          path: uuid(8f03e2df-020d-48b6-84c4-269f96c2ee85):/EFI/NixOS-boot/grubx64.efi
+
+        /Windows 10
+          protocol: efi
+          path: uuid(883cb4fb-d274-4a40-8083-17d5e6fadaca):/EFI/Microsoft/Boot/bootmgfw.efi
       '';
+      # osProber = false;
+      # defaultEntry = 1;
+      # extraEntries = ''
+      #   menuentry "NixOs (PC-SERVER)" {
+      #       insmod part_gpt
+      #       insmod fat
+      #       search --no-floppy --label SERVER_BOOT --set=root
+      #       chainloader /EFI/NixOS-boot/grubx64.efi
+      #   }
+      #   menuentry "Windows 10 " {
+      #       insmod part_gpt
+      #       insmod fat
+      #       search --no-floppy --label W10_BOOT --set=root
+      #       chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+      #   }
+      # '';
     };
     desktop = {
       hyprland-desktop = {

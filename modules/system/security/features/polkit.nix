@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     system.security.features.polkit = {
@@ -11,5 +16,7 @@
     in
     lib.mkIf cfg.enable {
       security.polkit.enable = true;
+      security.polkit.package = nixpkgs-stable.polkit;
+
     };
 }

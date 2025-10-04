@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  nixpkgs-stable,
   pkgs,
   ...
 }:
@@ -15,7 +16,7 @@
       cfg-hyprland = config.system.desktop.hyprland-desktop.hyprland;
     in
     lib.mkIf cfg.enable {
-      environment.systemPackages = with pkgs; [ satty ];
+      environment.systemPackages = with nixpkgs-stable; [ satty ];
       home-manager.users.${config.system.user.general.primary} =
         { lib, config, ... }:
         let

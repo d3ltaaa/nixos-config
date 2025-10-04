@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -25,14 +25,14 @@
     lib.mkIf cfg.enable (
       lib.mkMerge [
         (lib.mkIf (cfg.monitorType == "internal") {
-          environment.systemPackages = with pkgs; [
+          environment.systemPackages = with nixpkgs-stable; [
             brillo
             brightnessctl
           ];
           environment.variables.MONITOR_TYPE = "internal";
         })
         (lib.mkIf (cfg.monitorType == "external") {
-          environment.systemPackages = with pkgs; [
+          environment.systemPackages = with nixpkgs-stable; [
             ddcutil
           ];
           hardware.i2c.enable = true;

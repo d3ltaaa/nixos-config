@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     applications.configurations.client.thunderbird = {
@@ -13,6 +18,7 @@
     lib.mkIf cfg.enable {
       programs.thunderbird = {
         enable = true;
+        package = nixpkgs-stable.thunderbird;
         preferencesStatus = "user";
       };
     };

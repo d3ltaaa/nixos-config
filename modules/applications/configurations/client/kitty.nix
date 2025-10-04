@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     applications.configurations.client.kitty = {
@@ -25,6 +30,7 @@
             in
             {
               enable = true;
+              package = nixpkgs-stable.kitty;
               font = {
                 name = "UbuntuMonoNerdFont";
                 size = 12;

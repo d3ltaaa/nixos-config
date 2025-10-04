@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     system.desktop.hyprland-desktop.waybar.enable = lib.mkEnableOption "Enables Waybar module";
@@ -18,6 +23,7 @@
         {
 
           programs.waybar.enable = true;
+          programs.waybar.package = nixpkgs-stable.waybar;
           programs.waybar.settings = {
             mainBar = {
               layer = "top";

@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -16,7 +16,7 @@
       cfg = config.system.security.features.backups;
     in
     lib.mkIf cfg.enable {
-      environment.systemPackages = with pkgs; [
+      environment.systemPackages = with nixpkgs-stable; [
         deja-dup
         # vorta
       ];

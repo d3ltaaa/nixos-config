@@ -1,5 +1,6 @@
 {
   config,
+  nixpkgs-stable,
   pkgs,
   lib,
   ...
@@ -82,13 +83,13 @@
         # Check if all required arguments are provided
         export PATH=${
           lib.makeBinPath [
-            pkgs.systemd
-            pkgs.gnugrep
-            pkgs.curl
-            pkgs.jq
-            pkgs.coreutils
-            pkgs.msmtp
-            pkgs.hostname
+            nixpkgs-stable.systemd
+            nixpkgs-stable.gnugrep
+            nixpkgs-stable.curl
+            nixpkgs-stable.jq
+            nixpkgs-stable.coreutils
+            nixpkgs-stable.msmtp
+            nixpkgs-stable.hostname
           ]
         }
 
@@ -170,7 +171,7 @@
       systemd.services.monitor-systemd-service = {
         description = "Service for periodically running monitor-systemd-script";
 
-        path = with pkgs; [
+        path = with nixpkgs-stable; [
           bash
           systemd # For systemctl and journalctl
           gnugrep

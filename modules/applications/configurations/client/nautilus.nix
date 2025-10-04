@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -19,7 +19,7 @@
       environment.variables = {
         FILEMANAGER = "nautilus";
       };
-      environment.systemPackages = with pkgs; [ nautilus ];
+      environment.systemPackages = with nixpkgs-stable; [ nautilus ];
       services.gvfs.enable = true;
       services.gnome.tinysparql.enable = true;
       services.gnome.localsearch.enable = true;

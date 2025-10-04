@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     system.security.features.clamav = {
@@ -27,6 +32,7 @@
       ];
 
       services.clamav = {
+        package = nixpkgs-stable.clamav;
         daemon = {
           enable = true;
           settings = {

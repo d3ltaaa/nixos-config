@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -26,9 +26,10 @@
             in
             {
               enable = true;
+              package = nixpkgs-stable.tmux;
               plugins = [
-                pkgs.tmuxPlugins.better-mouse-mode
-                # pkgs.tmuxPlugins.catppuccin
+                nixpkgs-stable.tmuxPlugins.better-mouse-mode
+                # nixpkgs-stable.tmuxPlugins.catppuccin
               ];
               keyMode = "vi";
               clock24 = true;

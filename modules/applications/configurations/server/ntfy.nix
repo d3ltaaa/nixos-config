@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     applications.configurations.server.ntfy = {
@@ -17,6 +22,7 @@
       networking.firewall.allowedTCPPorts = [ 8070 ];
       services.ntfy-sh = {
         enable = true;
+        package = nixpkgs-stable.ntfy-sh;
         settings = {
           base-url = cfg.base-url;
           # Listen on all interfaces on port 8080

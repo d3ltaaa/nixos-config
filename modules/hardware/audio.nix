@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -21,13 +21,14 @@
         # pulseaudio.support32Bit = true;
         pipewire = {
           enable = true;
+          package = nixpkgs-stable.pipewire;
           alsa.enable = true;
           alsa.support32Bit = true;
           pulse.enable = true;
         };
 
       };
-      environment.systemPackages = with pkgs; [
+      environment.systemPackages = with nixpkgs-stable; [
         pulseaudio # for pactl (needed for scripts)
       ];
 

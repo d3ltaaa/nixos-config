@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     applications.configurations.server.jellyfin = {
@@ -13,6 +18,7 @@
     lib.mkIf cfg.enable {
       services.jellyfin = {
         enable = true;
+        package = nixpkgs-stable.jellyfin;
         openFirewall = true;
       };
     };

@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -18,7 +18,7 @@
     lib.mkIf cfg.enable {
       programs.gnupg.agent = {
         enable = true;
-        pinentryPackage = pkgs.pinentry-gnome3;
+        pinentryPackage = nixpkgs-stable.pinentry-gnome3;
       };
     };
 }

@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     applications.configurations.server.homepage = {
@@ -25,6 +30,7 @@
     lib.mkIf cfg.enable {
       services.homepage-dashboard = {
         enable = true;
+        package = nixpkgs-stable.homepage-dashboard;
         allowedHosts = "${config.system.networking.general.staticIp}:8082,home.${config.secrets.serverAddress}";
         openFirewall = true;
         widgets = cfg.widgets;

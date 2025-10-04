@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     hardware.usb = {
@@ -12,5 +17,6 @@
     in
     lib.mkIf cfg.enable {
       services.udisks2.enable = true;
+      services.udisks2.package = nixpkgs-stable.udisks2;
     };
 }

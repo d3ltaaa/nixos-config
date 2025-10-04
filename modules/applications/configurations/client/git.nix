@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -26,7 +26,7 @@
     lib.mkIf cfg.enable {
       programs.git = {
         enable = true;
-        package = pkgs.gitFull;
+        package = nixpkgs-stable.gitFull;
         config.credential.helper = "manager";
         config.credential."https://github.com".username = cfg.username;
         config.credential.credentialstore = "cache";

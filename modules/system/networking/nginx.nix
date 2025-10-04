@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     system.networking.nginx = {
@@ -23,6 +28,7 @@
       ];
       services.nginx = {
         enable = cfg.enable;
+        package = nixpkgs-stable.nginx;
         virtualHosts = cfg.virtualHosts;
       };
     };

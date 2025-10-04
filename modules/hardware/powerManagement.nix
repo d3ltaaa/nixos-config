@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -140,7 +140,7 @@
       };
 
       environment.systemPackages = lib.mkIf (cfg.gnome-power-manager.enable && cfg.upower.enable) [
-        pkgs.gnome-power-manager
+        nixpkgs-stable.gnome-power-manager
       ];
 
       home-manager.users.${config.system.user.general.primary} =

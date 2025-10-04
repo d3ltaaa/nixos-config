@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     applications.configurations.client.syncthing = {
@@ -25,6 +30,7 @@
       ];
       services.syncthing = {
         enable = true;
+        package = nixpkgs-stable.syncthing;
         dataDir = "/home/${config.system.user.general.primary}";
         user = config.system.user.general.primary;
         openDefaultPorts = lib.mkIf cfg.gui true;

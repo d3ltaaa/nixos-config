@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -17,6 +17,6 @@
     in
     lib.mkIf cfg.enable {
       hardware.opentabletdriver.enable = true;
-      hardware.opentabletdriver.package = pkgs.opentabletdriver;
+      hardware.opentabletdriver.package = nixpkgs-stable.opentabletdriver;
     };
 }

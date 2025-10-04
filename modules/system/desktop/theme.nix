@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  nixpkgs-stable,
   nix-colors,
   ...
 }:
@@ -94,19 +94,23 @@
           gtk = lib.mkIf cfg.gtk.enable {
             enable = true;
             theme.name = cfg.gtk.theme.name;
-            theme.package = lib.mkIf (cfg.gtk.theme.package != null) pkgs.${cfg.gtk.theme.package};
+            theme.package = lib.mkIf (cfg.gtk.theme.package != null) nixpkgs-stable.${cfg.gtk.theme.package};
             cursorTheme.name = cfg.gtk.cursor.name;
-            cursorTheme.package = lib.mkIf (cfg.gtk.cursor.package != null) pkgs.${cfg.gtk.cursor.package};
+            cursorTheme.package = lib.mkIf (
+              cfg.gtk.cursor.package != null
+            ) nixpkgs-stable.${cfg.gtk.cursor.package};
             iconTheme.name = cfg.gtk.icon.name;
-            iconTheme.package = lib.mkIf (cfg.gtk.icon.package != null) pkgs.${cfg.gtk.icon.package};
+            iconTheme.package = lib.mkIf (cfg.gtk.icon.package != null) nixpkgs-stable.${cfg.gtk.icon.package};
           };
 
           qt = lib.mkIf cfg.qt.enable {
             enable = true;
             platformTheme.name = cfg.qt.theme.name;
-            platformTheme.package = lib.mkIf (cfg.qt.theme.package != null) pkgs.${cfg.gtk.icon.package};
+            platformTheme.package = lib.mkIf (
+              cfg.qt.theme.package != null
+            ) nixpkgs-stable.${cfg.gtk.icon.package};
             style.name = cfg.qt.style.name;
-            style.package = lib.mkIf (cfg.qt.style.package != null) pkgs.${cfg.gtk.style.package};
+            style.package = lib.mkIf (cfg.qt.style.package != null) nixpkgs-stable.${cfg.gtk.style.package};
           };
         };
     };

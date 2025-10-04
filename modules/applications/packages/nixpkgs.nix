@@ -2,7 +2,7 @@
   lib,
   config,
   pkgs,
-  nixpkgs-unstable,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -14,28 +14,28 @@
       };
       stable = {
         system = {
-          default = lib.mkEnableOption "Enables unstable-system-pkgs";
-          base = lib.mkEnableOption "Enables unstable-base-pkgs";
-          lang = lib.mkEnableOption "Enables unstable-lang-pkgs";
-          tool = lib.mkEnableOption "Enables unstable-tool-pkgs";
-          hypr = lib.mkEnableOption "Enables unstable-hypr-pkgs";
-          desk = lib.mkEnableOption "Enables unstable-desk-pkgs";
-          power = lib.mkEnableOption "Enables unstable-power-pkgs";
+          default = lib.mkEnableOption "Enables stable-system-pkgs";
+          base = lib.mkEnableOption "Enables stable-base-pkgs";
+          lang = lib.mkEnableOption "Enables stable-lang-pkgs";
+          tool = lib.mkEnableOption "Enables stable-tool-pkgs";
+          hypr = lib.mkEnableOption "Enables stable-hypr-pkgs";
+          desk = lib.mkEnableOption "Enables stable-desk-pkgs";
+          power = lib.mkEnableOption "Enables stable-power-pkgs";
         };
-        user.default = lib.mkEnableOption "Enables unstable-user-pkgs";
-        font.default = lib.mkEnableOption "Enables unstable-font-pkgs";
-      };
-      unstable = {
-        system.default = lib.mkEnableOption "Enables stable-system-pkgs";
         user.default = lib.mkEnableOption "Enables stable-user-pkgs";
         font.default = lib.mkEnableOption "Enables stable-font-pkgs";
+      };
+      unstable = {
+        system.default = lib.mkEnableOption "Enables unstable-system-pkgs";
+        user.default = lib.mkEnableOption "Enables unstable-user-pkgs";
+        font.default = lib.mkEnableOption "Enables unstable-font-pkgs";
       };
     };
   };
 
   config =
     let
-      stable-base-pkgs = with pkgs; [
+      stable-base-pkgs = with nixpkgs-stable; [
         bat
         bat-extras.batman
         wget
@@ -54,7 +54,7 @@
         fastfetch
       ];
 
-      stable-lang-pkgs = with pkgs; [
+      stable-lang-pkgs = with nixpkgs-stable; [
         clang
         cmake
         meson
@@ -67,10 +67,10 @@
         psutils
       ];
 
-      stable-hypr-pkgs = with pkgs; [
+      stable-hypr-pkgs = with nixpkgs-stable; [
         hyprshade
         xdg-desktop-portal-hyprland
-        rofi-wayland
+        rofi
         waypaper
         # hyprpaper
         swww
@@ -91,7 +91,7 @@
         hyprpicker
       ];
 
-      stable-tool-pkgs = with pkgs; [
+      stable-tool-pkgs = with nixpkgs-stable; [
         mpv
         yt-dlg
 
@@ -113,7 +113,7 @@
         netcat-openbsd
       ];
 
-      stable-desk-pkgs = with pkgs; [
+      stable-desk-pkgs = with nixpkgs-stable; [
         waybar
         discord
         libreoffice-still
@@ -128,7 +128,7 @@
         bottles
       ];
 
-      stable-power-pkgs = with pkgs; [
+      stable-power-pkgs = with nixpkgs-stable; [
         furmark
         powertop
         ncdu
@@ -139,25 +139,25 @@
         auto-cpufreq
       ];
 
-      stable-system-pkgs = with pkgs; [
+      stable-system-pkgs = with nixpkgs-stable; [
       ];
 
-      unstable-system-pkgs = with nixpkgs-unstable; [
+      unstable-system-pkgs = with pkgs; [
       ];
 
-      stable-user-pkgs = with pkgs; [
+      stable-user-pkgs = with nixpkgs-stable; [
       ];
 
-      unstable-user-pkgs = with nixpkgs-unstable; [ ];
+      unstable-user-pkgs = with pkgs; [ ];
 
-      stable-font-pkgs = with pkgs; [
+      stable-font-pkgs = with nixpkgs-stable; [
         nerd-fonts.ubuntu-mono
         nerd-fonts.fira-code
         nerd-fonts.hack
         nerd-fonts.roboto-mono
       ];
 
-      unstable-font-pkgs = with nixpkgs-unstable; [ ];
+      unstable-font-pkgs = with pkgs; [ ];
 
       cfg = config.applications.packages.nixpkgs;
     in

@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  nixpkgs-stable,
   pkgs,
   ...
 }:
@@ -21,19 +22,25 @@
     in
     lib.mkIf cfg.enable {
       services.fwupd.enable = true;
+      services.fwupd.package = nixpkgs-stable.fwupd;
       services.fprintd.enable = true;
+      services.fprintd.package =
+        if config.services.fprintd.tod.enable then nixpkgs-stable.fprintd-tod else nixpkgs-stable.fprintd;
       services.fprintd.tod.enable = true;
-      services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
+      services.fprintd.tod.driver = nixpkgs-stable.libfprint-2-tod1-goodix;
 
-      security.pam.services = {
-        login = {
-          fprintAuth = true;
-        };
-        polkit-1 = {
-          fprintAuth = true;
-        };
-        sudo = {
-          fprintAuth = true;
+      security.pam = {
+        package = nixpkgs-stable.pam;
+        services = {
+          login = {
+            fprintAuth = true;
+          };
+          polkit-1 = {
+            fprintAuth = true;
+          };
+          sudo = {
+            fprintAuth = true;
+          };
         };
       };
     };

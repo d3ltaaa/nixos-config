@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     applications.configurations.client.zsh = {
@@ -22,6 +27,7 @@
         {
           programs.zsh = {
             enable = true;
+            package = nixpkgs-stable.zsh;
             enableCompletion = true;
             enableVteIntegration = true;
             autosuggestion.enable = true;
