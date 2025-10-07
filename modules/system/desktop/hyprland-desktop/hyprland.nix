@@ -29,7 +29,6 @@
 
       programs.hyprland = lib.mkIf cfg.enable {
         enable = true;
-        package = nixpkgs-stable.hyprland;
         xwayland.enable = true;
       };
 
@@ -65,7 +64,6 @@
         {
           wayland.windowManager.hyprland = lib.mkIf nixos-cfg.enable {
             enable = true;
-            package = nixpkgs-stable.hyprland;
             xwayland.enable = true;
             systemd.enable = true;
 
@@ -289,8 +287,8 @@
 
             plugins = [
               # inputs.hyprland-plugins.packages.${nixpkgs-stable.stdenv.hostPlatform.system}.hyprbars
-              nixpkgs-stable.hyprlandPlugins.hyprbars
-              nixpkgs-stable.hyprlandPlugins.hyprexpo
+              pkgs.hyprlandPlugins.hyprbars
+              pkgs.hyprlandPlugins.hyprexpo
             ];
           };
         };

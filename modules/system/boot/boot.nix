@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  nixpkgs-stable,
   ...
 }:
 {
@@ -9,6 +9,12 @@
     system.boot = {
       primaryBoot = lib.mkEnableOption "";
       osProber = lib.mkEnableOption "Enable Os-Prober";
+      bootloader = lib.mkOption {
+        type = lib.types.enum [
+          "grub"
+          "limine"
+        ];
+      };
       defaultEntry = lib.mkOption {
         type = lib.types.int;
         default = 0;
@@ -17,6 +23,7 @@
         type = lib.types.nullOr lib.types.str;
         default = null;
       };
+      secureBoot = lib.mkEnableOption "Enables SecureBoot (first enroll keys)";
     };
   };
 
@@ -32,13 +39,13 @@
         plymouth = {
           enable = true;
           # theme = "spinner_alt";
-          # themePackages = with pkgs; [
+          # themePackages = with nixpkgs-stable; [
           #   # By default we would install all themes
           #   (adi1090x-plymouth-themes.override {
           #     selected_themes = [ "spinner_alt" ];
           #   })
           # ];
-          logo = "${pkgs.nixos-icons}/share/icons/hicolor/48x48/apps/nix-snowflake-white.png";
+          logo = "${nixpkgs-stable.nixos-icons}/share/icons/hicolor/48x48/apps/nix-snowflake-white.png";
         };
 
         # Enable "Silent boot"
@@ -55,16 +62,38 @@
         # It will just not appear on screen unless a key is pressed
 
       };
+      environment.systemPackages = with nixpkgs-stable; [ sbctl ];
       boot.loader = {
         efi = {
           efiSysMountPoint = "/boot";
           canTouchEfiVariables = cfg.primaryBoot;
         };
-        grub = {
+        limine = lib.mkIf (cfg.bootloader == "limine") {
+          enable = true;
+          secureBoot.enable = cfg.secureBoot;
+          # lsblk -o NAME,PARTUUID,UUID,LABEL,FSTYPE,MOUNTPOINT
+          extraEntries = if cfg.extraEntries != null then cfg.extraEntries else "";
+          style = {
+            wallpapers = [ ];
+            interface = {
+              branding = "Bootloader";
+              brandingColor = 4;
+            };
+            graphicalTerminal = {
+              palette = "1e2030;ed8796;a6da95;eed49f;8aadf4;c6a0f6;8bd5ca;cad3f5";
+              brightPalette = "494d64;ed8796;a6da95;eed49f;8aadf4;c6a0f6;8bd5ca;cad3f5";
+              foreground = "ffffff";
+              background = "000000";
+              brightForeground = "000000";
+              brightBackground = "5b6078";
+            };
+          };
+        };
+        grub = lib.mkIf (cfg.bootloader == "grub") {
           enable = true;
           device = "nodev";
           gfxmodeEfi = "1920x1200x32";
-          theme = pkgs.minimal-grub-theme;
+          theme = nixpkgs-stable.minimal-grub-theme;
           useOSProber = cfg.osProber;
           efiSupport = true;
           configurationName = "NixOS (${config.system.general.nixos.name})";

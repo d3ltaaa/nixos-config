@@ -69,7 +69,6 @@
 
       stable-hypr-pkgs = with nixpkgs-stable; [
         hyprshade
-        xdg-desktop-portal-hyprland
         rofi
         waypaper
         # hyprpaper
@@ -118,10 +117,9 @@
         discord
         libreoffice-still
         arduino-ide
-        freecad-wayland
+        freecad
         telegram-desktop
         orca-slicer
-        rnote
         vlc
         remnote
         tor-browser-bundle-bin
@@ -143,6 +141,8 @@
       ];
 
       unstable-system-pkgs = with pkgs; [
+        xdg-desktop-portal-hyprland
+        rnote
       ];
 
       stable-user-pkgs = with nixpkgs-stable; [

@@ -28,7 +28,6 @@
         {
           services.hypridle = lib.mkIf nixos-cfg.enable {
             enable = true;
-            package = nixpkgs-stable.hypridle;
             settings = {
               general = {
                 lock_cmd = "pidof hyprlock || hyprlock"; # avoid starting multiple hyprlock instances.

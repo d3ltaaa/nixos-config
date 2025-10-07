@@ -22,7 +22,6 @@
         { config, ... }:
         lib.mkIf nixos-cfg.enable {
           programs.hyprlock.enable = true;
-          programs.hyprlock.package = nixpkgs-stable.hyprlock;
           programs.hyprlock.settings = {
             background = {
               monitor = "";

@@ -2,6 +2,7 @@
   lib,
   config,
   nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -21,6 +22,6 @@
       };
       programs.chromium.enable = true;
 
-      environment.systemPackages = with nixpkgs-stable; [ brave ];
+      environment.systemPackages = with pkgs; [ brave ];
     };
 }

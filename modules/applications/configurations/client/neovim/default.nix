@@ -22,7 +22,7 @@
             ./settings.nix
             ./keymaps.nix
             ./desktop.nix
-            # ./plugins/cmp.nix
+            ./plugins/cmp.nix
             ./plugins/icons.nix
             ./plugins/telescope.nix
             ./plugins/themes.nix
