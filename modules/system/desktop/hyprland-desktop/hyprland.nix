@@ -182,7 +182,7 @@
                 disable_splash_rendering = true;
                 enable_swallow = true;
                 swallow_regex = "^(kitty|alacritty)$";
-                enable_anr_dialog = true;
+                enable_anr_dialog = false;
                 anr_missed_pings = 3;
               };
 

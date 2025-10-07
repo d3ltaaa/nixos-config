@@ -39,7 +39,6 @@
         rfkillUnblockWlan = {
           text = ''
             rfkill unblock wlan
-            nmcli radio wifi on
           '';
           deps = [ ];
         };

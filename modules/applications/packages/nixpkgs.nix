@@ -143,6 +143,7 @@
       unstable-system-pkgs = with pkgs; [
         xdg-desktop-portal-hyprland
         rnote
+        freecad
       ];
 
       stable-user-pkgs = with nixpkgs-stable; [
