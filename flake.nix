@@ -14,6 +14,8 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    winboat.url = "github:TibixDev/winboat";
+
     scripts.url = "github:d3ltaaa/fscripts";
     scripts.flake = false;
   };
@@ -21,7 +23,6 @@
     {
       pkgs,
       pkgs-alt,
-      scripts,
       ...
     }@inputs:
     let
@@ -34,7 +35,6 @@
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
-            inherit scripts;
             pkgs-alt = import pkgs-alt {
               config.allowUnfree = true;
             };
@@ -62,7 +62,6 @@
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
-            inherit scripts;
             pkgs-alt = import pkgs-alt {
               config.allowUnfree = true;
             };
