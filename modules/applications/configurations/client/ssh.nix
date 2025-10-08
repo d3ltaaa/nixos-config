@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -18,7 +18,7 @@
     lib.mkIf cfg.enable {
       services.openssh = {
         enable = true;
-        package = nixpkgs-stable.openssh;
+        package = pkgs.openssh;
         settings = {
           PasswordAuthentication = true;
           PermitRootLogin = "no";

@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -30,7 +30,7 @@
             in
             {
               enable = true;
-              package = nixpkgs-stable.kitty;
+              package = pkgs.kitty;
               font = {
                 name = "UbuntuMonoNerdFont";
                 size = 12;

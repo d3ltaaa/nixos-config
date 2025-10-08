@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -37,7 +37,7 @@
         description = "Initialize server activity timestamp on boot";
         wantedBy = [ "multi-user.target" ]; # Run at boot
         before = [ "inactivity-shutdown.service" ]; # Ensure it's run before the shutdown check
-        path = with nixpkgs-stable; [ coreutils ];
+        path = with pkgs; [ coreutils ];
         script = ''
           mkdir -p /var/lib/server-activity
           date +%s > /var/lib/server-activity/last-active
@@ -48,7 +48,7 @@
 
       systemd.services.update-activity = lib.mkIf cfg.autoShutdown.enable {
         description = "Monitors server activity (Port: ${cfg.autoShutdown.watchPort})";
-        path = with nixpkgs-stable; [
+        path = with pkgs; [
           procps
           iproute2
           coreutils
@@ -81,7 +81,7 @@
 
       systemd.services.inactivity-shutdown = lib.mkIf cfg.autoShutdown.enable {
         description = "Shutdown server after ${cfg.autoShutdown.shutdownTime}s";
-        path = with nixpkgs-stable; [ coreutils ];
+        path = with pkgs; [ coreutils ];
         script = ''
           heartbeat="/var/lib/server-activity/last-active"
           countdown_file="/var/lib/server-activity/shutdown-in"

@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -22,7 +22,7 @@
       };
       services.xserver.videoDrivers = [ "amdgpu" ];
 
-      environment.systemPackages = with nixpkgs-stable; [
+      environment.systemPackages = with pkgs; [
         lact
       ];
 
@@ -31,7 +31,7 @@
         after = [ "multi-user.target" ];
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {
-          ExecStart = "${nixpkgs-stable.lact}/bin/lact daemon";
+          ExecStart = "${pkgs.lact}/bin/lact daemon";
         };
         enable = true;
       };

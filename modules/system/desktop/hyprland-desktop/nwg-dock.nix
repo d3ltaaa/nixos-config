@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -15,7 +15,7 @@
       cfg = config.system.desktop.hyprland-desktop.nwg-dock;
     in
     lib.mkIf cfg.enable {
-      environment.systemPackages = with nixpkgs-stable; [ nwg-dock-hyprland ];
+      environment.systemPackages = with pkgs; [ nwg-dock-hyprland ];
     };
   # there is a problem with the icons and scaling the display resolution.
 }

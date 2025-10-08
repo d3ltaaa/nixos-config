@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -23,7 +23,7 @@
         {
 
           programs.waybar.enable = true;
-          programs.waybar.package = nixpkgs-stable.waybar;
+          programs.waybar.package = pkgs.waybar;
           programs.waybar.settings = {
             mainBar = {
               layer = "top";

@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -18,7 +18,7 @@
     lib.mkIf cfg.enable {
       programs.thunderbird = {
         enable = true;
-        package = nixpkgs-stable.thunderbird;
+        package = pkgs.thunderbird;
         preferencesStatus = "user";
       };
     };

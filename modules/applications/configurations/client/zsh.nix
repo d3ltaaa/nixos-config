@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -27,7 +27,7 @@
         {
           programs.zsh = {
             enable = true;
-            package = nixpkgs-stable.zsh;
+            package = pkgs.zsh;
             enableCompletion = true;
             enableVteIntegration = true;
             autosuggestion.enable = true;

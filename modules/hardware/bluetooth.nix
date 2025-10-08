@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -17,6 +17,6 @@
     in
     lib.mkIf cfg.enable {
       hardware.bluetooth.enable = true;
-      hardware.bluetooth.package = nixpkgs-stable.bluez;
+      hardware.bluetooth.package = pkgs.bluez;
     };
 }

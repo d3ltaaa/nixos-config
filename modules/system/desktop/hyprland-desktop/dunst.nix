@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -19,7 +19,7 @@
         {
           services.dunst = {
             enable = true;
-            package = nixpkgs-stable.dunst;
+            package = pkgs.dunst;
             settings = {
               global = {
                 monitor = 1;

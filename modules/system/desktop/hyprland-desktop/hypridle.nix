@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -18,7 +18,7 @@
     lib.mkIf cfg.enable {
       services = {
         hypridle.enable = cfg.enable;
-        hypridle.package = nixpkgs-stable.hypridle;
+        hypridle.package = pkgs.hypridle;
       };
       home-manager.users.${config.system.user.general.primary} =
         let

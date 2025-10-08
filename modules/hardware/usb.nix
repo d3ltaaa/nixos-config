@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -17,6 +17,6 @@
     in
     lib.mkIf cfg.enable {
       services.udisks2.enable = true;
-      services.udisks2.package = nixpkgs-stable.udisks2;
+      services.udisks2.package = pkgs.udisks2;
     };
 }

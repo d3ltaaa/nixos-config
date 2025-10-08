@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -28,7 +28,7 @@
       ];
       services.nginx = {
         enable = cfg.enable;
-        package = nixpkgs-stable.nginx;
+        package = pkgs.nginx;
         virtualHosts = cfg.virtualHosts;
       };
     };

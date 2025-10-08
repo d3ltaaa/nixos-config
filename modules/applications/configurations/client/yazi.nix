@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  nixpkgs-stable,
   pkgs,
   ...
 }:
@@ -23,7 +22,7 @@
 
           programs.yazi = {
             enable = true;
-            package = nixpkgs-stable.yazi;
+            package = pkgs.yazi;
             plugins = {
               uiPlugin = pkgs.writeTextDir "init.lua" ''
                 function Folder:icon(file) return ui.Span(" " .. file:icon() .. "  ") end

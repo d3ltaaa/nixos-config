@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -18,7 +18,7 @@
     lib.mkIf cfg.enable {
       services.radicale = {
         enable = true;
-        package = nixpkgs-stable.radicale;
+        package = pkgs.radicale;
         settings = {
           server = {
             # Configure host and port if needed

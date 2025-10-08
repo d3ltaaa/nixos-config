@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -52,7 +52,7 @@
       };
       services.samba = {
         enable = true;
-        package = nixpkgs-stable.samba;
+        package = pkgs.samba;
         openFirewall = true;
         settings =
           let

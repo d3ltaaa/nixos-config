@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -27,7 +27,7 @@
       ];
       services.dnsmasq = {
         enable = cfg.enable;
-        package = nixpkgs-stable.dnsmasq;
+        package = pkgs.dnsmasq;
         settings = {
           domain-needed = true;
           bogus-priv = true;

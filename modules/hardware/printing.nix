@@ -2,7 +2,6 @@
   lib,
   config,
   pkgs,
-  nixpkgs-stable,
   ...
 }:
 {
@@ -26,7 +25,7 @@
       services = {
         printing = {
           drivers =
-            with nixpkgs-stable;
+            with pkgs;
             [ ]
             ++ (pkgs.lib.optionals cfg.installDriver.general gutenprint)
             ++ (pkgs.lib.optionals cfg.installDriver.hp hplip splix)

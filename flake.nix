@@ -1,27 +1,26 @@
 {
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # unstable -> pkgs
+    pkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    # stable -> pkgs-alt
+    pkgs-alt.url = "github:nixos/nixpkgs/nixos-25.05";
 
     home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs-stable";
+    home-manager.inputs.nixpkgs.follows = "pkgs";
 
     nixvim.url = "github:nix-community/nixvim";
-
     nix-colors.url = "github:misterio77/nix-colors";
-    # nix-colors.inputs.nixpkgs.follows = "nixpkgs-stable";
-
-    nix-flatpak.url = "github:gmodena/nix-flatpak"; # stable branch. Use github:gmodena/nix-flatpak/?ref=<tag> to pin releases.
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     scripts.url = "github:d3ltaaa/fscripts";
     scripts.flake = false;
-
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
   outputs =
     {
-      nixpkgs-unstable,
-      nixpkgs-stable,
+      pkgs,
+      pkgs-alt,
       scripts,
       ...
     }@inputs:
@@ -30,13 +29,13 @@
     in
     {
       nixosConfigurations = {
-        "FW13" = nixpkgs-unstable.lib.nixosSystem {
-          # nixpkgs-stable -> pkgs
+        "FW13" = pkgs.lib.nixosSystem {
+          # pkgs-alt -> pkgs
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
             inherit scripts;
-            nixpkgs-stable = import nixpkgs-stable {
+            pkgs-alt = import pkgs-alt {
               config.allowUnfree = true;
             };
           };
@@ -58,13 +57,13 @@
             }
           ];
         };
-        "PC" = nixpkgs-unstable.lib.nixosSystem {
-          # nixpkgs-stable -> pkgs
+        "PC" = pkgs.lib.nixosSystem {
+          # pkgs-alt -> pkgs
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
             inherit scripts;
-            nixpkgs-stable = import nixpkgs-stable {
+            pkgs-alt = import pkgs-alt {
               config.allowUnfree = true;
             };
           };

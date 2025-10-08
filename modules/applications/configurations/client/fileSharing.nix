@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -31,8 +31,8 @@
     in
     lib.mkIf cfg.enable {
       environment.systemPackages = [
-        nixpkgs-stable.cifs-utils
-        nixpkgs-stable.samba
+        pkgs.cifs-utils
+        pkgs.samba
       ];
 
       fileSystems =

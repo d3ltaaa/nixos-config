@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -19,7 +19,7 @@
       environment.systemPackages = [
       ]
       ++ lib.optionals cfg.nwg-displays.enable [
-        nixpkgs-stable.nwg-displays
+        pkgs.nwg-displays
       ];
     };
 }

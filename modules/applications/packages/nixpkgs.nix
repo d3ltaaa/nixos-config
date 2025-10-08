@@ -2,7 +2,7 @@
   lib,
   config,
   pkgs,
-  nixpkgs-stable,
+  pkgs-alt,
   ...
 }:
 {
@@ -12,30 +12,30 @@
         type = lib.types.listOf lib.types.pkgs;
         default = [ ];
       };
-      stable = {
+      pkgs = {
         system = {
-          default = lib.mkEnableOption "Enables stable-system-pkgs";
-          base = lib.mkEnableOption "Enables stable-base-pkgs";
-          lang = lib.mkEnableOption "Enables stable-lang-pkgs";
-          tool = lib.mkEnableOption "Enables stable-tool-pkgs";
-          hypr = lib.mkEnableOption "Enables stable-hypr-pkgs";
-          desk = lib.mkEnableOption "Enables stable-desk-pkgs";
-          power = lib.mkEnableOption "Enables stable-power-pkgs";
+          default = lib.mkEnableOption "Enables system-pkgs";
+          base = lib.mkEnableOption "Enables base-pkgs";
+          lang = lib.mkEnableOption "Enables lang-pkgs";
+          tool = lib.mkEnableOption "Enables tool-pkgs";
+          hypr = lib.mkEnableOption "Enables hypr-pkgs";
+          desk = lib.mkEnableOption "Enables desk-pkgs";
+          power = lib.mkEnableOption "Enables power-pkgs";
         };
-        user.default = lib.mkEnableOption "Enables stable-user-pkgs";
-        font.default = lib.mkEnableOption "Enables stable-font-pkgs";
+        user.default = lib.mkEnableOption "Enables user-pkgs";
+        font.default = lib.mkEnableOption "Enables font-pkgs";
       };
-      unstable = {
-        system.default = lib.mkEnableOption "Enables unstable-system-pkgs";
-        user.default = lib.mkEnableOption "Enables unstable-user-pkgs";
-        font.default = lib.mkEnableOption "Enables unstable-font-pkgs";
+      pkgs-alt = {
+        system.default = lib.mkEnableOption "Enables alt-system-pkgs";
+        user.default = lib.mkEnableOption "Enables alt-user-pkgs";
+        font.default = lib.mkEnableOption "Enables alt-font-pkgs";
       };
     };
   };
 
   config =
     let
-      stable-base-pkgs = with nixpkgs-stable; [
+      base-pkgs = with pkgs; [
         bat
         bat-extras.batman
         wget
@@ -54,7 +54,7 @@
         fastfetch
       ];
 
-      stable-lang-pkgs = with nixpkgs-stable; [
+      lang-pkgs = with pkgs; [
         clang
         cmake
         meson
@@ -67,7 +67,7 @@
         psutils
       ];
 
-      stable-hypr-pkgs = with nixpkgs-stable; [
+      hypr-pkgs = with pkgs; [
         hyprshade
         rofi
         waypaper
@@ -90,7 +90,7 @@
         hyprpicker
       ];
 
-      stable-tool-pkgs = with nixpkgs-stable; [
+      tool-pkgs = with pkgs; [
         mpv
         yt-dlg
 
@@ -112,7 +112,7 @@
         netcat-openbsd
       ];
 
-      stable-desk-pkgs = with nixpkgs-stable; [
+      desk-pkgs = with pkgs; [
         waybar
         discord
         libreoffice-still
@@ -126,7 +126,7 @@
         bottles
       ];
 
-      stable-power-pkgs = with nixpkgs-stable; [
+      power-pkgs = with pkgs; [
         furmark
         powertop
         ncdu
@@ -137,28 +137,28 @@
         auto-cpufreq
       ];
 
-      stable-system-pkgs = with nixpkgs-stable; [
+      system-pkgs = with pkgs; [
       ];
 
-      unstable-system-pkgs = with pkgs; [
+      alt-system-pkgs = with pkgs-alt; [
         xdg-desktop-portal-hyprland
         rnote
         freecad
       ];
 
-      stable-user-pkgs = with nixpkgs-stable; [
+      user-pkgs = with pkgs; [
       ];
 
-      unstable-user-pkgs = with pkgs; [ ];
+      alt-user-pkgs = with pkgs-alt; [ ];
 
-      stable-font-pkgs = with nixpkgs-stable; [
+      font-pkgs = with pkgs; [
         nerd-fonts.ubuntu-mono
         nerd-fonts.fira-code
         nerd-fonts.hack
         nerd-fonts.roboto-mono
       ];
 
-      unstable-font-pkgs = with pkgs; [ ];
+      alt-font-pkgs = with pkgs-alt; [ ];
 
       cfg = config.applications.packages.nixpkgs;
     in
@@ -170,24 +170,24 @@
       environment.systemPackages =
         [ ]
         ++ cfg.extraPackages
-        ++ (pkgs.lib.optionals cfg.stable.system.default stable-system-pkgs)
-        ++ (pkgs.lib.optionals cfg.stable.system.base stable-base-pkgs)
-        ++ (pkgs.lib.optionals cfg.stable.system.lang stable-lang-pkgs)
-        ++ (pkgs.lib.optionals cfg.stable.system.tool stable-tool-pkgs)
-        ++ (pkgs.lib.optionals cfg.stable.system.hypr stable-hypr-pkgs)
-        ++ (pkgs.lib.optionals cfg.stable.system.desk stable-desk-pkgs)
-        ++ (pkgs.lib.optionals cfg.stable.system.power stable-power-pkgs)
-        ++ (pkgs.lib.optionals cfg.unstable.system.default unstable-system-pkgs);
+        ++ (pkgs.lib.optionals cfg.pkgs.system.default system-pkgs)
+        ++ (pkgs.lib.optionals cfg.pkgs.system.base base-pkgs)
+        ++ (pkgs.lib.optionals cfg.pkgs.system.lang lang-pkgs)
+        ++ (pkgs.lib.optionals cfg.pkgs.system.tool tool-pkgs)
+        ++ (pkgs.lib.optionals cfg.pkgs.system.hypr hypr-pkgs)
+        ++ (pkgs.lib.optionals cfg.pkgs.system.desk desk-pkgs)
+        ++ (pkgs.lib.optionals cfg.pkgs.system.power power-pkgs)
+        ++ (pkgs.lib.optionals cfg.pkgs-alt.system.default alt-system-pkgs);
 
       # Install user packages
       users.users.${config.system.user.general.primary}.packages =
         [ ]
-        ++ (pkgs.lib.optionals cfg.stable.user.default stable-user-pkgs)
-        ++ (pkgs.lib.optionals cfg.unstable.user.default unstable-user-pkgs);
+        ++ (pkgs.lib.optionals cfg.pkgs.user.default user-pkgs)
+        ++ (pkgs.lib.optionals cfg.pkgs-alt.user.default alt-user-pkgs);
       # Install font packages
       fonts.packages =
         [ ]
-        ++ (pkgs.lib.optionals cfg.stable.font.default stable-font-pkgs)
-        ++ (pkgs.lib.optionals cfg.unstable.font.default unstable-font-pkgs);
+        ++ (pkgs.lib.optionals cfg.pkgs.font.default font-pkgs)
+        ++ (pkgs.lib.optionals cfg.pkgs-alt.font.default alt-font-pkgs);
     };
 }

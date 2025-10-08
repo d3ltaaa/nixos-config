@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  nixpkgs-stable,
   pkgs,
   ...
 }:
@@ -19,9 +18,7 @@
     lib.mkIf cfg.enable {
       programs.firefox = {
         enable = true;
-        package = (
-          pkgs.wrapFirefox (nixpkgs-stable.firefox-unwrapped.override { pipewireSupport = true; }) { }
-        );
+        package = (pkgs.wrapFirefox (pkgs.firefox-unwrapped.override { pipewireSupport = true; }) { });
       };
 
       hardware.audio.enable = lib.mkDefault true; # needs pipewire

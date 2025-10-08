@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -31,7 +31,7 @@
             in
             {
               enable = true;
-              package = nixpkgs-stable.foot;
+              package = pkgs.foot;
               settings = {
                 main = {
                   term = "xterm-256color";
@@ -41,8 +41,8 @@
                   font-bold-italic = "RobotoMonoNerdFont:size=10";
                   pad = "2x2"; # 5x5
                 };
-                cursor.color = "${palette.base01} ${palette.base0F}";
                 colors = {
+                  cursor = "${palette.base01} ${palette.base0F}";
                   alpha = "0.8";
 
                   foreground = "${palette.base05}";

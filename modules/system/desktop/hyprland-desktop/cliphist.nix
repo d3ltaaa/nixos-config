@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -14,7 +14,7 @@
       cfg = config.system.desktop.hyprland-desktop.cliphist;
     in
     lib.mkIf cfg.enable {
-      environment.systemPackages = with nixpkgs-stable; [
+      environment.systemPackages = with pkgs; [
         nwg-clipman
         wl-clipboard
       ];
@@ -22,7 +22,7 @@
         { ... }:
         {
           services.cliphist.enable = true;
-          services.cliphist.package = nixpkgs-stable.cliphist;
+          services.cliphist.package = pkgs.cliphist;
         };
     };
 }

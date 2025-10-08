@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -19,7 +19,7 @@
         {
           services.swww = {
             enable = true;
-            package = nixpkgs-stable.swww;
+            package = pkgs.swww;
           };
         };
     };

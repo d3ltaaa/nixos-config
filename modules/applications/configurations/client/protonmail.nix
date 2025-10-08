@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -30,7 +30,7 @@
       services.protonmail-bridge = {
         enable = true;
         logLevel = "debug";
-        path = with nixpkgs-stable; [
+        path = with pkgs; [
           gnome-keyring
         ];
       };

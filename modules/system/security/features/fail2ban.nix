@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -29,7 +29,7 @@
       ];
       services.fail2ban = {
         enable = true;
-        package = nixpkgs-stable.fail2ban;
+        package = pkgs.fail2ban;
         # Ban IP after 5 failures
         maxretry = 5;
         ignoreIP = [

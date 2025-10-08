@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -22,7 +22,7 @@
       virtualisation.virtualbox = {
         host = {
           enable = true;
-          package = nixpkgs-stable.virtualbox;
+          package = pkgs.virtualbox;
           enableExtensionPack = false;
           addNetworkInterface = true;
           enableKvm = false;

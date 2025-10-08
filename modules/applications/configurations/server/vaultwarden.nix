@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -19,7 +19,7 @@
       networking.firewall.allowedTCPPorts = [ 8222 ];
       services.vaultwarden = {
         enable = true;
-        package = nixpkgs-stable.vaultwarden;
+        package = pkgs.vaultwarden;
         config = {
           ROCKET_ADDRESS = "192.168.2.12";
           ROCKET_PORT = "8222";

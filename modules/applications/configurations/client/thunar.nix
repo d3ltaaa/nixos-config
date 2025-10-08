@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -30,7 +30,7 @@
 
         thunar = {
           enable = true;
-          plugins = with nixpkgs-stable.xfce; [
+          plugins = with pkgs.xfce; [
             # thunar-archive-plugin
             # thunar-volman
           ];
@@ -44,7 +44,7 @@
       #   serviceConfig = {
       #     Type = "oneshot";
       #     RemainAfterExit = true;
-      #     ExecStart = "${nixpkgs-stable.xfce.thunar}/bin/thunar --daemon";
+      #     ExecStart = "${pkgs.xfce.thunar}/bin/thunar --daemon";
       #   };
       # };
 

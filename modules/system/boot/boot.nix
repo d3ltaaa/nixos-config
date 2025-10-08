@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -39,13 +39,13 @@
         plymouth = {
           enable = true;
           # theme = "spinner_alt";
-          # themePackages = with nixpkgs-stable; [
+          # themePackages = with pkgs; [
           #   # By default we would install all themes
           #   (adi1090x-plymouth-themes.override {
           #     selected_themes = [ "spinner_alt" ];
           #   })
           # ];
-          logo = "${nixpkgs-stable.nixos-icons}/share/icons/hicolor/48x48/apps/nix-snowflake-white.png";
+          logo = "${pkgs.nixos-icons}/share/icons/hicolor/48x48/apps/nix-snowflake-white.png";
         };
 
         # Enable "Silent boot"
@@ -62,7 +62,7 @@
         # It will just not appear on screen unless a key is pressed
 
       };
-      environment.systemPackages = with nixpkgs-stable; [ sbctl ];
+      environment.systemPackages = with pkgs; [ sbctl ];
       boot.loader = {
         efi = {
           efiSysMountPoint = "/boot";
@@ -93,7 +93,7 @@
           enable = true;
           device = "nodev";
           gfxmodeEfi = "1920x1200x32";
-          theme = nixpkgs-stable.minimal-grub-theme;
+          theme = pkgs.minimal-grub-theme;
           useOSProber = cfg.osProber;
           efiSupport = true;
           configurationName = "NixOS (${config.system.general.nixos.name})";

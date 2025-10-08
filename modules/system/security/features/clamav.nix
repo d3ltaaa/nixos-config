@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -32,7 +32,7 @@
       ];
 
       services.clamav = {
-        package = nixpkgs-stable.clamav;
+        package = pkgs.clamav;
         daemon = {
           enable = true;
           settings = {

@@ -407,7 +407,7 @@
     packages = {
       nixpkgs = {
         extraPackages = [ ];
-        stable = {
+        pkgs = {
           system = {
             default = true;
             base = true;
@@ -420,7 +420,7 @@
           user.default = true;
           font.default = true;
         };
-        unstable = {
+        pkgs-alt = {
           system.default = true;
           user.default = true;
           font.default = true;

@@ -391,7 +391,7 @@
     packages = {
       nixpkgs = {
         extraPackages = [ ]; # a
-        stable = {
+        pkgs = {
           system = {
             default = true; # a
             base = true; # a
@@ -404,7 +404,7 @@
           user.default = true; # a
           font.default = true; # a
         };
-        unstable = {
+        pkgs-alt = {
           system.default = true; # a
           user.default = true; # a
           font.default = true; # a

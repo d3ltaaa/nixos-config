@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -22,7 +22,7 @@
 
           programs.lf = {
             enable = true;
-            package = nixpkgs-stable.lf;
+            package = pkgs.lf;
             extraConfig = ''
               # Basic Settings
               set sortby time
