@@ -188,7 +188,7 @@
               };
 
               "custom/vpn" = {
-                interval = "once";
+                interval = 60;
                 signal = 7;
                 format = "{}";
                 tooltip = true;
