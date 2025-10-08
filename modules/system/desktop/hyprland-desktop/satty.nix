@@ -16,7 +16,7 @@
       cfg-hyprland = config.system.desktop.hyprland-desktop.hyprland;
     in
     lib.mkIf cfg.enable {
-      environment.systemPackages = with nixpkgs-stable; [ satty ];
+      environment.systemPackages = with pkgs; [ satty ]; # stable fails with "egl display fails to create"
       home-manager.users.${config.system.user.general.primary} =
         { lib, config, ... }:
         let
