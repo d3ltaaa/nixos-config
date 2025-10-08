@@ -1,7 +1,7 @@
-{ pkgs, scripts, ... }:
+{ pkgs, inputs, ... }:
 pkgs.stdenv.mkDerivation {
   name = "my-scripts";
-  src = scripts;
+  src = inputs.scripts;
   installPhase = ''
     mkdir -p $out/bin
     cp -r ./* $out/bin

@@ -2,7 +2,7 @@
   lib,
   config,
   pkgs,
-  scripts,
+  inputs,
   ...
 }:
 {
@@ -15,7 +15,7 @@
   config =
     let
       cfg = config.applications.packages.derivations;
-      fscripts = import ./derivations/fscripts.nix { inherit pkgs scripts; };
+      fscripts = import ./derivations/fscripts.nix { inherit pkgs inputs; };
       derivations = [
         fscripts
       ]; # add to list
