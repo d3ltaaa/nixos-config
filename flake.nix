@@ -7,7 +7,6 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     nix-colors.url = "github:misterio77/nix-colors";
     # nix-colors.inputs.nixpkgs.follows = "nixpkgs-stable";
