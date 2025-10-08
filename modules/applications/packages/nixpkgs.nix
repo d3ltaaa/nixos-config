@@ -115,7 +115,6 @@
       desk-pkgs = with pkgs; [
         waybar
         discord
-        libreoffice-still
         arduino-ide
         freecad
         telegram-desktop
@@ -141,6 +140,7 @@
       ];
 
       alt-system-pkgs = with pkgs-alt; [
+        libreoffice
         xdg-desktop-portal-hyprland
         rnote
         freecad
