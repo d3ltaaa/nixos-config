@@ -16,7 +16,9 @@
     let
       cfg = config.applications.packages.derivations;
       fscripts = import ./derivations/fscripts.nix { inherit pkgs scripts; };
-      derivations = [ fscripts ]; # add to list
+      derivations = [
+        fscripts
+      ]; # add to list
     in
     lib.mkIf cfg.enable {
       environment.systemPackages = derivations;

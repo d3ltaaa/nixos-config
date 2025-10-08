@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  nixpkgs-stable,
+  ...
+}:
 {
   options = {
     applications.configurations.client.virtualbox = {
@@ -17,14 +22,15 @@
       virtualisation.virtualbox = {
         host = {
           enable = true;
+          package = nixpkgs-stable.virtualbox;
           enableExtensionPack = false;
           addNetworkInterface = true;
           enableKvm = false;
         };
         guest = {
-          enable = true;
-          dragAndDrop = true;
-          clipboard = true;
+          enable = false;
+          dragAndDrop = false;
+          clipboard = false;
         };
       };
     };

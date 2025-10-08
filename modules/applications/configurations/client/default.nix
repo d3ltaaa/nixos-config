@@ -21,6 +21,7 @@
     ./thunderbird.nix
     ./tmux.nix
     ./virtualbox.nix
+    ./winboat.nix
     ./yazi.nix
     ./zsh.nix
   ];

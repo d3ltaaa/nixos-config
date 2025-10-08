@@ -329,6 +329,9 @@
         virtualbox = {
           enable = false; # a
         };
+        winboat = {
+          enable = true; # a
+        };
         qemu = {
           enable = false; # a
         };
