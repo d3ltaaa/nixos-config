@@ -37,9 +37,12 @@
     };
     boot = {
       primaryBoot = true; # a
-      osProber = false; # a
-      defaultEntry = 0; # a
+      bootloader = "limine";
+      secureBoot = true;
       extraEntries = null; # a
+
+      # osProber = false; # a
+      # defaultEntry = 0; # a
     };
     desktop = {
       hyprland-desktop = {
@@ -324,7 +327,7 @@
           };
         };
         virtualbox = {
-          enable = true; # a
+          enable = false; # a
         };
         qemu = {
           enable = false; # a
