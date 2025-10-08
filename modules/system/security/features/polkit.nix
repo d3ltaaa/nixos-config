@@ -2,6 +2,7 @@
   lib,
   config,
   nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -16,7 +17,6 @@
     in
     lib.mkIf cfg.enable {
       security.polkit.enable = true;
-      security.polkit.package = nixpkgs-stable.polkit;
-
+      security.polkit.package = pkgs.polkit;
     };
 }

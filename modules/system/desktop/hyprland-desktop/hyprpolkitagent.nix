@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixpkgs-stable,
+  pkgs,
   ...
 }:
 {
@@ -16,7 +16,7 @@
     in
     lib.mkIf cfg.enable {
       environment.systemPackages = [
-        nixpkgs-stable.hyprpolkitagent
+        pkgs.hyprpolkitagent
       ];
     };
 }
