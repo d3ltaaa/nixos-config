@@ -171,9 +171,9 @@
                 preserve_split = "yes";
               };
 
-              gestures = {
-                gesture = "3, horizontal, workspace";
-              };
+              # gestures = {
+              #   gesture = "3, horizontal, workspace";
+              # };
 
               misc = {
                 force_default_wallpaper = 0;

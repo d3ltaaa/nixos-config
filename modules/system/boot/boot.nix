@@ -70,7 +70,7 @@
         };
         limine = lib.mkIf (cfg.bootloader == "limine") {
           enable = true;
-          secureBoot.enable = cfg.secureBoot;
+          # secureBoot.enable = cfg.secureBoot;
           # lsblk -o NAME,PARTUUID,UUID,LABEL,FSTYPE,MOUNTPOINT
           extraEntries = if cfg.extraEntries != null then cfg.extraEntries else "";
           style = {

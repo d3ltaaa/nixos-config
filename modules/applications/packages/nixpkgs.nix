@@ -116,7 +116,6 @@
         waybar
         discord
         arduino-ide
-        freecad
         telegram-desktop
         orca-slicer
         vlc
@@ -137,13 +136,12 @@
       ];
 
       system-pkgs = with pkgs; [
+        libreoffice
+        xdg-desktop-portal-hyprland
       ];
 
       alt-system-pkgs = with pkgs-alt; [
-        libreoffice
-        xdg-desktop-portal-hyprland
-        rnote
-        freecad
+        freecad-wayland
       ];
 
       user-pkgs = with pkgs; [

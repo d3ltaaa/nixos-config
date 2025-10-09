@@ -15,6 +15,7 @@
     let
       cfg = config.applications.packages.flatpaks;
       flatpak-pkgs = [
+        "com.github.flxzt.rnote"
         "com.usebottles.bottles"
         "org.gnome.Connections"
         # "org.endlessos.Key"

@@ -129,7 +129,7 @@
             {
               enable = true;
               theme = rofi-theme;
-              package = pkgs.rofi;
+              package = pkgs.rofi-wayland;
               extraConfig = {
                 kb-row-up = "Up,alt+k,Shift+Tab,Shift+ISO_Left_Tab";
                 kb-row-down = "Down,alt+j";

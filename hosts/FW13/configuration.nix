@@ -38,7 +38,7 @@
     boot = {
       primaryBoot = true; # a
       bootloader = "limine";
-      secureBoot = true;
+      secureBoot = false;
       extraEntries = null; # a
 
       # osProber = false; # a
