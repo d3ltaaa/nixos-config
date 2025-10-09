@@ -4,7 +4,7 @@
     pkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 
     # stable -> pkgs-alt
-    pkgs-alt.url = "github:nixos/nixpkgs/nixos-25.05";
+    pkgs-alt.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "pkgs";
