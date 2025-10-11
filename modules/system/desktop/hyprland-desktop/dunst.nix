@@ -326,6 +326,11 @@
               };
             };
           };
+          wayland.windowManager.hyprland.settings.bind = [
+            "$mod SHIFT, N, exec, dunstctl history-pop"
+            "$mod, N, exec, dunstctl close"
+            "$mod CONTROL, N, exec, dunstctl close-all && dunstctl history-clear"
+          ];
         };
     };
 }

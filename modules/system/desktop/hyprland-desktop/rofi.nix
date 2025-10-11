@@ -156,6 +156,9 @@
                 # // font = "Meslo Nerd Font 12";
               };
             };
+          wayland.windowManager.hyprland.settings.bind = [
+            "$mod, SPACE, exec, rofi -show drun -case-insensitive"
+          ];
         };
     };
 }

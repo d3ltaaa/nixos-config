@@ -112,14 +112,6 @@
               plugin = {
                 hyprspace = {
                 };
-                # hyprexpo = {
-                #   columns = 3;
-                #   gap_size = 5;
-                #   skip_empty = true;
-                #   bg_col = "rgb(${config.colorScheme.palette.base00})";
-                #   workspace_method = "center current"; # [center/first] [workspace] e.g. first 1 or center m+1
-                #   gesture_distance = 300; # how far is the "max" for the gesture
-                # };
                 hyprbars = {
                   bar_height = 20;
                   bar_title_enabled = false;
@@ -171,6 +163,7 @@
                 preserve_split = "yes";
               };
 
+              # unstable as of 11.10.25
               # gestures = {
               #   gesture = "3, horizontal, workspace";
               # };
@@ -244,16 +237,6 @@
                 "$mod, C, exec, menu_options updates"
                 "$mod, P, exec, menu_options energy"
                 "$mod, V, exec, toggle_vpn.sh"
-
-                "$mod, SPACE, exec, rofi -show drun -case-insensitive"
-
-                "$mod SHIFT, W, exec, pkill waybar; waybar"
-
-                "$mod SHIFT, N, exec, dunstctl history-pop"
-                "$mod, N, exec, dunstctl close"
-                "$mod CONTROL, N, exec, dunstctl close-all && dunstctl history-clear"
-
-                "$mod, G, exec, hyprlock"
               ];
 
               bindm = [

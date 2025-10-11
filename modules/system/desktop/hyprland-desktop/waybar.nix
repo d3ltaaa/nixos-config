@@ -409,6 +409,9 @@
                 background-color: #${config.colorScheme.palette.base00};
             }
           '';
+          wayland.windowManager.hyprland.settings.bind = [
+            "$mod SHIFT, W, exec, pkill waybar; waybar"
+          ];
         };
     };
 }

@@ -108,6 +108,9 @@
               }
             ];
           };
+          wayland.windowManager.hyprland.settings.bind = [
+            "$mod, G, exec, hyprlock"
+          ];
         };
     };
 }
