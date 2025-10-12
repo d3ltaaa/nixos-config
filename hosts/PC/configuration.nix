@@ -370,7 +370,7 @@
           enable = true;
         };
         firefox = {
-          enable = true;
+          enable = false;
         };
         brave = {
           enable = true;

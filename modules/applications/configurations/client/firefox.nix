@@ -31,5 +31,15 @@
           xdg-desktop-portal-hyprland
         ];
       };
+      home-manager.users.${config.system.user.general.primary} =
+        let
+          nixos-config = config;
+        in
+        { config, ... }:
+        {
+          wayland.windowManager.hyprland.settings.bind = [
+            "$mod, B, exec, firefox"
+          ];
+        };
     };
 }
