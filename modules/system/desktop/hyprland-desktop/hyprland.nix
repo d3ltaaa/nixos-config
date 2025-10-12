@@ -163,6 +163,11 @@
                 preserve_split = "yes";
               };
 
+              # stable (25.05) as of 11.10.25
+              gestures = {
+                workspace_swipe = "on";
+              };
+
               # unstable as of 11.10.25
               # gestures = {
               #   gesture = "3, horizontal, workspace";
