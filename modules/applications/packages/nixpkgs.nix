@@ -117,7 +117,6 @@
         discord
         arduino-ide
         telegram-desktop
-        orca-slicer
         vlc
         remnote
         tor-browser-bundle-bin
@@ -142,6 +141,7 @@
 
       alt-system-pkgs = with pkgs-alt; [
         freecad-wayland
+        orca-slicer
       ];
 
       user-pkgs = with pkgs; [
