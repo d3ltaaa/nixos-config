@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  # syntax highlighter
+  # syntax highlighter (coloring types of words etc)
   programs.nixvim = {
 
     plugins.treesitter = {
