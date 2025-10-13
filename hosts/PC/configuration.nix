@@ -349,7 +349,7 @@
           enable = false;
         };
         winboat = {
-          enable = true;
+          enable = false;
         };
         qemu = {
           enable = false;
@@ -397,7 +397,8 @@
           enable = true;
         };
         neovim = {
-          enable = true;
+          nixvim.enable = true;
+          nvf.enable = false;
         };
         git = {
           enable = true;
