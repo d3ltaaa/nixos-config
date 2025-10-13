@@ -1,7 +1,8 @@
 { ... }:
 {
   imports = [
-    ./neovim/default.nix
+    ./nixvim/default.nix
+    ./nvf/default.nix
     ./brave.nix
     ./firefox.nix
     ./fileSharing.nix

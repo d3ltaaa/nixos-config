@@ -10,6 +10,8 @@
     home-manager.inputs.nixpkgs.follows = "pkgs";
 
     nixvim.url = "github:nix-community/nixvim";
+    nvf.url = "github:notashelf/nvf";
+
     nix-colors.url = "github:misterio77/nix-colors";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -79,6 +81,7 @@
               };
               home-manager.users.${user}.imports = [
                 inputs.nixvim.homeManagerModules.nixvim
+                inputs.nvf.homeManagerModules.default
               ];
             }
           ];
