@@ -56,25 +56,25 @@
       {
         mode = "n";
         key = "<C-k>";
-        action = "<cmd>resize +2<cr>";
+        action = "<cmd>resize -2<cr>";
         options.desc = "Increase window height";
       }
       {
         mode = "n";
         key = "<C-j>";
-        action = "<cmd>resize -2<cr>";
+        action = "<cmd>resize +2<cr>";
         options.desc = "Decrease window height";
       }
       {
         mode = "n";
         key = "<C-h>";
-        action = "<cmd>vertical resize +2<cr>";
+        action = "<cmd>vertical resize -2<cr>";
         options.desc = "Increase window windth";
       }
       {
         mode = "n";
         key = "<C-l>";
-        action = "<cmd>vertical resize -2<cr>";
+        action = "<cmd>vertical resize +2<cr>";
         options.desc = "Decrease window windth";
       }
       {
