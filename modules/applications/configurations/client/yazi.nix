@@ -27,6 +27,7 @@
               uiPlugin = pkgs.writeTextDir "init.lua" ''
                 function Folder:icon(file) return ui.Span(" " .. file:icon() .. "  ") end
               '';
+              mount = pkgs.yaziPlugins.mount;
             };
             theme = {
               icon = {
@@ -86,6 +87,73 @@
                 ];
               };
             };
+            keymap = {
+              input.prepend_keymap = [
+              ];
+              manager.prepend_keymap = [
+                {
+                  run = "plugin mount";
+                  on = "M";
+                  desc = "Manage mounted drives";
+                }
+                {
+                  run = "cd $XDG_DOCUMENTS_DIR";
+                  on = [
+                    "g"
+                    "D"
+                  ];
+                  desc = "Go to documents";
+                }
+                {
+                  run = "cd ~/nixos-config";
+                  on = [
+                    "g"
+                    "C"
+                  ];
+                  desc = "Go to nixos-config";
+                }
+                {
+                  run = "cd $XDG_VIDEOS_DIR";
+                  on = [
+                    "g"
+                    "v"
+                  ];
+                  desc = "Go to videos";
+                }
+                {
+                  run = "cd $XDG_SREENSHOT_DIR";
+                  on = [
+                    "g"
+                    "s"
+                  ];
+                  desc = "Go to screenshots";
+                }
+                {
+                  run = "cd $XDG_MUSIC_DIR";
+                  on = [
+                    "g"
+                    "a"
+                  ];
+                  desc = "Go to music";
+                }
+                {
+                  run = "cd $XDG_PICTURES_DIR";
+                  on = [
+                    "g"
+                    "p"
+                  ];
+                  desc = "Go to pictures";
+                }
+                {
+                  run = "cd /mnt";
+                  on = [
+                    "g"
+                    "m"
+                  ];
+                  desc = "Go to /mnt";
+                }
+              ];
+            };
             settings = {
               mgr = {
                 ratio = [
@@ -123,7 +191,6 @@
                 macro_workers = 10;
                 bizarre_retry = 5;
               };
-
             };
           };
         };
