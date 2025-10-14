@@ -11,15 +11,16 @@
         };
         messages = {
           enabled = true;
-          view = "mini";
+          view = "notify";
         };
         lsp = {
           message = {
-            enabled = false;
+            enabled = true;
+            view = "notify";
           };
           progress = {
             enabled = false;
-            view = "mini";
+            view = "notify";
           };
         };
         popupmenu = {

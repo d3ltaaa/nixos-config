@@ -33,6 +33,8 @@
             ./plugins/flash.nix
             ./plugins/statusline.nix
             ./plugins/neo-tree.nix
+            ./plugins/nui.nix
+            ./plugins/notify.nix
             ./plugins/smear-cursor.nix
             ./plugins/tiny-inline-diagnostic.nix
             ./plugins/treesitter.nix
