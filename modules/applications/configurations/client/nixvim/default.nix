@@ -23,7 +23,7 @@
             ./settings.nix
             ./keymaps.nix
             ./desktop.nix
-            # ./plugins/cmp.nix
+            # ./plugins/cmp.nix # completion (alternative to blink-cmp)
             ./plugins/icons.nix
             ./plugins/telescope.nix
             ./plugins/themes.nix
@@ -31,6 +31,7 @@
             ./plugins/blink-cmp.nix
             ./plugins/bufferline.nix
             ./plugins/flash.nix
+            ./plugins/alpha.nix
             ./plugins/statusline.nix
             ./plugins/neo-tree.nix
             ./plugins/nui.nix
@@ -38,12 +39,12 @@
             ./plugins/smear-cursor.nix
             ./plugins/tiny-inline-diagnostic.nix
             ./plugins/treesitter.nix
-            # ./plugins/lint.nix
+            # ./plugins/lint.nix # linting
             ./plugins/lsp.nix
             ./plugins/which-key.nix
             ./plugins/noice.nix
-            # ./plugins/trouble.nix
-            # ./plugins/mini.nix
+            # ./plugins/trouble.nix # error messages
+            # ./plugins/mini.nix # tweaks
             ./plugins/colorizer.nix
           ];
         };
