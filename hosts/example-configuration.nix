@@ -661,7 +661,13 @@
           enable = true; # a
         };
         firefox = {
-          enable = true; # a
+          enable = false; # a
+        };
+        brave = {
+          enable = true;
+        };
+        localsend = {
+          enable = true;
         };
         foot = {
           enable = true; # a

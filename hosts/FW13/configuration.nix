@@ -356,6 +356,9 @@
         brave = {
           enable = true; # a
         };
+        localsend = {
+          enable = true;
+        };
         open-webui = {
           enable = true; # a
         };

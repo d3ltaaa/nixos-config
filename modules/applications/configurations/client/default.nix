@@ -10,6 +10,7 @@
     ./git.nix
     ./kitty.nix
     ./lf.nix
+    ./localsend.nix
     ./msmtp.nix
     ./nautilus.nix
     ./open-webui.nix

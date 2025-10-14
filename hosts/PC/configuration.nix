@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 {
@@ -375,6 +376,9 @@
         brave = {
           enable = true;
         };
+        localsend = {
+          enable = true;
+        };
         open-webui = {
           enable = true;
         };
@@ -438,4 +442,6 @@
       };
     };
   };
+  # environment.systemPackages = with pkgs; [ localsend ];
+  # networking.firewall.allowedTCPPorts = [ 53317 ]; # localsend
 }
