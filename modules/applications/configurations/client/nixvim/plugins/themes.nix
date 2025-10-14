@@ -134,6 +134,13 @@
                 NeoTreeVertSplit = { fg = "#${config.colorScheme.palette.base05}" }, 
                 NeoTreeStatusLineNC = { fg = "#${config.colorScheme.palette.base05}", bg = "NONE"},
                 NeoTreeWinSeparator = { fg = "#${config.colorScheme.palette.base06}"},
+                NeoTreeDimText = {fg = "#${config.colorScheme.palette.base06}"},
+                NeoTreeDotfile = {fg = "#${config.colorScheme.palette.base07}"},
+                NeoTreeMessage = {fg = "#${config.colorScheme.palette.base06}"},
+                NeoTreeExpander = {fg = "#${config.colorScheme.palette.base07}"},
+                NeoTreeFileStats = {fg = "#${config.colorScheme.palette.base07}"},
+                NeoTreeFileStatsHeader = {fg = "#${config.colorScheme.palette.base0D}"},
+
 
                 Added = { fg = "#${config.colorScheme.palette.base0B}" },
                 Changed = { fg = "#${config.colorScheme.palette.base0A}" },
