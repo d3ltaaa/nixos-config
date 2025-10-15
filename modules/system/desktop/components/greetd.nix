@@ -26,6 +26,7 @@
           };
         };
       };
+
       users.users.greeter = {
         isNormalUser = false;
         description = "greetd greeter user";
@@ -35,9 +36,5 @@
         ];
         linger = true;
       };
-
-      environment.systemPackages = with pkgs; [
-        greetd.tuigreet
-      ];
     };
 }
