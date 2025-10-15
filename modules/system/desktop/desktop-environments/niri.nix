@@ -11,7 +11,7 @@
     {
       system.desktop.components = lib.mkIf cfg.enable {
         hyprland = {
-          enable = false;
+          enable = lib.mkDefault false;
         };
         niri = {
           enable = true;
@@ -26,6 +26,9 @@
           enable = true;
         };
         greetd = {
+          enable = false;
+        };
+        ly = {
           enable = true;
         };
         waybar = {

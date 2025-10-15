@@ -13,6 +13,9 @@
         hyprland = {
           enable = true;
         };
+        niri = {
+          enable = lib.mkDefault false;
+        };
         hypridle = {
           enable = true;
         };
@@ -23,6 +26,9 @@
           enable = true;
         };
         greetd = {
+          enable = false;
+        };
+        ly = {
           enable = true;
         };
         waybar = {

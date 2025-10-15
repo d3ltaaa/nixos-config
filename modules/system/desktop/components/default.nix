@@ -9,6 +9,8 @@
     ./hyprland.nix
     ./hyprlock.nix
     ./hyprpolkitagent.nix
+    ./niri.nix
+    ./ly.nix
     # ./nwg-dock.nix
     ./rofi.nix
     ./satty.nix
