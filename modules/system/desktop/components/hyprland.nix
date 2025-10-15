@@ -35,9 +35,12 @@
         (pkgs.writeScriptBin "hyprland-start-script" ''
           #!${pkgs.bash}/bin/bash
 
-          ${lib.optionalString (cfg-components.hyprlock.enable && !cfg-components.greetd.enable) ''
-            hyprlock &
-          ''}
+          ${lib.optionalString
+            (cfg-components.hyprlock.enable && !cfg-components.greetd.enable && !cfg-components.ly.enable)
+            ''
+              hyprlock &
+            ''
+          }
           ${lib.optionalString cfg-components.hyprpolkitagent.enable ''
             systemctl --user start hyprpolkitagent &
           ''}
