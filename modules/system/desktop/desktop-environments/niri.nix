@@ -29,7 +29,7 @@
           enable = false;
         };
         ly = {
-          enable = true;
+          enable = false;
         };
         waybar = {
           enable = true;

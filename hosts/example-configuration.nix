@@ -72,7 +72,7 @@
           style.package = null; # a
         };
       };
-      session = {
+      components.session = {
         autoLogin = {
           enable = true; # a
         };

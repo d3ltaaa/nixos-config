@@ -69,6 +69,7 @@
     desktop = {
       desktop-environments = {
         hyprland-desktop.enable = true;
+        niri-desktop.enable = true;
       };
       theme = {
         colorSchemes = null;
@@ -89,9 +90,9 @@
           style.package = null;
         };
       };
-      session = {
+      components.session = {
         autoLogin = {
-          enable = true;
+          enable = false;
         };
         autoShutdown = {
           enable = false;

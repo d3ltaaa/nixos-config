@@ -6,7 +6,7 @@
 }:
 {
   options = {
-    system.desktop.session = {
+    system.desktop.components.session = {
       autoLogin.enable = lib.mkEnableOption "Enables autologin as primary user";
       autoShutdown = {
         enable = lib.mkEnableOption "Enables shutting down, if for shutdownTime there was no activity noticed on port watchport";
@@ -24,12 +24,16 @@
 
   config =
     let
-      cfg = config.system.desktop.session;
+      cfg = config.system.desktop.components.session;
+      cfg-components = config.system.desktop.components;
     in
     {
       # autologin
       services = {
-        getty.autologinUser = lib.mkIf cfg.autoLogin.enable "${config.system.user.general.primary}";
+        getty.autologinUser = lib.mkIf (
+          cfg.autoLogin.enable
+          || (!cfg-components.greetd.enable && !cfg-components.ly.enable && cfg-components.hyprlock.enable)
+        ) "${config.system.user.general.primary}";
       };
 
       # autoShutdown
