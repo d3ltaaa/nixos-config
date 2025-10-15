@@ -49,63 +49,8 @@
       ''; # a
     };
     destkop = {
-      hyprland-desktop = {
-        hyprland = {
-          enable = true; # a
-          # monitor = [
-          #   "DP-3, 2560x1440@240, 0x0, 1"
-          #   "DP-2, 1920x1080@165, 2560x0, 1"
-          # ]; # a
-          # workspaces = [
-          #   "1, monitor:DP-3"
-          #   "3, monitor:DP-3"
-          #   "5, monitor:DP-3"
-          #   "7, monitor:DP-3"
-          #   "9, monitor:DP-3"
-          #   "2, monitor:DP-2"
-          #   "4, monitor:DP-2"
-          #   "6, monitor:DP-2"
-          #   "8, monitor:DP-2"
-          # ]; # a
-        };
-        hypridle = {
-          enable = true; # a
-        };
-        hyprlock = {
-          enable = true; # a
-        };
-        waybar = {
-          enable = true; # a
-        };
-        rofi = {
-          enable = true; # a
-        };
-        swappy = {
-          enable = false; # a
-        };
-        satty = {
-          enable = true; # a
-        };
-        swww = {
-          enable = true; # a
-        };
-        cliphist = {
-          enable = true; # a
-        };
-        dunst = {
-          enable = true; # a
-        };
-        dconf = {
-          enable = true; # a
-        };
-        nwg-dock = {
-          enable = true; # TODO
-        };
-        settings = {
-          nwg-displays = {
-            enable = true; # a
-          };
-        };
+      desktop-environments = {
+        hyprland-desktop.enable = true;
       };
       theme = {
         colorSchemes = null; # a

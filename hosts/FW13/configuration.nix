@@ -45,51 +45,8 @@
       # defaultEntry = 0; # a
     };
     desktop = {
-      hyprland-desktop = {
-        hyprland = {
-          enable = true; # a
-        };
-        hypridle = {
-          enable = true; # a
-        };
-        hyprlock = {
-          enable = true; # a
-        };
-        hyprpolkitagent = {
-          enable = true;
-        };
-        waybar = {
-          enable = true; # a
-        };
-        rofi = {
-          enable = true; # a
-        };
-        swappy = {
-          enable = false; # a
-        };
-        satty = {
-          enable = true; # a
-        };
-        swww = {
-          enable = true; # a
-        };
-        cliphist = {
-          enable = true; # a
-        };
-        dunst = {
-          enable = true; # a
-        };
-        dconf = {
-          enable = true; # a
-        };
-        # nwg-dock = {
-        #   enable = true;
-        # };
-        settings = {
-          nwg-displays = {
-            enable = true; # a
-          };
-        };
+      desktop-environments = {
+        hyprland-desktop.enable = true;
       };
       theme = {
         colorSchemes = null; # a
