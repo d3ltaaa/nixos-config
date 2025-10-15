@@ -2,8 +2,8 @@
 {
   imports = [
     ./environment.nix
-    ./hyprland-desktop/default.nix
-    ./session.nix
     ./theme.nix
+    ./components/default.nix
+    ./desktop-environments/default.nix
   ];
 }

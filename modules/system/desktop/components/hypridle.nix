@@ -6,14 +6,14 @@
 }:
 {
   options = {
-    system.desktop.hyprland-desktop.hypridle = {
+    system.desktop.components.hypridle = {
       enable = lib.mkEnableOption "Enables hypridle";
     };
   };
 
   config =
     let
-      cfg = config.system.desktop.hyprland-desktop.hypridle;
+      cfg = config.system.desktop.components.hypridle;
     in
     lib.mkIf cfg.enable {
       services = {

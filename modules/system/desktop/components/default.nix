@@ -11,6 +11,7 @@
     # ./nwg-dock.nix
     ./rofi.nix
     ./satty.nix
+    ./session.nix
     ./swappy.nix
     ./swww.nix
     ./settings.nix

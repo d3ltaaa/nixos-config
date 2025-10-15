@@ -6,13 +6,13 @@
 }:
 {
   options = {
-    system.desktop.hyprland-desktop.satty.enable = lib.mkEnableOption "Enables Swappy Module";
+    system.desktop.components.satty.enable = lib.mkEnableOption "Enables Swappy Module";
   };
 
   config =
     let
-      cfg = config.system.desktop.hyprland-desktop.satty;
-      cfg-hyprland = config.system.desktop.hyprland-desktop.hyprland;
+      cfg = config.system.desktop.components.satty;
+      cfg-hyprland = config.system.desktop.components.hyprland;
     in
     lib.mkIf cfg.enable {
       environment.systemPackages = with pkgs; [ satty ]; # stable fails with "egl display fails to create"

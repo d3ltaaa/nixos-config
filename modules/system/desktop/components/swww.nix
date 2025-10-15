@@ -6,12 +6,12 @@
 }:
 {
   options = {
-    system.desktop.hyprland-desktop.swww.enable = lib.mkEnableOption "Enables Swww module";
+    system.desktop.components.swww.enable = lib.mkEnableOption "Enables Swww module";
   };
 
   config =
     let
-      cfg = config.system.desktop.hyprland-desktop.swww;
+      cfg = config.system.desktop.components.swww;
     in
     lib.mkIf cfg.enable {
       home-manager.users.${config.system.user.general.primary} =

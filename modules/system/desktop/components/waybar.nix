@@ -6,12 +6,12 @@
 }:
 {
   options = {
-    system.desktop.hyprland-desktop.waybar.enable = lib.mkEnableOption "Enables Waybar module";
+    system.desktop.components.waybar.enable = lib.mkEnableOption "Enables Waybar module";
   };
 
   config =
     let
-      cfg = config.system.desktop.hyprland-desktop.waybar;
+      cfg = config.system.desktop.components.waybar;
     in
     lib.mkIf cfg.enable {
       home-manager.users.${config.system.user.general.primary} =

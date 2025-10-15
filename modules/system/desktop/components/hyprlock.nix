@@ -6,12 +6,12 @@
 }:
 {
   options = {
-    system.desktop.hyprland-desktop.hyprlock.enable = lib.mkEnableOption "Enables Hyplock";
+    system.desktop.components.hyprlock.enable = lib.mkEnableOption "Enables Hyplock";
   };
 
   config =
     let
-      cfg = config.system.desktop.hyprland-desktop.hyprlock;
+      cfg = config.system.desktop.components.hyprlock;
     in
     lib.mkIf cfg.enable {
       home-manager.users.${config.system.user.general.primary} =

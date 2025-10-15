@@ -6,7 +6,7 @@
 }:
 {
   options = {
-    system.desktop.hyprland-desktop.hyprland = {
+    system.desktop.components.hyprland = {
       enable = lib.mkEnableOption "Enable hyprland as windowManager";
       monitor = lib.mkOption {
         type = lib.types.nullOr (lib.types.listOf lib.types.str);
@@ -21,8 +21,8 @@
 
   config =
     let
-      cfg = config.system.desktop.hyprland-desktop.hyprland;
-      cfg-hyprland = config.system.desktop.hyprland-desktop;
+      cfg = config.system.desktop.components.hyprland;
+      cfg-hyprland = config.system.desktop.components;
     in
     lib.mkIf cfg.enable {
 
@@ -101,11 +101,11 @@
               };
 
               monitor = lib.mkIf (
-                nixos-config.system.desktop.hyprland-desktop.settings.nwg-displays.enable != true
+                nixos-config.system.desktop.components.settings.nwg-displays.enable != true
                 && nixos-cfg.monitor != null
               ) nixos-cfg.monitor;
               workspace = lib.mkIf (
-                nixos-config.system.desktop.hyprland-desktop.settings.nwg-displays.enable != true
+                nixos-config.system.desktop.components.settings.nwg-displays.enable != true
                 && nixos-cfg.workspaces != null
               ) nixos-cfg.workspaces;
 

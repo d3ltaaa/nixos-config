@@ -6,12 +6,12 @@
 }:
 {
   options = {
-    system.desktop.hyprland-desktop.cliphist.enable = lib.mkEnableOption "Enables Cliphist module";
+    system.desktop.components.cliphist.enable = lib.mkEnableOption "Enables Cliphist module";
   };
 
   config =
     let
-      cfg = config.system.desktop.hyprland-desktop.cliphist;
+      cfg = config.system.desktop.components.cliphist;
     in
     lib.mkIf cfg.enable {
       environment.systemPackages = with pkgs; [

@@ -1,13 +1,13 @@
 { lib, config, ... }:
 {
   options = {
-    system.desktop.hyprland-desktop.swappy.enable = lib.mkEnableOption "Enables Swappy Module";
+    system.desktop.components.swappy.enable = lib.mkEnableOption "Enables Swappy Module";
   };
 
   config =
     let
-      cfg = config.system.desktop.hyprland-desktop.swappy;
-      cfg-hyprland = config.system.desktop.hyprland-desktop;
+      cfg = config.system.desktop.components.swappy;
+      cfg-hyprland = config.system.desktop.components;
     in
     lib.mkIf cfg.enable {
       home-manager.users.${config.system.user.general.primary} =

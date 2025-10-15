@@ -6,12 +6,12 @@
 }:
 {
   options = {
-    system.desktop.hyprland-desktop.dunst.enable = lib.mkEnableOption "Enables Dunst module";
+    system.desktop.components.dunst.enable = lib.mkEnableOption "Enables Dunst module";
   };
 
   config =
     let
-      cfg = config.system.desktop.hyprland-desktop.dunst;
+      cfg = config.system.desktop.components.dunst;
     in
     lib.mkIf cfg.enable {
       home-manager.users.${config.system.user.general.primary} =

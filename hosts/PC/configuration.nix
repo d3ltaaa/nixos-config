@@ -67,52 +67,8 @@
       # '';
     };
     desktop = {
-      hyprland-desktop = {
-        hyprland = {
-          enable = true;
-        };
-        hypridle = {
-          enable = true;
-        };
-        hyprlock = {
-          enable = true;
-        };
-        hyprpolkitagent = {
-          enable = true;
-        };
-        waybar = {
-          enable = true;
-        };
-        rofi = {
-          enable = true;
-        };
-        swappy = {
-          enable = false;
-        };
-        satty = {
-          enable = true;
-        };
-        swww = {
-          enable = true;
-        };
-        cliphist = {
-          enable = true;
-        };
-        dunst = {
-          enable = true;
-        };
-        dconf = {
-          enable = true;
-        };
-        # nwg-dock = {
-        #   enable = true;
-        # };
-        settings = {
-          # TODO impala etc
-          nwg-displays = {
-            enable = true;
-          };
-        };
+      desktop-environments = {
+        hyprland-desktop.enable = true;
       };
       theme = {
         colorSchemes = null;

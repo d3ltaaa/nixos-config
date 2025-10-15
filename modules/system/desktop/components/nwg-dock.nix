@@ -6,13 +6,13 @@
 }:
 {
   options = {
-    system.desktop.hyprland-desktop.nwg-dock = {
+    system.desktop.components.nwg-dock = {
       enable = lib.mkEnableOption "Enables the nwg-dock";
     };
   };
   config =
     let
-      cfg = config.system.desktop.hyprland-desktop.nwg-dock;
+      cfg = config.system.desktop.components.nwg-dock;
     in
     lib.mkIf cfg.enable {
       environment.systemPackages = with pkgs; [ nwg-dock-hyprland ];

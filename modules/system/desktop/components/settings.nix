@@ -6,14 +6,14 @@
 }:
 {
   options = {
-    system.desktop.hyprland-desktop.settings = {
+    system.desktop.components.settings = {
       nwg-displays.enable = lib.mkEnableOption "Enables nwg-display";
     };
   };
 
   config =
     let
-      cfg = config.system.desktop.hyprland-desktop.settings;
+      cfg = config.system.desktop.components.settings;
     in
     {
       environment.systemPackages = [

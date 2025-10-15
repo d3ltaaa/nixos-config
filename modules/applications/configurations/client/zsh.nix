@@ -66,7 +66,7 @@
                   fi
                 '';
 
-                hyprlandLaunch = lib.optionalString nixos-config.system.desktop.hyprland-desktop.hyprland.enable "Hyprland";
+                hyprlandLaunch = lib.optionalString nixos-config.system.desktop.components.hyprland.enable "Hyprland";
 
                 yaziFunction = lib.optionalString nixos-config.applications.configurations.client.yazi.enable ''
                   function y() {

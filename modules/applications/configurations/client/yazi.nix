@@ -90,7 +90,7 @@
             keymap = {
               input.prepend_keymap = [
               ];
-              manager.prepend_keymap = [
+              mgr.prepend_keymap = [
                 {
                   run = "plugin mount";
                   on = "M";

@@ -6,12 +6,12 @@
 }:
 {
   options = {
-    system.desktop.hyprland-desktop.rofi.enable = lib.mkEnableOption "Enables Rofi module";
+    system.desktop.components.rofi.enable = lib.mkEnableOption "Enables Rofi module";
   };
 
   config =
     let
-      cfg = config.system.desktop.hyprland-desktop.rofi;
+      cfg = config.system.desktop.components.rofi;
     in
     lib.mkIf cfg.enable {
       home-manager.users.${config.system.user.general.primary} =
