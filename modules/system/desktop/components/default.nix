@@ -4,6 +4,7 @@
     ./cliphist.nix
     ./dconf.nix
     ./dunst.nix
+    ./greetd.nix
     ./hypridle.nix
     ./hyprland.nix
     ./hyprlock.nix

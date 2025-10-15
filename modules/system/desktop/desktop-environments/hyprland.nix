@@ -22,6 +22,9 @@
         hyprpolkitagent = {
           enable = true;
         };
+        greetd = {
+          enable = true;
+        };
         waybar = {
           enable = true;
         };

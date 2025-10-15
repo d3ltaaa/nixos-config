@@ -22,7 +22,7 @@
   config =
     let
       cfg = config.system.desktop.components.hyprland;
-      cfg-hyprland = config.system.desktop.components;
+      cfg-components = config.system.desktop.components;
     in
     lib.mkIf cfg.enable {
 
@@ -35,20 +35,20 @@
         (pkgs.writeScriptBin "hyprland-start-script" ''
           #!${pkgs.bash}/bin/bash
 
-          ${lib.optionalString cfg-hyprland.hyprlock.enable ''
+          ${lib.optionalString (cfg-components.hyprlock.enable && !cfg-components.greetd.enable) ''
             hyprlock &
           ''}
-          ${lib.optionalString cfg-hyprland.hyprpolkitagent.enable ''
+          ${lib.optionalString cfg-components.hyprpolkitagent.enable ''
             systemctl --user start hyprpolkitagent &
           ''}
-          ${lib.optionalString cfg-hyprland.swww.enable ''
+          ${lib.optionalString cfg-components.swww.enable ''
             swww-daemon &
             swww restore &
           ''}
 
           hyprpm reload -n
 
-          ${lib.optionalString cfg-hyprland.waybar.enable ''
+          ${lib.optionalString cfg-components.waybar.enable ''
             waybar &
           ''}
         '')
