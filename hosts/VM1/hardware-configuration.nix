@@ -25,12 +25,12 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-label/NIXOS_ROOT";
+    device = "/dev/disk/by-label/FS_ROOT";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/NIXOS_BOOT";
+    device = "/dev/disk/by-label/FS_BOOT";
     fsType = "vfat";
     options = [
       "fmask=0022"
@@ -39,7 +39,7 @@
   };
 
   swapDevices = [
-    { device = "/dev/disk/by-label/NIXOS_SWAP"; }
+    { device = "/dev/disk/by-label/FS_SWAP"; }
   ];
 
   networking.useDHCP = lib.mkDefault true;
