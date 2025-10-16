@@ -17,19 +17,19 @@
           enable = true;
         };
         hypridle = {
-          enable = true;
+          enable = false;
         };
         hyprlock = {
           enable = true;
         };
         hyprpolkitagent = {
-          enable = true;
+          enable = false;
         };
         greetd = {
           enable = false;
         };
         ly = {
-          enable = true;
+          enable = false;
         };
         waybar = {
           enable = true;
@@ -61,7 +61,7 @@
         settings = {
           # TODO impala etc
           nwg-displays = {
-            enable = true;
+            enable = false;
           };
         };
       };

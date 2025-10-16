@@ -34,6 +34,7 @@
               modules-left = [
                 "custom/logo"
                 "hyprland/workspaces"
+                "niri/workspaces"
               ];
 
               modules-center = [
@@ -60,6 +61,21 @@
                 icon-theme = "WhiteSur";
                 icon-size = 25;
                 tooltip-format = "{title}";
+              };
+
+              "niri/workspaces" = {
+                "format" = "{icon}";
+                "format-icons" = {
+                  # Named workspaces
+                  # (you need to configure them in niri)
+                  "browser" = "";
+                  "discord" = "";
+                  "chat" = "<b></b>";
+
+                  # Icons by state
+                  "active" = "";
+                  "default" = "";
+                };
               };
 
               "hyprland/workspaces" = {

@@ -22,8 +22,8 @@
             package = pkgs.dunst;
             settings = {
               global = {
-                monitor = 1;
-                follow = "monitor";
+                # monitor = 1;
+                follow = "keyboard";
 
                 width = "(200, 400)";
 

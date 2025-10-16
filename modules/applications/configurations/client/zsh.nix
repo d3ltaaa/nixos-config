@@ -66,7 +66,9 @@
                   fi
                 '';
 
-                hyprlandLaunch = lib.optionalString nixos-config.system.desktop.components.hyprland.enable "Hyprland";
+                hyprlandLaunch = "Hyprland";
+
+                niriLaunch = "niri";
 
                 yaziFunction = lib.optionalString nixos-config.applications.configurations.client.yazi.enable ''
                   function y() {
@@ -81,10 +83,16 @@
               ''
                 ${yaziFunction}
 
-                if pgrep -f Hyprland > /dev/null; then
+                if pgrep -f ${hyprlandLaunch} > /dev/null; then
+                  ${tmuxCheck}
+                elif pgrep  -f ${niriLaunch} > /dev/null; then
                   ${tmuxCheck}
                 else
-                  ${hyprlandLaunch}
+                  if command -v ${hyprlandLaunch} > /dev/null; then  
+                    ${hyprlandLaunch}
+                  elif command -v ${niriLaunch} > /dev/null; then 
+                    ${niriLaunch}-session
+                  fi
                 fi
               '';
           };
