@@ -49,6 +49,7 @@
       environment = {
         enable = true;
       };
+      theme.colorSchemes = null;
     };
     security = {
       monitoring = {
@@ -269,15 +270,17 @@
   hardware = { };
   applications = {
     configurations = {
-      ssh.enable = true;
-      yazi.enable = true;
-      tmux.enable = true;
-      zsh.enable = true;
-      neovim.nixvim.enable = true;
-      git = {
-        enable = true;
-        username = config.secrets.githubUsername;
-        email = config.secrets.githubEmail;
+      client = {
+        ssh.enable = true;
+        yazi.enable = true;
+        tmux.enable = true;
+        zsh.enable = true;
+        neovim.nixvim.enable = true;
+        git = {
+          enable = true;
+          username = config.secrets.githubUsername;
+          email = config.secrets.githubEmail;
+        };
       };
     };
     packages = {

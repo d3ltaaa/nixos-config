@@ -10,6 +10,7 @@
     system.desktop.theme = {
       colorSchemes = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
+        default = null;
       };
       gtk = {
         enable = lib.mkEnableOption "Enables gtk theming";
@@ -96,9 +97,7 @@
             theme.name = cfg.gtk.theme.name;
             theme.package = lib.mkIf (cfg.gtk.theme.package != null) pkgs.${cfg.gtk.theme.package};
             cursorTheme.name = cfg.gtk.cursor.name;
-            cursorTheme.package = lib.mkIf (
-              cfg.gtk.cursor.package != null
-            ) pkgs.${cfg.gtk.cursor.package};
+            cursorTheme.package = lib.mkIf (cfg.gtk.cursor.package != null) pkgs.${cfg.gtk.cursor.package};
             iconTheme.name = cfg.gtk.icon.name;
             iconTheme.package = lib.mkIf (cfg.gtk.icon.package != null) pkgs.${cfg.gtk.icon.package};
           };
@@ -106,9 +105,7 @@
           qt = lib.mkIf cfg.qt.enable {
             enable = true;
             platformTheme.name = cfg.qt.theme.name;
-            platformTheme.package = lib.mkIf (
-              cfg.qt.theme.package != null
-            ) pkgs.${cfg.gtk.icon.package};
+            platformTheme.package = lib.mkIf (cfg.qt.theme.package != null) pkgs.${cfg.gtk.icon.package};
             style.name = cfg.qt.style.name;
             style.package = lib.mkIf (cfg.qt.style.package != null) pkgs.${cfg.gtk.style.package};
           };

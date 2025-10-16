@@ -20,9 +20,10 @@
   config =
     let
       cfg = config.system.networking.dnsmasq;
+      cfg-general = config.system.networking.general;
     in
     lib.mkIf cfg.enable {
-      networking.firewall.allowedTCPPorts = lib.mkIf (cfg.staticIp != null) [
+      networking.firewall.allowedTCPPorts = lib.mkIf (cfg-general.staticIp != null) [
         53
       ];
       services.dnsmasq = {
