@@ -45,8 +45,8 @@
             ./hosts/FW13/configuration.nix
             ./modules/default.nix
             inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-            inputs.home-manager.nixosModules.home-manager
             inputs.nix-flatpak.nixosModules.nix-flatpak
+            inputs.home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -71,8 +71,8 @@
           modules = [
             ./hosts/PC/configuration.nix
             ./modules/default.nix
-            inputs.home-manager.nixosModules.home-manager
             inputs.nix-flatpak.nixosModules.nix-flatpak
+            inputs.home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -82,6 +82,58 @@
               home-manager.users.${user}.imports = [
                 inputs.nixvim.homeManagerModules.nixvim
                 inputs.nvf.homeManagerModules.default
+              ];
+            }
+          ];
+        };
+        "VM1" = pkgs.lib.nixosSystem {
+          # pkgs-alt -> pkgs
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            pkgs-alt = import pkgs-alt {
+              config.allowUnfree = true;
+            };
+          };
+          modules = [
+            ./hosts/VM1/configuration.nix
+            ./modules/default.nix
+            inputs.nix-flatpak.nixosModules.nix-flatpak
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+              };
+              home-manager.users.${user}.imports = [
+                inputs.nixvim.homeManagerModules.nixvim
+              ];
+            }
+          ];
+        };
+        "VM2" = pkgs.lib.nixosSystem {
+          # pkgs-alt -> pkgs
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            pkgs-alt = import pkgs-alt {
+              config.allowUnfree = true;
+            };
+          };
+          modules = [
+            ./hosts/VM2/configuration.nix
+            ./modules/default.nix
+            inputs.nix-flatpak.nixosModules.nix-flatpak
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+              };
+              home-manager.users.${user}.imports = [
+                inputs.nixvim.homeManagerModules.nixvim
               ];
             }
           ];
