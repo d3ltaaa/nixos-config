@@ -28,4 +28,7 @@
     "amdgpu.dpm=1"
     "amd_pstate_epp=power"
   ];
+  networking.useDHCP = lib.mkDefault true;
+  hardware.enableAllFirmware = true;
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
