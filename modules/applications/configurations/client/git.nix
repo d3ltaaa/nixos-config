@@ -27,9 +27,9 @@
       programs.git = {
         enable = true;
         package = pkgs.gitFull;
-        # config.credential.helper = "manager";
-        # config.credential."https://github.com".username = cfg.username;
-        # config.credential.credentialstore = "cache";
+        config.credential.helper = "manager";
+        config.credential."https://github.com".username = cfg.username;
+        config.credential.credentialstore = "cache";
       };
 
       home-manager.users.${config.system.user.general.primary} =
