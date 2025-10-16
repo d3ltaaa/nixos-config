@@ -130,7 +130,7 @@
               ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o ${config.system.networking.general.lanInterface} -j MASQUERADE
             '';
 
-            privateKeyFile = "/home/${config.system.user.general.primary}/.wireguard-keys/private";
+            privateKeyFile = "/etc/credentials/wireguard-keys/private";
 
             peers = cfg.server.serverPeers;
           };
