@@ -137,6 +137,11 @@
 
           # wireguard-ui
           networking.firewall.allowedTCPPorts = [ 5000 ]; # port for wireguard-webui
+          # ensure /etc/wireguard exists
+          systemd.tmpfiles.rules = [
+            "d /etc/wireguard 0755 root root - -"
+          ];
+
           systemd.services.wireguard-ui = {
             enable = true;
             description = "WireGuard-UI Web Interface";
