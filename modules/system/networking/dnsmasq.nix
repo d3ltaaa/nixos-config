@@ -23,9 +23,8 @@
       cfg-general = config.system.networking.general;
     in
     lib.mkIf cfg.enable {
-      networking.firewall.allowedTCPPorts = lib.mkIf (cfg-general.staticIp != null) [
-        53
-      ];
+      networking.firewall.allowedTCPPorts = [ 53 ];
+      networking.firewall.allowedUDPPorts = [ 53 ];
       services.dnsmasq = {
         enable = cfg.enable;
         package = pkgs.dnsmasq;
@@ -44,6 +43,7 @@
             "127.0.0.1" # ipv4 localhost
             "::1" # ipv6 localhost
             "${config.system.networking.general.staticIp}"
+            "fd00::11"
           ];
 
           address = cfg.address;
