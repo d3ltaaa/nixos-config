@@ -338,7 +338,8 @@
           enable = true; # a
         };
         neovim = {
-          enable = true;
+          nixvim.enable = true;
+          nvf.enable = false;
         };
         git = {
           enable = true; # a

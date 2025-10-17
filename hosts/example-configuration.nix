@@ -5,7 +5,7 @@
     serverAddress = lib.strings.trim (builtins.readFile "/etc/credentials/server_address");
     ipv64KeyFile = lib.strings.trim (builtins.readFile "/etc/credentials/acmeIPV64.cert");
     acmeEmail = lib.strings.trim (builtins.readFile "/etc/credentials/acmeEmail");
-    githubUserename = lib.strings.trim (builtins.readFile "/etc/credentials/github/username");
+    githubUsername = lib.strings.trim (builtins.readFile "/etc/credentials/github/username");
     githubEmail = lib.strings.trim (builtins.readFile "/etc/credentials/github/email");
     privateWireguardKey = lib.strings.trim (
       builtins.readFile "/etc/credentials/wireguard-keys/private"
@@ -48,7 +48,7 @@
         }
       ''; # a
     };
-    destkop = {
+    desktop = {
       desktop-environments = {
         hyprland-desktop.enable = true;
       };
@@ -639,7 +639,7 @@
     packages = {
       nixpkgs = {
         extraPackages = [ ]; # a
-        stable = {
+        pkgs = {
           system = {
             default = true; # a
             base = true; # a
@@ -652,7 +652,7 @@
           user.default = true; # a
           font.default = true; # a
         };
-        unstable = {
+        pkgs-alt = {
           system.default = true; # a
           user.default = true; # a
           font.default = true; # a

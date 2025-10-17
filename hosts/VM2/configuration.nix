@@ -5,7 +5,7 @@
     serverAddress = lib.strings.trim (builtins.readFile "/etc/credentials/server_address");
     ipv64KeyFile = lib.strings.trim (builtins.readFile "/etc/credentials/acmeIPV64.cert");
     acmeEmail = lib.strings.trim (builtins.readFile "/etc/credentials/acmeEmail");
-    githubUserename = lib.strings.trim (builtins.readFile "/etc/credentials/github/username");
+    githubUsername = lib.strings.trim (builtins.readFile "/etc/credentials/github/username");
     githubEmail = lib.strings.trim (builtins.readFile "/etc/credentials/github/email");
     privateWireguardKey = lib.strings.trim (
       builtins.readFile "/etc/credentials/wireguard-keys/private"
@@ -35,7 +35,7 @@
       secureBoot = false;
       extraEntries = null; # a
     };
-    destkop = {
+    desktop = {
       components.session = {
         autoLogin = {
           enable = true; # a
@@ -302,6 +302,21 @@
             }
           ]; # a
         };
+      };
+      client = {
+        ssh.enable = true; # a
+        yazi.enable = true;
+        tmux.enable = true; # a
+        zsh.enable = true; # a
+        neovim = {
+          nixvim.enable = true;
+          nvf.enable = false;
+        };
+        git = {
+          enable = true; # a
+          username = config.secrets.githubUsername; # a
+          email = config.secrets.githubEmail; # a
+        };
         syncthing = {
           enable = true; # a
           devices = {
@@ -339,23 +354,11 @@
           }; # a
         };
       };
-      client = {
-        ssh.enable = true; # a
-        yazi.enable = true;
-        tmux.enable = true; # a
-        zsh.enable = true; # a
-        neovim.enable = true;
-        git = {
-          enable = true; # a
-          username = config.secrets.githubUsername; # a
-          email = config.secrets.githubEmail; # a
-        };
-      };
     };
     packages = {
       nixpkgs = {
         extraPackages = [ ]; # a
-        stable = {
+        pkgs = {
           system = {
             default = true; # a
             base = false; # a
@@ -368,7 +371,7 @@
           user.default = false; # a
           font.default = false; # a
         };
-        unstable = {
+        pkgs-alt = {
           system.default = false; # a
           user.default = false; # a
           font.default = false; # a
