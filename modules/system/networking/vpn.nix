@@ -136,6 +136,7 @@
           };
 
           # wireguard-ui
+          # change password in /etc/wireguard/db/users/admin.json
           networking.firewall.allowedTCPPorts = [ 5000 ]; # port for wireguard-webui
           # ensure /etc/wireguard exists
           systemd.tmpfiles.rules = [
