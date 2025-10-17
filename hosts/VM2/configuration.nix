@@ -19,7 +19,7 @@
   system = {
     general = {
       nixos = {
-        name = "T480"; # a
+        name = "VM2"; # a
         nixosStateVersion = "25.05"; # a
         homeManagerStateVersion = "25.05"; # a
       };
@@ -31,302 +31,77 @@
     };
     boot = {
       primaryBoot = true; # a
-      osProber = false; # a
-      defaultEntry = 0; # a
-      extraEntries = ''
-        menuentry "NixOs (PC-SERVER)" {
-            insmod part_gpt
-            insmod fat
-            search --no-floppy --label SERVER_BOOT --set=root
-            chainloader /EFI/NixOS-boot/grubx64.efi
-        }
-        menuentry "Windows 10 " {
-            insmod part_gpt
-            insmod fat
-            search --no-floppy --label W10_BOOT --set=root
-            chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-        }
-      ''; # a
+      bootloader = "limine";
+      secureBoot = false;
+      extraEntries = null; # a
     };
     destkop = {
-      desktop-environments = {
-        hyprland-desktop.enable = true;
-      };
-      theme = {
-        colorSchemes = null; # a
-
-        gtk = {
-          enable = true; # a
-          theme.name = "Adwaita"; # a
-          theme.package = null; # a
-          cursor.name = "Bibata-Modern-Ice"; # a
-          cursor.package = null; # a
-          icon.name = "WhiteSur-light"; # a
-          icon.package = "whitesur-icon-theme"; # a
-        };
-        qt = {
-          enable = true; # a
-          theme.name = "adwaita"; # a
-          theme.package = null; # a
-          style.name = "adwaita-light"; # a
-          style.package = null; # a
-        };
-      };
       components.session = {
         autoLogin = {
           enable = true; # a
         };
-        autoShutdown = {
-          enable = false; # a
-          watchPort = config.services.ollama.port; # a
-          shutdownTime = "1800"; # seconds # a
-        };
       };
     };
     security = {
-      # TODO
-      monitoring = { };
+      monitoring = {
+        OnBootSec = "5min";
+        OnUnitActiveSec = "1h";
+        services = [
+          # {
+          #   notify = "${config.secrets.monitoringEmail}";
+          #   flag = 0;
+          #   service = "syncthing.service";
+          #   pattern = "error|warning|critical";
+          #   title = "Syncthing service alert";
+          #   timeframe = "1 day ago";
+          # }
+        ];
+      };
       features = {
-        opensnitch = { };
-        fail2ban = { };
-        passwords = { };
-        snapshots = { };
-        backups = { };
-        bleachBit = { };
-        apparmor = { };
-        firejail = { };
-        clamav = { };
-        gnupg = { };
+        gnupg.enable = true;
+        polkit.enable = true;
+        fail2ban.enable = true; # monitored
+        clamav = {
+          enable = true; # monitored
+          interval = "*-*-* 17:00:00";
+        };
       };
     };
     networking = {
       general = {
-        lanInterface = "enp0s31f6"; # a
-        wifiInterface = "wlp3s0"; # a
-        staticIp = null; # a
-        defaultGateway = null; # a
-        nameservers = [ "1.1.1.1" ]; # a
-      };
-      firewall = { }; # a
-      bridgedNetwork = {
-        enable = true; # a (for wireguard)
-      };
-      wakeOnLan = {
-        enable = true; # a
-      };
-      vpn = {
-        wireguard = {
-          client = {
-            enable = true; # a
-            address = [ "10.100.0.2/32" ]; # a
-            dns = [
-              "192.168.2.11"
-              "192.168.2.1"
-            ]; # a
-            serverPublicKey = "hAvazVD4FMIbtZPLa5rtUXrZ3iXYIiW5Ivemyv1UmWA="; # a
-          };
-          server = {
-            enable = false; # a
-            serverPeers = [
-              {
-                # T480
-                publicKey = "fSaTvwFYNcAx/dKxS9HCEB/017HITk/dpZCwJ1uZDDs="; # a
-                allowedIPs = [ "10.100.0.2/32" ]; # a
-              }
-              {
-                # PHONE
-                publicKey = "Am+PSLEvczLPxaoI/x2QEiQCe1N5/LwSzVqPD/CUDF4="; # a
-                allowedIPs = [ "10.100.0.3/32" ]; # a
-              }
-              {
-                # TABS9
-                publicKey = "Ggovi9VYVEHK70enoT/8/GweGBTX8xgiktRTMSGboww="; # a
-                allowedIPs = [ "10.100.0.4/32" ]; # a
-              }
-            ];
-          };
-        };
-      };
-      dnsmasq = {
-        enable = false; # a
-        address = [
-          "/${config.secrets.serverAddress}/192.168.2.11"
+        lanInterface = "ens18"; # a
+        wifiInterface = null; # a
+        staticIp = "192.168.2.12"; # a
+        defaultGateway = "192.168.2.1"; # a
+        nameservers = [
+          "192.168.2.11"
+          "1.1.1.1"
         ]; # a
       };
-      acme = {
-        enable = true; # a
-        domain = "${config.secrets.serverAddress}"; # a
-        email = "${config.secrets.acmeEmail}"; # a
-        dnsProvider = "ipv64"; # a
-        domainNames = [
-          "dp.${config.secrets.serverAddress}"
-          "proxmox.${config.secrets.serverAddress}"
-          "vault.${config.secrets.serverAddress}"
-          "home.${config.secrets.serverAddress}"
-          "wg.${config.secrets.serverAddress}"
-          "homeassistant.${config.secrets.serverAddress}"
-          "ollama.${config.secrets.serverAddress}"
-          "syncthing.${config.secrets.serverAddress}"
-        ]; # a
-      };
-      nginx = {
-        enable = false; # a
-        virtualHosts = {
-          "proxmox.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "https://192.168.2.10:8006";
-              proxyWebsockets = true;
-              extraConfig = ''
-                client_max_body_size 8G;
-                proxy_buffering off;
-                proxy_request_buffering off;
-                proxy_connect_timeout 3600;
-                proxy_send_timeout 3600;
-                proxy_read_timeout 3600;
-              '';
-            };
-          };
-          "dp.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.31:80"; # allow dp.${serverAddress} in moonraker manually
-              proxyWebsockets = true;
-            };
-          };
-          "vault.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:8222";
-              proxyWebsockets = true;
-            };
-          };
-          "home.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:8082";
-              proxyWebsockets = true;
-            };
-          };
-          "wg.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.11:5000";
-              proxyWebsockets = true;
-            };
-          };
-          "homeassistant.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:8123";
-              proxyWebsockets = true;
-            };
-          };
-          "ollama.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:8080";
-              proxyWebsockets = true;
-            };
-          };
-          "syncthing.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:8384";
-              proxyWebsockets = true;
-            };
-          };
-        };
-      }; # a
     };
     user = {
       general = {
         primary = "falk"; # a
       };
-      directories = {
-        enable = true; # a
-      };
     };
   };
-  hardware = {
-    drawingTablet = {
-      enable = true; # a
-    };
-    blueTooth = {
-      enable = true; # a
-    };
-    audio = {
-      enable = true; # a
-    };
-    amdGpu = {
-      enable = true; # a
-    };
-    nvidiaGpu = {
-      enable = true; # a
-      enableGpu = false; # a
-      intelBusId = "PCI:0@0:2:0"; # a
-      nvidiaBusId = "PCI:0@01:0:0"; # a
-    };
-    printing = {
-      enable = true; # a
-      printer.ML-1865W.enable = true; # a
-      installDriver = {
-        general = true; # a
-        hp = true; # a
-        samsung = true; # a
-      };
-    };
-    brightness = {
-      enable = true; # a
-      monitorType = "internal"; # a
-    };
-    powerManagement = {
-      upower = {
-        enable = true; # a
-        criticalPowerHibernate = true;
-      };
-      tlp.enable = true; # a
-      auto-cpufreq = {
-        enable = true; # a
-        thresholds = true; # a
-      };
-    };
-    usb = {
-      enable = true; # a
-    };
-    partitioning = {
-      enable = true; # TODO
-    };
-  };
+  hardware = { };
   applications = {
     configurations = {
       server = {
         # grafana = {
         #   enable = true;
         # };
-        jellyfin = {
-          enable = true; # a
-        };
-        n8n = {
-          enable = true; # a
-        };
+        jellyfin.enable = true; # a
+        n8n.enable = true; # a
+        litellm.enable = true; # a
+        radicale.enable = true; # a
+        vaultwarden.enable = true; # a
+        homeassistant.enable = true; # a
+        open-webui.enable = true;
         ntfy = {
           enable = true; # a
           base-url = "https://ntfy.${config.secrets.serverAddress}"; # a
-        };
-        litellm = {
-          enable = true; # a
-        };
-        radicale = {
-          enable = true; # a
         };
         homepage = {
           enable = true; # a
@@ -498,12 +273,6 @@
             }
           ]; # a
         };
-        ollama = {
-          enable = true; # a
-          dualSetup = true; # a
-          modelDir = "/mnt/share/ollama/models"; # a
-          homeDir = "/mnt/share/ollama/home"; # a
-        };
         fileSharing = {
           enable = true; # a
           ip = "192.168.2.12"; # a
@@ -538,9 +307,10 @@
           devices = {
             "PC".id = "MIR6FXD-EEKYM5S-GQFPDZT-DWNCTYW-XGZNIGY-6CNO5C2-VOR6YPG-T3JCMAX";
             "PX8".id = "UPROPYX-AFK4Q5X-P5WRKRE-4VXJ5XU-QKTXML3-2SFWBV7-ELVVPDH-AOWS2QY";
-            # "T480".id = "Z3EA4H3-RNVAKPJ-JIWF4HD-L4AISEX-DUZZ4SV-P3E45GU-AKA3DHG-VYQNRAK";
-            "T440P".id = "CAWY2HI-K3QLENX-QABH4C4-QDGBZAB-GH22BRL-ZB6YBG5-PXVDZTR-4MSF7QY";
-            "SERVER".id = "OP5RCKE-UFEQ4IT-DRMANC2-425AFHE-RS4PG3Y-35VLH6F-7UJXUIJ-EAVK5A3";
+            "FW13".id = "N6F2GRB-VUPQC4F-DVNYES5-5KNJ36R-GGVAP2R-ZHHBV4U-UATR2JY-BRQ2NQ2";
+            # "T480".id = "OHXDERI-SBNTM5Q-ZBM7UMC-BZUOLDB-U32FQZW-VNXGSH7-VKQTNJO-TM3VWAH";
+            # "T440P".id = "CAWY2HI-K3QLENX-QABH4C4-QDGBZAB-GH22BRL-ZB6YBG5-PXVDZTR-4MSF7QY";
+            # "SERVER".id = "OP5RCKE-UFEQ4IT-DRMANC2-425AFHE-RS4PG3Y-35VLH6F-                    7UJXUIJ-EAVK5A3";
           }; # a
 
           folders = {
@@ -548,87 +318,33 @@
               path = "/home/${config.system.user.general.primary}/Dokumente";
               devices = [
                 "PC"
+                # "PX8"
+                "FW13"
                 # "T480"
-                "T440P"
-                "SERVER"
+                # "T440P"
+                # "SERVER"
               ];
             }; # a
             "Bilder" = {
               path = "/home/${config.system.user.general.primary}/Bilder";
               devices = [
                 "PC"
+                # "PX8"
+                "FW13"
                 # "T480"
-                "T440P"
-                "SERVER"
+                # "T440P"
+                # "SERVER"
               ];
             };
           }; # a
         };
-        vaultwarden = {
-          enable = true; # a
-        };
-        homeassistant = {
-          enable = true; # a
-        };
       };
       client = {
-        fileSharing = {
-          enable = true; # a
-          items = [
-            {
-              share = {
-                "/mnt/private" = {
-                  device = "//192.168.2.12/private";
-                };
-              };
-            }
-          ]; # a
-        };
-        virtualbox = {
-          enable = true; # a
-        };
-        qemu = {
-          enable = true; # a
-        };
-        ssh = {
-          enable = true; # a
-        };
-        protonmail = {
-          enable = true; # a
-        };
-        thunderbird = {
-          enable = true; # a
-        };
-        thunar = {
-          enable = true; # a
-        };
-        spotify = {
-          enable = true; # a
-        };
-        firefox = {
-          enable = false; # a
-        };
-        brave = {
-          enable = true;
-        };
-        localsend = {
-          enable = true;
-        };
-        foot = {
-          enable = true; # a
-        };
-        lf = {
-          enable = true; # a
-        };
-        tmux = {
-          enable = true; # a
-        };
-        zsh = {
-          enable = true; # a
-        };
-        neovim = {
-          enable = true;
-        };
+        ssh.enable = true; # a
+        yazi.enable = true;
+        tmux.enable = true; # a
+        zsh.enable = true; # a
+        neovim.enable = true;
         git = {
           enable = true; # a
           username = config.secrets.githubUsername; # a
@@ -642,27 +358,27 @@
         stable = {
           system = {
             default = true; # a
-            base = true; # a
-            lang = true; # a
-            tool = true; # a
-            hypr = true; # a
-            desk = true; # a
-            power = true; # a
+            base = false; # a
+            lang = false; # a
+            tool = false; # a
+            hypr = false; # a
+            desk = false; # a
+            power = false; # a
           };
-          user.default = true; # a
-          font.default = true; # a
+          user.default = false; # a
+          font.default = false; # a
         };
         unstable = {
-          system.default = true; # a
-          user.default = true; # a
-          font.default = true; # a
+          system.default = false; # a
+          user.default = false; # a
+          font.default = false; # a
         };
       };
       flatpaks = {
-        enable = true; # a
+        enable = false; # a
       };
       derivations = {
-        enable = true; # a
+        enable = false; # a
       };
     };
   };
