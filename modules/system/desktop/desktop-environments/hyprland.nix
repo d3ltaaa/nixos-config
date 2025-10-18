@@ -25,6 +25,9 @@
         hyprpolkitagent = {
           enable = true;
         };
+        gnomepolkitagent = {
+          enable = false;
+        };
         greetd = {
           enable = false;
         };

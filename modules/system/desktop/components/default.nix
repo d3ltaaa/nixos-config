@@ -5,6 +5,7 @@
     ./dconf.nix
     ./dunst.nix
     ./greetd.nix
+    ./gnomepolkitagent.nix
     ./hypridle.nix
     ./hyprland.nix
     ./hyprlock.nix
