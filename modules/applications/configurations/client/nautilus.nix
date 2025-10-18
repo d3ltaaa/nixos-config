@@ -43,6 +43,15 @@
               terminal = false;
             };
           };
+          xdg.mimeApps = {
+            enable = true;
+            defaultApplications = {
+              "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
+              "inode/mount-point" = [ "org.gnome.Nautilus.desktop" ];
+              "x-scheme-handler/file" = [ "org.gnome.Nautilus.desktop" ];
+              "applications/x-gnome-saved-search" = [ "org.gnome.Nautilus.desktop" ];
+            };
+          };
 
           wayland.windowManager.hyprland.settings.bind = [
             "$mod, E, exec, nautilus --new-window"
