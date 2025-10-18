@@ -63,9 +63,8 @@
         # };
         settings = {
           # TODO impala etc
-          nwg-displays = {
-            enable = false;
-          };
+          nwg-displays.enable = false;
+          scripts.enable = true;
         };
       };
     };

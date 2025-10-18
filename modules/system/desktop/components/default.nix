@@ -16,6 +16,7 @@
     ./rofi.nix
     ./satty.nix
     ./session.nix
+    ./settings.nix
     ./swappy.nix
     ./swww.nix
     ./settings.nix
