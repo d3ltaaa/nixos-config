@@ -19,6 +19,7 @@
     ./session.nix
     ./settings.nix
     ./swappy.nix
+    ./swayidle.nix
     ./swww.nix
     ./settings.nix
     ./waybar.nix

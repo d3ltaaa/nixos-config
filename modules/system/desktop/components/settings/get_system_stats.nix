@@ -152,7 +152,8 @@ pkgs.writeShellApplication {
     if $desktop; then
       printf "{\"text\": \"%s   %s\"}" "$ram_string" "$cpu_string"
     else
-      printf "{\"text\": \"%s   %s\", \"tooltip\": \"%s\n\n%s\n\nBrightness: %s%%\"}" "$power_string" "$battery_string" "$ram_string" "$cpu_string" "$(get_brightness)"
+      printf '{\"text\": \"%s   %s\", \"tooltip\": \"%s\\n\\n%s\\n\\nBrightness: %s%%\"}' \
+        "$power_string" "$battery_string" "$ram_string" "$cpu_string" "$(get_brightness)"
     fi
   '';
 }

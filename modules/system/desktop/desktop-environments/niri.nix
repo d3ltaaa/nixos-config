@@ -20,6 +20,9 @@
         hypridle = {
           enable = false;
         };
+        swayidle = {
+          enable = true;
+        };
         hyprlock = {
           enable = true;
         };
