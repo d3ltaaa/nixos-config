@@ -18,8 +18,8 @@
 
     winboat.url = "github:TibixDev/winboat";
 
-    scripts.url = "github:d3ltaaa/fscripts";
-    scripts.flake = false;
+    # scripts.url = "github:d3ltaaa/fscripts";
+    # scripts.flake = false;
   };
   outputs =
     {

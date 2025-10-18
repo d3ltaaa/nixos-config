@@ -376,24 +376,7 @@
         "nvf": "nvf",
         "pkgs": "pkgs",
         "pkgs-alt": "pkgs-alt",
-        "scripts": "scripts",
         "winboat": "winboat"
-      }
-    },
-    "scripts": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1759869627,
-        "narHash": "sha256-7gjfhd8/Jkjw7TRoZ+kEEh9LYfLsZ8kJF9yo4fiSDI4=",
-        "owner": "d3ltaaa",
-        "repo": "fscripts",
-        "rev": "5d5ff933e35d1322ea1e6215674f978c00ef9367",
-        "type": "github"
-      },
-      "original": {
-        "owner": "d3ltaaa",
-        "repo": "fscripts",
-        "type": "github"
       }
     },
     "systems": {
