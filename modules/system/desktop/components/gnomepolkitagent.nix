@@ -12,7 +12,7 @@
   };
   config =
     let
-      cfg = config.system.desktop.components.hyprpolkitagent;
+      cfg = config.system.desktop.components.gnomepolkitagent;
     in
     lib.mkIf cfg.enable {
       environment.systemPackages = with pkgs; [ polkit_gnome ];
