@@ -17,6 +17,7 @@
     lib.mkIf cfg.enable {
       environment.systemPackages = with pkgs; [ polkit_gnome ];
       systemd.user.services.polkit-gnome-authentication-agent-1 = {
+        enable = true;
         description = "polkit-gnome-authentication-agent-1";
         wantedBy = [ "graphical-session.target" ];
         wants = [ "graphical-session.target" ];

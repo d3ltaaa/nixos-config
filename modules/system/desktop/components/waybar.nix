@@ -227,7 +227,7 @@
                 format = "{}";
                 on-click = "menu_options energy";
                 return-type = "json";
-                exec = "get_system_stats.sh";
+                exec = "get_system_stats";
               };
 
               memory = {
