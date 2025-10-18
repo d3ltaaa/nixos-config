@@ -21,6 +21,9 @@
         in
         { config, ... }:
         {
+          # duplicate waybar fix
+          programs.waybar.systemd.enable = true;
+          systemd.user.services."waybar".Service.ExecReload = lib.mkForce "";
 
           programs.waybar.enable = true;
           programs.waybar.package = pkgs.waybar;

@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./autostart.nix
     ./cliphist.nix
     ./dconf.nix
     ./dunst.nix

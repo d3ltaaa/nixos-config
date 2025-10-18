@@ -37,10 +37,6 @@
           ${lib.optionalString cfg-components.hyprland.enable ''
             reload -n 
           ''}
-
-          ${lib.optionalString cfg-components.waybar.enable ''
-            waybar &
-          ''}
         '')
       ];
     };

@@ -31,32 +31,6 @@
         xwayland.enable = true;
       };
 
-      environment.systemPackages = [
-        (pkgs.writeScriptBin "hyprland-start-script" ''
-          #!${pkgs.bash}/bin/bash
-
-          ${lib.optionalString
-            (cfg-components.hyprlock.enable && !cfg-components.greetd.enable && !cfg-components.ly.enable)
-            ''
-              hyprlock &
-            ''
-          }
-          ${lib.optionalString cfg-components.hyprpolkitagent.enable ''
-            systemctl --user start hyprpolkitagent &
-          ''}
-          ${lib.optionalString cfg-components.swww.enable ''
-            swww-daemon &
-            swww restore &
-          ''}
-
-          hyprpm reload -n
-
-          ${lib.optionalString cfg-components.waybar.enable ''
-            waybar &
-          ''}
-        '')
-      ];
-
       home-manager.users.${config.system.user.general.primary} =
         let
           nixos-config = config;
@@ -272,7 +246,7 @@
                 "$mod CONTROL, J, resizeactive, 0 40"
               ];
 
-              exec-once = "hyprland-start-script";
+              exec-once = "autostart-script";
             };
 
             plugins = [
