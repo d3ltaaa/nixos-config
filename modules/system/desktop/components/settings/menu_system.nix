@@ -1,6 +1,6 @@
 { pkgs }:
 pkgs.writeShellApplication {
-  name = "menu_system_new";
+  name = "menu_system";
   runtimeInputs = [ ]; # not specifying inputs, makes it complain instead of downloading the inputs automatically
   text = ''
     menu="rofi -dmenu -i"

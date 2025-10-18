@@ -24,6 +24,8 @@
       ]
       ++ lib.optionals cfg.scripts.enable [
         (import ./settings/menu_system.nix { inherit pkgs; })
+        (import ./settings/menu_options.nix { inherit pkgs; })
+        (import ./settings/script_light.nix { inherit pkgs; })
       ];
     };
 }

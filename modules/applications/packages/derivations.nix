@@ -17,7 +17,7 @@
       cfg = config.applications.packages.derivations;
       fscripts = import ./derivations/fscripts.nix { inherit pkgs inputs; };
       derivations = [
-        fscripts
+        # fscripts
       ]; # add to list
     in
     lib.mkIf cfg.enable {

@@ -243,7 +243,7 @@
               "custom/settings" = {
                 format = " ";
                 tooltip = false;
-                on-click = "sleep 0.1; menu_options";
+                on-click = "sleep 0.1; menu_options main";
               };
 
               "custom/power" = {

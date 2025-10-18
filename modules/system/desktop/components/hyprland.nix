@@ -240,7 +240,7 @@
                 "$mod, D, togglespecialworkspace, magic"
                 "$mod SHIFT, D, movetoworkspace, special:magic"
 
-                "$mod, S, exec, menu_options"
+                "$mod, S, exec, menu_options main"
                 "$mod SHIFT, S, exec, menu_system"
                 "$mod, C, exec, menu_options updates"
                 "$mod, P, exec, menu_options energy"
@@ -254,8 +254,8 @@
               ];
 
               bindel = [
-                ",XF86MonBrightnessUp, exec, scr_light up"
-                ",XF86MonBrightnessDown, exec, scr_light down"
+                ",XF86MonBrightnessUp, exec, script_light up"
+                ",XF86MonBrightnessDown, exec, script_light down"
               ];
 
               binde = [
