@@ -46,7 +46,8 @@
     };
     desktop = {
       desktop-environments = {
-        hyprland-desktop.enable = true;
+        hyprland-desktop.enable = false;
+        niri-desktop.enable = true;
       };
       theme = {
         colorSchemes = null; # a
