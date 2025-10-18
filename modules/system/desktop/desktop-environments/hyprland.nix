@@ -10,6 +10,7 @@
     in
     {
       system.desktop.components = lib.mkIf cfg.enable {
+        autostart.enable = true;
         hyprland = {
           enable = true;
         };
