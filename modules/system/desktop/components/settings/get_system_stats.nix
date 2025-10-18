@@ -119,7 +119,7 @@ pkgs.writeShellApplication {
       else
         icon="''${DEFAULT_ICONS[$icon_index]}"
       fi
-      fixed_battery_string="$(format_string "$fixed_battery_string" 3)"
+      # fixed_battery_string="$(format_string "$fixed_battery_string" 3)"
       battery_string="$battery_percentage% $icon"
     fi
 
