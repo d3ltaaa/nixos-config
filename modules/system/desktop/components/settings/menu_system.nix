@@ -20,8 +20,7 @@ pkgs.writeShellApplication {
       systemctl hibernate
       ;;
     "  Restart")
-      # systemctl reboot
-    alöskdfj
+      systemctl reboot
       ;;
     "󰌾  Lock")
       hyprlock

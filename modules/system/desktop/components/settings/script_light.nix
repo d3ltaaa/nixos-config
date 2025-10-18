@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, config }:
 pkgs.writeShellApplication {
   name = "script_light";
   runtimeInputs = with pkgs; [
@@ -8,8 +8,13 @@ pkgs.writeShellApplication {
   ]; # not specifying inputs, makes it complain instead of downloading the inputs automatically
   text =
     let
-      # get_monitor_count_cmd = "$(hyprctl monitors all | grep Monitor | wc -l)";
-      get_monitor_count_cmd = "$(niri msg outputs | grep -c Output)";
+      get_monitor_count_cmd =
+        if config.system.desktop.desktop-environments.niri-desktop.enable then
+          "$(niri msg outputs | grep -c Output)"
+        else if config.system.desktop.desktop-environments.hyprland-desktop.enable then
+          "$(hyprctl monitors all | grep Monitor | wc -l)"
+        else
+          "";
     in
     ''
       #!/run/current-system/sw/bin/bash
@@ -85,11 +90,11 @@ pkgs.writeShellApplication {
         ;;
 
       "blue")
-        gammastep -O 6500
+        pkill gammastep; gammastep -O 6500
         ;;
 
       "red")
-        gammastep -O 4000 
+        pkill gammastep; gammastep -O 4000 
         ;;
 
       "day")

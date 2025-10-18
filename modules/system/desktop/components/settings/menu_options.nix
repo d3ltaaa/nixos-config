@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, config }:
 pkgs.writeShellApplication {
   name = "menu_options";
   runtimeInputs = with pkgs; [
@@ -8,11 +8,24 @@ pkgs.writeShellApplication {
   ];
   text =
     let
-      menu = "${pkgs.rofi-wayland}/bin/rofi -dmenu -i";
-      terminal = "${pkgs.foot}/bin/foot";
-      terminal_floating = "${pkgs.foot}/bin/foot --app-id \"FLOATING-SETTINGS\"";
-      edit_monitors_cmd = "${pkgs.foot}/bin/foot --app-id \"FLOATING-SETTINGS\" -e ${pkgs.neovim}/bin/nvim ~/.config/niri/config.kdl";
-      # edit_monitors_cmd="hyprctl dispatch exec \"[float;size 1000 700] nwg-displays\""
+      cfg-components = config.system.desktop.components;
+      cfg-applications = config.applications.configurations.client;
+      menu = if cfg-components.rofi.enable then "${pkgs.rofi-wayland}/bin/rofi -dmenu -i" else "";
+      terminal = if cfg-applications.foot.enable then "${pkgs.foot}/bin/foot" else "";
+      terminal_floating =
+        if cfg-applications.foot.enable then "${pkgs.foot}/bin/foot --app-id \"FLOATING-SETTINGS\"" else "";
+      edit_monitors_cmd =
+        if
+          (
+            config.system.desktop.desktop-environments.niri-desktop.enable
+            && (cfg-applications.neovim.nixvim.enable || cfg-applications.neovim.nvf.enable)
+          )
+        then
+          "${pkgs.foot}/bin/foot --app-id \"FLOATING-SETTINGS\" -e nvim ~/.config/niri/config.kdl"
+        else if config.system.desktop.desktop-environments.hyprland-desktop.enable then
+          "hyprctl dispatch exec \"[float;size 1000 700] nwg-displays\""
+        else
+          "";
     in
     ''
       menu_main() {
