@@ -31,7 +31,7 @@ pkgs.writeShellApplication {
     if [[ "$(cat $governor_path)" == "performance" ]]; then
       governor_string="󰓅";
     elif [[ "$(cat $governor_path)" == "powersave" ]]; then
-      governor_string="󰾆";
+      governor_string="󱧥";
     else
       governor_string="?";
     fi
@@ -108,18 +108,18 @@ pkgs.writeShellApplication {
 
       battery_percentage=$((100 * total_remaining_capacity / total_capacity))
       # Determine icon index (0-9 scale)
-      icon_index=$((battery_percentage / 10))
-      if [[ $icon_index -gt 9 ]]; then
+      icon_index="$((battery_percentage / 10))"
+      if [[ "$icon_index" -gt 9 ]]; then
         icon_index=9
       fi
 
       # Choose the appropriate icon
       if [[ "$charging" == "true" ]]; then
-        icon=''${CHARGING_ICONS[$icon_index]}
+        icon="''${CHARGING_ICONS[$icon_index]}"
       else
-        icon=''${DEFAULT_ICONS[$icon_index]}
+        icon="''${DEFAULT_ICONS[$icon_index]}"
       fi
-      # fixed_battery_string=$(format_string "$fixed_battery_string" 3)
+      fixed_battery_string="$(format_string "$fixed_battery_string" 3)"
       battery_string="$battery_percentage% $icon"
     fi
 
@@ -131,7 +131,7 @@ pkgs.writeShellApplication {
     # Get RAM usage
     RAM_USED=$(free -h | awk '/Mem:/ {print $3}' | sed 's/i//')
     RAM_TOTAL=$(free -h | awk '/Mem:/ {print $2}' | sed 's/i//')
-    ram_string="$RAM_USED/$RAM_TOTAL  "
+    ram_string="$RAM_USED/$RAM_TOTAL "
 
     # Cpu temp
 
@@ -146,18 +146,13 @@ pkgs.writeShellApplication {
       cpu_temp=$((cpu_temp_millidegrees / 1000))
 
       # Print the temperature
-      cpu_string="$cpu_temp°C  "
+      cpu_string="$cpu_temp°C "
     fi
 
     if $desktop; then
-      # printf '{"text": "%s   %s", "tooltip": "Brightness: %s"}' "$ram_string" "$cpu_string"  "$(get_brightness)"
-      echo no
-
-      # printf "{\"text\": \"$ram_string    $cpu_string\", \"tooltip\": \"Brightness: $(get_brightness)\"}"
+      printf "{\"text\": \"%s   %s\"}" "$ram_string" "$cpu_string"
     else
-      echo no
-      # printf "{\"text\": \"$power_string    $battery_string\", \"tooltip\": \"$ram_string\n\n$cpu_string\n\nBrightness: $(get_brightness)\" }"
+      printf "{\"text\": \"%s   %s\", \"tooltip\": \"%s\n\n%s\n\nBrightness: %s%%\"}" "$power_string" "$battery_string" "$ram_string" "$cpu_string" "$(get_brightness)"
     fi
-
   '';
 }

@@ -177,7 +177,7 @@ pkgs.writeShellApplication {
         case ''$selected in
         "  Reset")  pkexec auto-cpufreq --force reset ;;
         "󱧥  Powersave") pkexec auto-cpufreq --force powersave ;;
-        "󰓅  Performance")  auto-cpufreq --force performance ;;
+        "󰓅  Performance")  pkexec auto-cpufreq --force performance ;;
         "  Go back") menu_main ;;
         esac
       }
