@@ -37,6 +37,10 @@
           ${lib.optionalString cfg-components.hyprland.enable ''
             reload -n 
           ''}
+
+          ${lib.optionalString cfg-components.hyprpolkitagent.enable ''
+            systemctl --user start hyprpolkitagent
+          ''}
         '')
       ];
     };
