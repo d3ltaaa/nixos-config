@@ -67,6 +67,7 @@
           nwg-displays = {
             enable = true;
           };
+          scripts.enable = true;
         };
       };
     };
