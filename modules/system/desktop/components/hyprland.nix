@@ -218,7 +218,7 @@
                 "$mod SHIFT, S, exec, menu_system"
                 "$mod, C, exec, menu_options updates"
                 "$mod, P, exec, menu_options energy"
-                "$mod, V, exec, toggle_vpn.sh"
+                "$mod, V, exec, script_vpn"
               ];
 
               bindm = [
@@ -233,9 +233,9 @@
               ];
 
               binde = [
-                ",XF86AudioMute, exec, scr_volume mute"
-                ",XF86AudioLowerVolume, exec, scr_volume dec"
-                ",XF86AudioRaiseVolume, exec, scr_volume inc"
+                ",XF86AudioMute, exec, pulsemixer --toggle-mute"
+                ",XF86AudioLowerVolume, exec, pulsemixer --change-volume -5"
+                ",XF86AudioRaiseVolume, exec, pulsemixer --change-volume +5"
                 ",XF86AudioPlay, exec, playerctl play-pause"
                 ",XF86AudioPrev, exec, playerctl previous"
                 ",XF86AudioNext, exec, playerctl next"

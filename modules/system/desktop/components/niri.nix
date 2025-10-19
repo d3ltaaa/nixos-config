@@ -178,9 +178,9 @@
                   Mod+O repeat=false { toggle-overview; }
 
 
-                  XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
-                  XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-                  XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+                  XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "pulsemixer --change-volume +5"; }
+                  XF86AudioLowerVolume allow-when-locked=true { spawn-sh "pulsemixer --change-volume -5"; }
+                  XF86AudioMute        allow-when-locked=true { spawn-sh "pulsemixer --toggle-mute"; }
                   XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
                   XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
                   XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
