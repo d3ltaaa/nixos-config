@@ -12,19 +12,14 @@ pkgs.writeShellApplication {
         if config.system.desktop.desktop-environments.niri-desktop.enable then
           "$(niri msg outputs | grep -c Output)"
         else if config.system.desktop.desktop-environments.hyprland-desktop.enable then
-          "$(hyprctl monitors all | grep Monitor | wc -l)"
+          "$(hyprctl monitors all | grep -c Monitor)"
         else
           "";
     in
     ''
-      #!/run/current-system/sw/bin/bash
       monitor_count=${get_monitor_count_cmd}
 
       if [[ "$MONITOR_TYPE" == "internal" ]]; then
-        # cmd_more="brillo -A 10"
-        # cmd_less="brillo -U 10"
-        # cmd_max="brillo -S 100"
-        # cmd_min="brillo -S 0"
         cmd_more="brightnessctl set +10%"
         cmd_less="brightnessctl set 10%-"
         cmd_max="brightnessctl set 100%"
@@ -48,11 +43,7 @@ pkgs.writeShellApplication {
         done
       fi
 
-      echo "$cmd_more"
-      echo "$cmd_less"
-
       light_down() {
-
         case "$1" in
         "max")
           eval "$cmd_min"
@@ -90,11 +81,13 @@ pkgs.writeShellApplication {
         ;;
 
       "blue")
-        pkill gammastep; gammastep -O 6500
+        pidof gammastep 2&>/dev/null && pkill gammastep
+        gammastep -O 6500 &
         ;;
 
       "red")
-        pkill gammastep; gammastep -O 4000 
+        pidof gammastep 2&>/dev/null && pkill gammastep
+        gammastep -O 4000 &
         ;;
 
       "day")
