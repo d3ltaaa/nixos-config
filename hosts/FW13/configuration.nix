@@ -220,7 +220,7 @@
           stop_threshold = 95; # a
         };
         scaling = {
-          enable = true; # a
+          enable = false; # a
           min_freq_MHz = 400; # a
           max_freq_MHz = 1000; # a
         };
