@@ -382,4 +382,12 @@
   };
 
   services.hardware.bolt.enable = true; # Thunderbolt device manager
+  specialisation = {
+    hyprland.configuration = {
+      system.desktop.desktop-environments = {
+        hyprland-desktop.enable = lib.mkForce true;
+        niri-desktop.enable = lib.mkForce false;
+      };
+    };
+  };
 }
