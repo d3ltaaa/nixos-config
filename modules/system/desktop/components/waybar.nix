@@ -34,11 +34,12 @@
               spacing = 0;
               height = 41;
 
-              modules-left = [
-                "custom/logo"
-                "hyprland/workspaces"
-                "niri/workspaces"
-              ];
+              modules-left =
+                [ ]
+                ++ (pkgs.lib.optionals nixos-config.system.desktop.components.hyprland.enable [
+                  "hyprland/workspaces"
+                ])
+                ++ (pkgs.lib.optionals nixos-config.system.desktop.components.niri.enable [ "niri/workspaces" ]);
 
               modules-center = [
                 "clock"
@@ -211,8 +212,8 @@
                 signal = 7;
                 format = "{}";
                 tooltip = true;
-                on-click = "toggle_vpn.sh";
-                exec = "vpn_icon.sh";
+                on-click = "script_vpn";
+                exec = "get_vpn";
                 return-type = "json";
               };
 
@@ -322,8 +323,7 @@
             #clock,
             #custom-settings,
             #custom-config,
-            #custom-appmenu,
-            #custom-logo {
+            #custom-appmenu {
               border-radius: 4px;
               margin: 6px 3px;
               padding: 6px 12px;

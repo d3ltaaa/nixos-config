@@ -23,13 +23,15 @@
         pkgs.nwg-displays
       ]
       ++ lib.optionals cfg.scripts.enable [
-        (import ./settings/menu_system.nix { inherit pkgs; })
         (import ./settings/get_system_stats.nix { inherit pkgs; })
         (import ./settings/get_brightness.nix { inherit pkgs; })
+        (import ./settings/get_vpn.nix { inherit pkgs; })
+        (import ./settings/script_vpn.nix { inherit pkgs; })
         (import ./settings/script_light.nix {
           inherit pkgs;
           inherit config;
         })
+        (import ./settings/menu_system.nix { inherit pkgs; })
         (import ./settings/menu_options.nix {
           inherit pkgs;
           inherit config;
