@@ -132,10 +132,7 @@
               }
 
 
-              // spawn-at-startup "hyprlock" //TODO: only start if no displaymanager enabled maybe script =>
-              // spawn-at-startup "waybar"
               spawn-at-startup "autostart-script"
-              // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
               hotkey-overlay {
                   skip-at-startup
@@ -301,7 +298,7 @@
                   Mod+P hotkey-overlay-title="Menu energy" { spawn-sh "menu_options energy"; }
                   Mod+S hotkey-overlay-title="Menu options" { spawn-sh "menu_options main"; }
                   Mod+Shift+S hotkey-overlay-title="Menu system" { spawn-sh "menu_system"; }
-                  Mod+V hotkey-overlay-title="Menu vpn" { spawn-sh "toggle_vpn.sh"; }
+                  Mod+V hotkey-overlay-title="Menu vpn" { spawn-sh "script_vpn"; }
 
                   Mod+B hotkey-overlay-title="Run an Application: brave" { spawn "brave"; }
                   Mod+E hotkey-overlay-title="Run an Application: files" { spawn "nautilus"; }
