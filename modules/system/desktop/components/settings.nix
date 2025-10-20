@@ -31,7 +31,10 @@
           inherit pkgs;
           inherit config;
         })
-        (import ./settings/menu_system.nix { inherit pkgs; })
+        (import ./settings/menu_system.nix {
+          inherit pkgs;
+          inherit config;
+        })
         (import ./settings/menu_options.nix {
           inherit pkgs;
           inherit config;

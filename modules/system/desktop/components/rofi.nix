@@ -159,6 +159,117 @@
           wayland.windowManager.hyprland.settings.bind = [
             "$mod, SPACE, exec, rofi -show drun -case-insensitive"
           ];
+
+          xdg.configFile."rofi/settings.rasi".text = ''
+            window {
+              fullscreen: true;
+              border: 0px;
+            }
+            mainbox {
+              margin:     15% 30%;
+            }'';
+
+          xdg.configFile."rofi/powermenu.rasi".text = ''
+
+            configuration {
+                show-icons:                 false;
+            }
+            * {
+                background:     #${config.colorScheme.palette.base00}e5;
+                background-alt:     #${config.colorScheme.palette.base01};
+                foreground:     #${config.colorScheme.palette.base05};
+                selected:     #${config.colorScheme.palette.base05};
+                active:     #${config.colorScheme.palette.base0B};
+                urgent:     #${config.colorScheme.palette.base08};
+                box-margin:                  40% 15%;
+                list-spacing:                5%;
+                general-padding:             0px;
+                element-padding:             2% 0%;
+                element-radius:              20px;
+                general-radius:              100%;
+                font: "InconsolataGo Nerd Font Bold 11";
+                element-font: "InconsolataGo Nerd Font Bold 40";
+            }
+
+            /*****----- Main Window -----*****/
+            window {
+                /* properties for window widget */
+                transparency:                "real";
+                fullscreen:                  true;
+
+                /* properties for all widgets */
+                enabled:                     true;
+                margin:                      0px;
+                padding:                     0px;
+                border:                      0px solid;
+                border-radius:               0px;
+                border-color:                @selected;
+                cursor:                      "default";
+                background-color:            @background;
+            }
+
+            /*****----- Main Box -----*****/
+            mainbox {
+                enabled:                     true;
+                margin:                      0px;
+                padding:                     var(box-margin);
+                border:                      0px solid;
+                border-radius:               0px;
+                border-color:                @selected;
+                background-color:            transparent;
+                children:                    [  "listview" ];
+            }
+
+            /*****----- Listview -----*****/
+            listview {
+                enabled:                     true;
+                columns:                     6;
+                lines:                       1;
+                cycle:                       true;
+                dynamic:                     true;
+                scrollbar:                   false;
+                layout:                      vertical;
+                reverse:                     false;
+                fixed-height:                true;
+                fixed-columns:               true;
+
+                spacing:                     var(list-spacing);
+                margin:                      0px;
+                padding:                     0px;
+                border:                      0px solid;
+                border-radius:               0px;
+                border-color:                @selected;
+                background-color:            transparent;
+                text-color:                  @foreground;
+                cursor:                      "default";
+            }
+
+            /*****----- Elements -----*****/
+            element {
+                enabled:                     true;
+                spacing:                     0px;
+                margin:                      0px;
+                padding:                     var(element-padding);
+                border:                      0px solid;
+                border-radius:               var(element-radius);
+                border-color:                @selected;
+                background-color:            @background-alt;
+                text-color:                  @foreground;
+                cursor:                      pointer;
+            }
+            element-text {
+                font:                        var(element-font);
+                background-color:            transparent;
+                text-color:                  inherit;
+                cursor:                      inherit;
+                vertical-align:              0.5;
+                horizontal-align:            0.5;
+            }
+            element selected.normal {
+                background-color:            var(selected);
+                text-color:                  var(background);
+            }
+          '';
         };
     };
 }

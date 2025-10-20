@@ -1,36 +1,45 @@
-{ pkgs }:
+{ pkgs, config }:
 pkgs.writeShellApplication {
   name = "menu_system";
   runtimeInputs = [ ]; # not specifying inputs, makes it complain instead of downloading the inputs automatically
-  text = ''
-    menu="rofi -dmenu -i"
+  text =
+    let
+      cfg-components = config.system.desktop.components;
+      menu =
+        if cfg-components.rofi.enable then
+          ''
+            ${pkgs.rofi-wayland}/bin/rofi -dmenu -i -theme-str '@theme "powermenu"'
+          ''
+        else
+          "";
+    in
+    ''
+      # Define the options for the system actions menu
+      options=("󰐥" "󰤁" "" "󰌾" "󰤄" "")
 
-    # Define the options for the system actions menu
-    options=("󰐥  Shutdown" "󰤁  Hibernate" "  Restart" "󰌾  Lock" "󰤄  Sleep" "  Bios")
+      # Use dmenu to display the options and prompt the user to select one
+      selected=$(printf '%s\n' "''${options[@]}" | ${menu})
 
-    # Use dmenu to display the options and prompt the user to select one
-    selected=$(printf '%s\n' "''${options[@]}" | ''${menu})
-
-    # Depending on which option was selected, perform the corresponding system action
-    case $selected in
-    "󰐥  Shutdown")
-      systemctl poweroff
-      ;;
-    "󰤁  Hibernate")
-      systemctl hibernate
-      ;;
-    "  Restart")
-      systemctl reboot
-      ;;
-    "󰌾  Lock")
-      hyprlock
-      ;;
-    "󰤄  Sleep")
-      systemctl hybrid-sleep
-      ;;
-    "  Bios")
-      systemctl reboot --firmware-setup
-      ;;
-    esac
-  '';
+      # Depending on which option was selected, perform the corresponding system action
+      case $selected in
+      "󰐥")
+        systemctl poweroff
+        ;;
+      "󰤁")
+        systemctl hibernate
+        ;;
+      "")
+        systemctl reboot
+        ;;
+      "󰌾")
+        hyprlock
+        ;;
+      "󰤄")
+        systemctl hybrid-sleep
+        ;;
+      "")
+        systemctl reboot --firmware-setup
+        ;;
+      esac
+    '';
 }

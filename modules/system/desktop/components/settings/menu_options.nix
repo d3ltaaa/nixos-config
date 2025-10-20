@@ -10,7 +10,11 @@ pkgs.writeShellApplication {
     let
       cfg-components = config.system.desktop.components;
       cfg-applications = config.applications.configurations.client;
-      menu = if cfg-components.rofi.enable then "${pkgs.rofi-wayland}/bin/rofi -dmenu -i" else "";
+      menu =
+        if cfg-components.rofi.enable then
+          "${pkgs.rofi-wayland}/bin/rofi -dmenu -i -theme-str '@import \"settings\"'"
+        else
+          "";
       terminal = if cfg-applications.foot.enable then "${pkgs.foot}/bin/foot" else "";
       terminal_floating =
         if cfg-applications.foot.enable then "${pkgs.foot}/bin/foot --app-id \"FLOATING-SETTINGS\"" else "";
@@ -30,10 +34,10 @@ pkgs.writeShellApplication {
     ''
       menu_main() {
         # Define first layer
-        options=(" Wifi" "󰂯 Bluetooth" "󰕾 Audio" "󰍹 Monitors" " Wallpaper" " Light" "󰓅 Energy-Mode" " Nixos Config" "󰅙 Close")
+        options=(" Wifi" "󰂯 Bluetooth" "󰕾 Audio" "󰍹 Monitors" " Wallpaper" " Light" "󰓅 Energy" " Nixos Config" "󰅙 Close")
 
         # display options
-        selected=''$(printf '%s\n' "''${options[@]}" | ${menu} " Settings")
+        selected=''$(printf '%s\n' "''${options[@]}" | ${menu} -p " Settings")
 
         case ''$selected in
         " Wifi")
@@ -54,11 +58,8 @@ pkgs.writeShellApplication {
         " Light")
           menu_light
           ;;
-        "󰓅 Energy-Mode")
+        "󰓅 Energy")
           menu_energy
-          ;;
-        "󱊞 USB")
-          menu_usb
           ;;
         " Nixos Config")
           menu_updates
@@ -104,13 +105,13 @@ pkgs.writeShellApplication {
 
       menu_light() {
         options=("  Brightness" "  Redshift" "  Go back")
-        selected=''$(printf '%s\n' "''${options[@]}" | ${menu})
+        selected=''$(printf '%s\n' "''${options[@]}" | ${menu} -p " Light")
 
         case "''$selected" in
         "  Brightness")
           while true; do
             options=("  +10%" "  -10%" "  Max Brightness" "  Lowest Brightness" "  Go back")
-            further_selected=''$(printf '%s\n' "''${options[@]}" | ${menu} "Brightness:")
+            further_selected=''$(printf '%s\n' "''${options[@]}" | ${menu} -p "Brightness:")
             case "''$further_selected" in
             "  +10%")
               script_light up
@@ -140,7 +141,7 @@ pkgs.writeShellApplication {
         "  Redshift")
           while true; do
             options=("  Blue-light-filter on" "  Blue-light-filter off" "  Go back")
-            further_selected=''$(printf '%s\n' "''${options[@]}" | ${menu} "Blue light:")
+            further_selected=''$(printf '%s\n' "''${options[@]}" | ${menu} -p "Blue light:")
             case "''$further_selected" in
             "  Blue-light-filter off")
               script_light blue
@@ -171,7 +172,7 @@ pkgs.writeShellApplication {
         options=("  Reset" "󱧥  Powersave" "󰓅  Performance" "  Go back")
 
         # Use dmenu to display the options and prompt the user to select one
-        selected=''$(printf '%s\n' "''${options[@]}" | ${menu})
+        selected=''$(printf '%s\n' "''${options[@]}" | ${menu} -p "󰓅 Energy")
 
         # Depending on which option was selected, perform the corresponding system action
         case ''$selected in
@@ -186,7 +187,7 @@ pkgs.writeShellApplication {
 
         options=("Edit Config" "Update Sources" "Build System" "  Go back")
 
-        selected=''$(printf '%s\n' "''${options[@]}" | ${menu})
+        selected=''$(printf '%s\n' "''${options[@]}" | ${menu} -p " Nixos Config")
 
         case ''$selected in
         "Edit Config")
