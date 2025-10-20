@@ -101,6 +101,7 @@
               layout {
                   gaps 16
                   center-focused-column "on-overflow"
+                  always-center-single-column
                   preset-column-widths {
                       proportion 0.33333
                       proportion 0.5
