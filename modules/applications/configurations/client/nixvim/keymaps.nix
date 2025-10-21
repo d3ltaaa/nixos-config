@@ -4,13 +4,13 @@
     globals.mapleader = " ";
 
     keymaps = [
-      # Windows
       {
         mode = "n";
         key = "<leader>nh";
         action = ":nohl<CR>";
         options.desc = "Remove Highlights";
       }
+      # Windows
       {
         mode = "n";
         key = "<leader>wv";
@@ -29,6 +29,7 @@
         action = ":close<CR>";
         options.desc = "Close window";
       }
+      # Navigation
       {
         mode = "n";
         key = "<leader>H";
@@ -53,6 +54,7 @@
         action = "<C-w>k";
         options.desc = "Move up";
       }
+      # Window Resize
       {
         mode = "n";
         key = "<C-k>";
@@ -77,30 +79,50 @@
         action = "<cmd>vertical resize +2<cr>";
         options.desc = "Decrease window windth";
       }
+      # Buffer
       {
         mode = "n";
-        key = "<leader>tn";
-        action = ":tabnew<CR>";
-        options.desc = "New tab";
+        key = "<leader>X";
+        action = ":bdelete<CR>";
+        options.desc = "Close Buffer";
       }
       {
         mode = "n";
-        key = "<leader>tx";
-        action = ":tabclose<CR>";
-        options.desc = "Close tab";
+        key = "<leader>U";
+        action = ":bprev<CR>";
+        options.desc = "Previous Buffer";
       }
       {
         mode = "n";
         key = "<leader>I";
-        action = ":tabp<CR>";
-        options.desc = "Left tab";
+        action = ":bnext<CR>";
+        options.desc = "Next Buffer";
       }
-      {
-        mode = "n";
-        key = "<leader>O";
-        action = ":tabn<CR>";
-        options.desc = "Right tab";
-      }
+
+      # {
+      #   mode = "n";
+      #   key = "<leader>tn";
+      #   action = ":tabnew<CR>";
+      #   options.desc = "New tab";
+      # }
+      # {
+      #   mode = "n";
+      #   key = "<leader>tx";
+      #   action = ":tabclose<CR>";
+      #   options.desc = "Close tab";
+      # }
+      # {
+      #   mode = "n";
+      #   key = "<leader>I";
+      #   action = ":tabp<CR>";
+      #   options.desc = "Left tab";
+      # }
+      # {
+      #   mode = "n";
+      #   key = "<leader>O";
+      #   action = ":tabn<CR>";
+      #   options.desc = "Right tab";
+      # }
     ];
   };
 }
