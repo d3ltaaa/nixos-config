@@ -86,7 +86,7 @@
             }
           ];
         };
-        "VM1" = pkgs.lib.nixosSystem {
+        "VM0" = pkgs.lib.nixosSystem {
           # pkgs-alt -> pkgs
           system = "x86_64-linux";
           specialArgs = {
@@ -96,7 +96,7 @@
             };
           };
           modules = [
-            ./hosts/VM1/configuration.nix
+            ./hosts/VM0/configuration.nix
             ./modules/default.nix
             inputs.nix-flatpak.nixosModules.nix-flatpak
             inputs.home-manager.nixosModules.home-manager
@@ -112,7 +112,7 @@
             }
           ];
         };
-        "VM2" = pkgs.lib.nixosSystem {
+        "VM1" = pkgs.lib.nixosSystem {
           # pkgs-alt -> pkgs
           system = "x86_64-linux";
           specialArgs = {
@@ -122,7 +122,7 @@
             };
           };
           modules = [
-            ./hosts/VM2/configuration.nix
+            ./hosts/VM1/configuration.nix
             ./modules/default.nix
             inputs.nix-flatpak.nixosModules.nix-flatpak
             inputs.home-manager.nixosModules.home-manager
