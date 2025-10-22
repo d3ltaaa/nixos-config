@@ -28,6 +28,8 @@ pkgs.writeShellApplication {
           "${pkgs.foot}/bin/foot --app-id \"FLOATING-SETTINGS\" -e nvim ~/.config/niri/config.kdl"
         else if config.system.desktop.desktop-environments.hyprland-desktop.enable then
           "hyprctl dispatch exec \"[float;size 1000 700] nwg-displays\""
+        else if config.system.desktop.desktop-environments.gnome-desktop.enable then
+          "gnome-control-center display"
         else
           "";
     in

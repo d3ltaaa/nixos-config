@@ -32,13 +32,13 @@
         package = pkgs.pam;
         services = {
           login = {
-            fprintAuth = true;
+            fprintAuth = lib.mkDefault true;
           };
           polkit-1 = {
-            fprintAuth = true;
+            fprintAuth = lib.mkDefault true;
           };
           sudo = {
-            fprintAuth = true;
+            fprintAuth = lib.mkDefault true;
           };
         };
       };

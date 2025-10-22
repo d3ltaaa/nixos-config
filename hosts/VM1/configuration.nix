@@ -1,55 +1,46 @@
-{
-  lib,
-  config,
-  ...
-}:
+{ lib, config, ... }:
 {
   # accessible for root at /etc/credentials
-  imports = [
-    ./hardware-configuration.nix
-  ];
   secrets = {
     serverAddress = lib.strings.trim (builtins.readFile "/etc/credentials/server_address");
-    mailHost = lib.strings.trim (builtins.readFile "/etc/credentials/mail/host");
-    mailEmail = lib.strings.trim (builtins.readFile "/etc/credentials/mail/email");
     ipv64KeyFile = lib.strings.trim (builtins.readFile "/etc/credentials/acmeIPV64.cert");
     acmeEmail = lib.strings.trim (builtins.readFile "/etc/credentials/acmeEmail");
     githubUsername = lib.strings.trim (builtins.readFile "/etc/credentials/github/username");
     githubEmail = lib.strings.trim (builtins.readFile "/etc/credentials/github/email");
-    monitoringEmail = lib.strings.trim (builtins.readFile "/etc/credentials/monitoring/email");
     privateWireguardKey = lib.strings.trim (
       builtins.readFile "/etc/credentials/wireguard-keys/private"
     );
   };
 
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
   system = {
     general = {
       nixos = {
-        name = "VM1";
-        nixosStateVersion = "25.05";
-        homeManagerStateVersion = "25.05";
+        name = "VM1"; # a
+        nixosStateVersion = "25.05"; # a
+        homeManagerStateVersion = "25.05"; # a
       };
       locale = {
-        language = "en";
-        timeZone = "Europe/Berlin";
-        keyboardLayout = "de";
+        language = "en"; # a
+        timeZone = "Europe/Berlin"; # a
+        keyboardLayout = "de"; # a
       };
     };
-    user.general.primary = "falk";
     boot = {
-      primaryBoot = true;
+      primaryBoot = true; # a
       bootloader = "limine";
       secureBoot = false;
-      extraEntries = null;
+      extraEntries = null; # a
     };
     desktop = {
       components.session = {
-        autoLogin.enable = true;
+        autoLogin = {
+          enable = true; # a
+        };
       };
-      environment = {
-        enable = true;
-      };
-      theme.colorSchemes = null;
     };
     security = {
       monitoring = {
@@ -78,228 +69,319 @@
     };
     networking = {
       general = {
-        lanInterface = "ens18";
-        wifiInterface = null;
-        staticIp = "192.168.2.11";
-        defaultGateway = "192.168.2.1";
+        lanInterface = "ens18"; # a
+        wifiInterface = null; # a
+        staticIp = "192.168.2.12"; # a
+        defaultGateway = "192.168.2.1"; # a
         nameservers = [
+          "192.168.2.11"
           "1.1.1.1"
-        ];
+        ]; # a
       };
-      bridgedNetwork.enable = true; # (for wireguard)
-      acme = {
-        enable = true;
-        domain = config.secrets.serverAddress;
-        email = config.secrets.acmeEmail;
-        dnsProvider = "ipv64";
-        domainNames = [
-          "dp.${config.secrets.serverAddress}"
-          "proxmox.${config.secrets.serverAddress}"
-          "vault.${config.secrets.serverAddress}"
-          "home.${config.secrets.serverAddress}"
-          "wg.${config.secrets.serverAddress}"
-          "homeassistant.${config.secrets.serverAddress}"
-          "ntfy.${config.secrets.serverAddress}"
-          "open-webui.${config.secrets.serverAddress}"
-          "litellm.${config.secrets.serverAddress}"
-          "syncthing.${config.secrets.serverAddress}"
-          "n8n.${config.secrets.serverAddress}"
-          "radicale.${config.secrets.serverAddress}"
-          "jf.${config.secrets.serverAddress}"
-          "grafana.${config.secrets.serverAddress}"
-        ];
-      };
-      dnsmasq = {
-        enable = true;
-        address = [
-          "/${config.secrets.serverAddress}/192.168.2.11"
-        ];
-      };
-      nginx = {
-        enable = true;
-        virtualHosts = {
-          "proxmox.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "https://192.168.2.10:8006";
-              proxyWebsockets = true;
-              extraConfig = ''
-                client_max_body_size 8G;
-                proxy_buffering off;
-                proxy_request_buffering off;
-                proxy_connect_timeout 3600;
-                proxy_send_timeout 3600;
-                proxy_read_timeout 3600;
-              '';
-            };
-          };
-          "dp.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.31:80"; # allow dp.${serverAddress} in moonraker manually
-              proxyWebsockets = true;
-            };
-          };
-          "vault.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:8222";
-              proxyWebsockets = true;
-            };
-          };
-          "home.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:8082";
-              proxyWebsockets = true;
-            };
-          };
-          "wg.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.11:5000";
-              proxyWebsockets = true;
-            };
-          };
-          "homeassistant.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:8123";
-              proxyWebsockets = true;
-            };
-          };
-          "ntfy.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:8070";
-              proxyWebsockets = true;
-            };
-          };
-          "open-webui.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:8080";
-              proxyWebsockets = true;
-            };
-          };
-          "litellm.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:8090";
-              proxyWebsockets = true;
-            };
-          };
-          "syncthing.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:8384";
-              proxyWebsockets = true;
-            };
-          };
-          "n8n.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:5678";
-              proxyWebsockets = true;
-            };
-          };
-          "radicale.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:5232";
-              proxyWebsockets = true;
-            };
-          };
-          "jf.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:8096";
-              proxyWebsockets = true;
-            };
-          };
-          "grafana.${config.secrets.serverAddress}" = {
-            enableACME = true;
-            forceSSL = true;
-            locations."/" = {
-              proxyPass = "http://192.168.2.12:2342";
-              proxyWebsockets = true;
-              recommendedProxySettings = true;
-            };
-          };
-        };
-      };
-      vpn = {
-        wireguard = {
-          server = {
-            enable = true;
-            serverPeers = [
-              {
-                # FW13
-                publicKey = "HmfK0Mlqu22xaIpvwf5CI+J5jvvJBt5q5hfTAHm4yHY=";
-                allowedIPs = [ "10.100.0.5/32" ];
-              }
-              {
-                # PHONE
-                publicKey = "Am+PSLEvczLPxaoI/x2QEiQCe1N5/LwSzVqPD/CUDF4=";
-                allowedIPs = [ "10.100.0.3/32" ];
-              }
-              {
-                # T14
-                publicKey = "UbMkKrSqVgxwdnkkeOwCz23H0/tcXaG17fceTwW2RgQ=";
-                allowedIPs = [ "10.100.0.6/32" ];
-              }
-            ];
-          };
-        };
+    };
+    user = {
+      general = {
+        primary = "falk"; # a
       };
     };
   };
   hardware = { };
   applications = {
     configurations = {
+      server = {
+        # grafana = {
+        #   enable = true;
+        # };
+        jellyfin.enable = true; # a
+        n8n.enable = false; # a
+        litellm.enable = true; # a
+        radicale.enable = true; # a
+        vaultwarden.enable = true; # a
+        homeassistant.enable = true; # a
+        open-webui.enable = true;
+        ntfy = {
+          enable = true; # a
+          base-url = "https://ntfy.${config.secrets.serverAddress}"; # a
+        };
+        homepage = {
+          enable = true; # a
+          widgets = [
+            {
+              resources = {
+                cpu = true;
+                disk = "/";
+                memory = true;
+              };
+            }
+            {
+              search = {
+                provider = "duckduckgo";
+                target = "_blank";
+              };
+            }
+          ];
+          bookmarks = [
+            {
+              "Bookmarks" = [
+                {
+                  "Proton Mail" = [
+                    {
+                      icon = "proton-mail.png";
+                      href = "https://mail.proton.me/u/0/inbox";
+                    }
+                  ];
+                }
+                {
+                  "Proton Calendar" = [
+                    {
+                      icon = "proton-calendar.png";
+                      href = "https://calendar.proton.me/u/0/";
+                    }
+                  ];
+                }
+                {
+                  "Github" = [
+                    {
+                      icon = "github-light.png";
+                      href = "https://github.com/";
+                    }
+                  ];
+                }
+                {
+                  "Youtube" = [
+                    {
+                      icon = "youtube.png";
+                      href = "https://youtube.com/";
+                    }
+                  ];
+                }
+                {
+                  "ChatGPT" = [
+                    {
+                      icon = "chatgpt.png";
+                      href = "https://chat.openai.com/chat";
+                    }
+                  ];
+                }
+                {
+                  "HM4Mint" = [
+                    {
+                      icon = "bookstack.png";
+                      href = "https://hm4mint.nrw/hm1/link/HoeherMathem1";
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
+          services = [
+            {
+              "Administration" = [
+                {
+                  "Proxmox" = {
+                    icon = "proxmox.png";
+                    href = "https://proxmox.${config.secrets.serverAddress}";
+                  };
+                }
+                {
+                  "Wireguard" = {
+                    icon = "wireguard.png";
+                    href = "https://wg.${config.secrets.serverAddress}";
+                  };
+                }
+                {
+                  "Ntfy" = {
+                    icon = "ntfy.png";
+                    href = "https://ntfy.${config.secrets.serverAddress}";
+                  };
+                }
+                {
+                  "Litellm" = {
+                    icon = "anything-llm-light.png";
+                    href = "https://litellm.${config.secrets.serverAddress}";
+                  };
+                }
+                {
+                  "Radicale" = {
+                    icon = "radicale.png";
+                    href = "https://radicale.${config.secrets.serverAddress}";
+                  };
+                }
+              ];
+            }
+            {
+              "Services" = [
+                {
+                  "Syncthing" = {
+                    icon = "syncthing.png";
+                    href = "https://syncthing.${config.secrets.serverAddress}";
+                  };
+                }
+                {
+                  "n8n" = {
+                    icon = "n8n.png";
+                    href = "https://n8n.${config.secrets.serverAddress}";
+                  };
+                }
+                {
+                  "Vaultwarden" = {
+                    icon = "vaultwarden.png";
+                    href = "https://vault.${config.secrets.serverAddress}";
+                  };
+                }
+                {
+                  "Homeassistant" = {
+                    icon = "home-assistant.png";
+                    href = "https://homeassistant.${config.secrets.serverAddress}";
+                  };
+                }
+                {
+                  "Open-Webui" = {
+                    icon = "open-webui.png";
+                    href = "https://open-webui.${config.secrets.serverAddress}";
+                  };
+                }
+                {
+                  "Jellyfin" = {
+                    icon = "jellyfin.png";
+                    href = "https://jf.${config.secrets.serverAddress}";
+                  };
+                }
+                {
+                  "Grafana" = {
+                    icon = "grafana.png";
+                    href = "https://grafana.${config.secrets.serverAddress}";
+                  };
+                }
+              ];
+            }
+            {
+              "Devices" = [
+                {
+                  "Router" = {
+                    icon = "router.png";
+                    href = "http://192.168.2.1";
+                  };
+                }
+                {
+                  "3D Printer" = {
+                    icon = "mainsail.png";
+                    href = "https://dp.${config.secrets.serverAddress}";
+                  };
+                }
+              ];
+            }
+          ]; # a
+        };
+        fileSharing = {
+          enable = true; # a
+          ip = "192.168.2.12"; # a
+          items = [
+            {
+              share = {
+                private = {
+                  path = "/mnt/shared/private";
+                  "force user" = "falk";
+                  "force group" = "users";
+                };
+              };
+            }
+            {
+              share = {
+                public = {
+                  path = "/mnt/shared/public";
+                  "guest ok" = "yes";
+                  "public" = "yes";
+                  "force user" = "nobody";
+                  "force group" = "nobody";
+                  "read only" = "no";
+                  "create mask" = "0777";
+                  "directory mask" = "0777";
+                };
+              };
+            }
+          ]; # a
+        };
+      };
       client = {
-        ssh.enable = true;
+        ssh.enable = true; # a
         yazi.enable = true;
-        tmux.enable = true;
-        zsh.enable = true;
-        neovim.nixvim.enable = true;
+        tmux.enable = true; # a
+        zsh.enable = true; # a
+        neovim = {
+          nixvim.enable = true;
+          nvf.enable = false;
+        };
         git = {
-          enable = true;
-          username = config.secrets.githubUsername;
-          email = config.secrets.githubEmail;
+          enable = true; # a
+          username = config.secrets.githubUsername; # a
+          email = config.secrets.githubEmail; # a
+        };
+        syncthing = {
+          enable = true; # a
+          devices = {
+            "PC".id = "MIR6FXD-EEKYM5S-GQFPDZT-DWNCTYW-XGZNIGY-6CNO5C2-VOR6YPG-T3JCMAX";
+            "PX8".id = "UPROPYX-AFK4Q5X-P5WRKRE-4VXJ5XU-QKTXML3-2SFWBV7-ELVVPDH-AOWS2QY";
+            "FW13".id = "N6F2GRB-VUPQC4F-DVNYES5-5KNJ36R-GGVAP2R-ZHHBV4U-UATR2JY-BRQ2NQ2";
+            # "T480".id = "OHXDERI-SBNTM5Q-ZBM7UMC-BZUOLDB-U32FQZW-VNXGSH7-VKQTNJO-TM3VWAH";
+            # "T440P".id = "CAWY2HI-K3QLENX-QABH4C4-QDGBZAB-GH22BRL-ZB6YBG5-PXVDZTR-4MSF7QY";
+            # "SERVER".id = "OP5RCKE-UFEQ4IT-DRMANC2-425AFHE-RS4PG3Y-35VLH6F-                    7UJXUIJ-EAVK5A3";
+          }; # a
+
+          folders = {
+            "Dokumente" = {
+              path = "/home/${config.system.user.general.primary}/Dokumente";
+              devices = [
+                "PC"
+                # "PX8"
+                "FW13"
+                # "T480"
+                # "T440P"
+                # "SERVER"
+              ];
+            }; # a
+            "Bilder" = {
+              path = "/home/${config.system.user.general.primary}/Bilder";
+              devices = [
+                "PC"
+                # "PX8"
+                "FW13"
+                # "T480"
+                # "T440P"
+                # "SERVER"
+              ];
+            };
+          }; # a
         };
       };
     };
     packages = {
       nixpkgs = {
-        extraPackages = [ ];
+        extraPackages = [ ]; # a
         pkgs = {
           system = {
-            default = true;
-            base = true;
-            tool = true;
+            default = true; # a
+            base = false; # a
+            lang = false; # a
+            tool = false; # a
+            hypr = false; # a
+            desk = false; # a
+            power = false; # a
           };
-          user.default = true;
-          font.default = true;
+          user.default = false; # a
+          font.default = false; # a
         };
         pkgs-alt = {
-          system.default = true;
-          user.default = true;
-          font.default = true;
+          system.default = false; # a
+          user.default = false; # a
+          font.default = false; # a
         };
+      };
+      flatpaks = {
+        enable = false; # a
+      };
+      derivations = {
+        enable = false; # a
       };
     };
   };

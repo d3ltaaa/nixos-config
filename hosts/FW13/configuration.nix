@@ -46,6 +46,7 @@
     };
     desktop = {
       desktop-environments = {
+        gnome-desktop.enable = false;
         hyprland-desktop.enable = false;
         niri-desktop.enable = true;
       };
@@ -66,16 +67,6 @@
           theme.package = null; # a
           style.name = "adwaita-light"; # a
           style.package = null; # a
-        };
-      };
-      components.session = {
-        autoLogin = {
-          enable = true; # a
-        };
-        autoShutdown = {
-          enable = false; # a
-          watchPort = toString config.services.ollama.port; # a
-          shutdownTime = "1800"; # seconds # a
         };
       };
       environment = {
@@ -383,8 +374,9 @@
 
   services.hardware.bolt.enable = true; # Thunderbolt device manager
   specialisation = {
-    hyprland.configuration = {
+    Hyprland.configuration = {
       system.desktop.desktop-environments = {
+        gnome-desktop.enable = lib.mkForce false;
         hyprland-desktop.enable = lib.mkForce true;
         niri-desktop.enable = lib.mkForce false;
       };
