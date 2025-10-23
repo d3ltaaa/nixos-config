@@ -145,13 +145,18 @@
           client = {
             enable = true;
             address = [ "10.100.0.5/32" ];
+            port = 51920;
+            allowedIPs = [
+              # only route VPN subnet traffic
+              "10.100.0.0/24"
+              "192.168.2.0/24"
+            ];
             dns = [
               "192.168.2.11"
               "192.168.2.1"
             ];
             serverPublicKey = "hAvazVD4FMIbtZPLa5rtUXrZ3iXYIiW5Ivemyv1UmWA=";
           };
-          server = { };
         };
       };
     };

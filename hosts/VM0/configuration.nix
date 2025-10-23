@@ -243,26 +243,43 @@
       };
       vpn = {
         wireguard = {
-          server = {
-            enable = true;
-            serverPeers = [
-              {
-                # FW13
-                publicKey = "HmfK0Mlqu22xaIpvwf5CI+J5jvvJBt5q5hfTAHm4yHY=";
-                allowedIPs = [ "10.100.0.5/32" ];
-              }
-              {
-                # PHONE
-                publicKey = "Am+PSLEvczLPxaoI/x2QEiQCe1N5/LwSzVqPD/CUDF4=";
-                allowedIPs = [ "10.100.0.3/32" ];
-              }
-              {
-                # T14
-                publicKey = "UbMkKrSqVgxwdnkkeOwCz23H0/tcXaG17fceTwW2RgQ=";
-                allowedIPs = [ "10.100.0.6/32" ];
-              }
-            ];
-          };
+          server = [
+            {
+              name = "wg1";
+              enable = true;
+              ips = [ "10.100.0.1/24" ];
+              subnet = "10.100.0.0/24";
+              listenPort = 51920;
+              privateKeyFile = "/etc/credentials/wireguard-keys/wg1/private";
+              serverPeers = [
+                {
+                  # FW13
+                  publicKey = "HmfK0Mlqu22xaIpvwf5CI+J5jvvJBt5q5hfTAHm4yHY=";
+                  allowedIPs = [ "10.100.0.5/32" ];
+                }
+                {
+                  # PHONE
+                  publicKey = "Am+PSLEvczLPxaoI/x2QEiQCe1N5/LwSzVqPD/CUDF4=";
+                  allowedIPs = [ "10.100.0.3/32" ];
+                }
+              ];
+            }
+            {
+              name = "wg2";
+              enable = false;
+              ips = [ "10.200.0.1/24" ];
+              subnet = "10.200.0.0/24";
+              listenPort = 51930;
+              privateKeyFile = "/etc/credentials/wireguard-keys/wg2/private";
+              serverPeers = [
+                {
+                  # T14
+                  publicKey = "UbMkKrSqVgxwdnkkeOwCz23H0/tcXaG17fceTwW2RgQ=";
+                  allowedIPs = [ "10.100.0.6/32" ];
+                }
+              ];
+            }
+          ];
         };
       };
     };

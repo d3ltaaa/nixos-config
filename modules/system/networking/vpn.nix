@@ -12,6 +12,12 @@
         address = lib.mkOption {
           type = lib.types.listOf (lib.types.str);
         };
+        port = lib.mkOption {
+          type = lib.types.int;
+        };
+        allowedIPs = lib.mkOption {
+          type = lib.types.listOf lib.types.str;
+        };
         dns = lib.mkOption {
           type = lib.types.listOf (lib.types.str);
         };
@@ -20,28 +26,55 @@
           default = null;
         };
       };
-      server = {
-        enable = lib.mkEnableOption "Enables Wireguard-server module";
-        serverPeers = lib.mkOption {
-          type = lib.types.listOf (
-            lib.types.submodule {
-              options = {
-                publicKey = lib.mkOption {
-                  type = lib.types.str;
-                  description = "The public key of the peer.";
-                };
-
-                allowedIPs = lib.mkOption {
-                  type = lib.types.listOf lib.types.str;
-                  description = "List of allowed IPs for the peer.";
-                };
+      server = lib.mkOption {
+        default = [ ];
+        type = lib.types.listOf (
+          lib.types.submodule {
+            options = {
+              name = lib.mkOption {
+                description = "The name of the interface";
+                type = lib.types.str;
               };
-            }
-          );
+              enable = lib.mkEnableOption "Enables specific VPN interface";
+              ips = lib.mkOption {
+                description = "Servers IP and subnet of tunnel interface";
+                type = lib.types.listOf lib.types.str;
+              };
+              subnet = lib.mkOption {
+                description = "Subnet of tunnel";
+                type = lib.types.str;
+              };
+              listenPort = lib.mkOption {
+                description = "Port on which to listen for clients";
+                type = lib.types.int;
+              };
+              privateKeyFile = lib.mkOption {
+                type = lib.types.path;
+                description = "Path to the private key file";
+              };
+              serverPeers = lib.mkOption {
+                type = lib.types.listOf (
+                  lib.types.submodule {
+                    options = {
+                      publicKey = lib.mkOption {
+                        type = lib.types.str;
+                        description = "The public key of the peer.";
+                      };
 
-          default = [ ];
-          description = "List of WireGuard peers.";
-        };
+                      allowedIPs = lib.mkOption {
+                        type = lib.types.listOf lib.types.str;
+                        description = "List of allowed IPs for the peer.";
+                      };
+                    };
+                  }
+                );
+
+                default = [ ];
+                description = "List of WireGuard peers.";
+              };
+            };
+          }
+        );
       };
     };
   };
@@ -50,7 +83,7 @@
     let
       cfg = config.system.networking.vpn.wireguard;
     in
-    lib.mkIf (cfg.client.enable || cfg.server.enable) (
+    lib.mkIf (cfg.client.enable || lib.any (wg: wg.enable) cfg.server) (
       lib.mkMerge [
 
         {
@@ -66,6 +99,7 @@
               RestartSec = 5;
             };
           };
+
           networking = {
             wg-quick.interfaces.wg0 = {
               address = cfg.client.address;
@@ -75,108 +109,44 @@
               peers = [
                 {
                   publicKey = cfg.client.serverPublicKey;
-                  endpoint = "${config.secrets.serverAddress}:51920";
-                  allowedIPs = [
-                    # only route VPN subnet traffic
-                    "10.100.0.0/24"
-                    "192.168.2.0/24"
-                  ];
+                  endpoint = "${config.secrets.serverAddress}:${toString cfg.client.port}";
+                  allowedIPs = cfg.client.allowedIPs;
                   persistentKeepalive = 25;
                 }
               ];
             };
           };
         })
-        (lib.mkIf cfg.server.enable {
+        # enable if one of server interfaces is enabled
+        (lib.mkIf (lib.any (wg: wg.enable) cfg.server) {
           environment.systemPackages = with pkgs; [
             wireguard-tools
           ];
-          # imperative
 
-          systemd.services."wg-quick@wg0" = {
-            enable = true;
-            description = "Imperative WireGuard VPN (wg0)";
-            after = [ "network.target" ];
-            wantedBy = [ "multi-user.target" ];
-            serviceConfig = {
-              Type = "oneshot";
-              RemainAfterExit = true;
-              ExecStart = "${pkgs.wireguard-tools}/bin/wg-quick up wg0";
-              ExecStop = "${pkgs.wireguard-tools}/bin/wg-quick down wg0";
-            };
-          };
+          # add every port to allowedUDPPorts
+          networking.firewall.allowedUDPPorts = builtins.map (wg: wg.listenPort) (
+            builtins.filter (wg: wg.enable) cfg.server
+          );
 
-          networking = {
-            firewall.allowedUDPPorts = [
-              51820 # imperative
-              51920 # declarative
-            ];
-          };
-          networking.wireguard.interfaces.wg1 = {
-            # Determines the IP address and subnet of the server's end of the tunnel interface.
-            ips = [ "10.100.0.1/24" ];
-
-            # The port that WireGuard listens to. Must be accessible by the client.
-            listenPort = 51920; # must be different from imparative llistenPort
-
-            # This allows the wireguard server to route your traffic to the internet and hence be like a VPN
-            # For this to work you have to set the dnsserver IP of your router (or dnsserver of choice) in your clients
-            postSetup = ''
-              ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o ${config.system.networking.general.lanInterface} -j MASQUERADE
-            '';
-
-            # This undoes the above command
-            postShutdown = ''
-              ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o ${config.system.networking.general.lanInterface} -j MASQUERADE
-            '';
-
-            privateKeyFile = "/etc/credentials/wireguard-keys/private";
-
-            peers = cfg.server.serverPeers;
-          };
-
-          # wireguard-ui
-          # change password in /etc/wireguard/db/users/admin.json
-          networking.firewall.allowedTCPPorts = [ 5000 ]; # port for wireguard-webui
-          # ensure /etc/wireguard exists
-          systemd.tmpfiles.rules = [
-            "d /etc/wireguard 0755 root root - -"
-          ];
-
-          systemd.services.wireguard-ui = {
-            enable = true;
-            description = "WireGuard-UI Web Interface";
-            after = [ "network.target" ];
-            wantedBy = [ "multi-user.target" ];
-
-            serviceConfig = {
-              ExecStart = "${pkgs.wireguard-ui}/bin/wireguard-ui"; # path to wireguard-ui binary
-              # Run as root (default), so no User/Group needed
-              WorkingDirectory = "/etc/wireguard"; # or wherever configs live
-              StandardOutput = "journal";
-              StandardError = "journal";
-            };
-          };
-
-          systemd.services.wgui = {
-            enable = true;
-            description = "Restart WireGuard";
-            after = [ "network.target" ];
-            serviceConfig = {
-              Type = "oneshot";
-              ExecStart = "${pkgs.systemd}/bin/systemctl restart wg-quick@wg0.service";
-            };
-            wantedBy = [ "wgui.path" ]; # makes path unit trigger this service
-          };
-
-          systemd.paths.wgui = {
-            enable = true;
-            description = "Watch /etc/wireguard/wg0.conf for changes";
-            pathConfig = {
-              PathModified = "/etc/wireguard/wg0.conf";
-            };
-            wantedBy = [ "multi-user.target" ];
-          };
+          networking.wireguard.interfaces =
+            let
+              enabledServers = builtins.filter (wg: wg.enable) cfg.server;
+            in
+            lib.listToAttrs (
+              map (cfg-attr: {
+                name = cfg-attr.name;
+                value = {
+                  ips = cfg-attr.ips;
+                  listenPort = cfg-attr.listenPort;
+                  privateKeyFile = cfg-attr.privateKeyFile;
+                  peers = cfg-attr.serverPeers;
+                }
+                // lib.optionalAttrs true {
+                  postSetup = ''${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${cfg-attr.subnet} -o ${config.system.networking.general.lanInterface} -j MASQUERADE'';
+                  postShutdown = ''${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s ${cfg-attr.subnet} -o ${config.system.networking.general.lanInterface} -j MASQUERADE'';
+                };
+              }) enabledServers
+            );
         })
       ]
     );
