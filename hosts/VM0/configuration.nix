@@ -276,7 +276,12 @@
                 {
                   # T14
                   publicKey = "UbMkKrSqVgxwdnkkeOwCz23H0/tcXaG17fceTwW2RgQ=";
-                  allowedIPs = [ "10.200.0.6/32" ];
+                  allowedIPs = [ "10.200.0.2/32" ];
+                }
+                {
+                  # PHONE
+                  publicKey = "f2ZM5TywmrAK/19tZcrQZKzO71A5TH7k5Z/2kOa1VG4=";
+                  allowedIPs = [ "10.200.0.3/32" ];
                 }
               ];
             }
