@@ -175,14 +175,7 @@
         wireguard = {
           client = {
             enable = false;
-            # address = [ "10.100.0.5/32" ];
-            # dns = [
-            #   "192.168.2.11"
-            #   "192.168.2.1"
-            # ];
-            # serverPublicKey = "hAvazVD4FMIbtZPLa5rtUXrZ3iXYIiW5Ivemyv1UmWA=";
           };
-          server = { };
         };
       };
     };

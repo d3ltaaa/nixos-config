@@ -265,8 +265,9 @@
               ];
             }
             {
+              # EU04lgKRk1yZAoPM+uwC+8thkxS1ycmtJVuaW8ZVKVc=
               name = "wg2";
-              enable = false;
+              enable = true;
               ips = [ "10.200.0.1/24" ];
               subnet = "10.200.0.0/24";
               listenPort = 51930;
@@ -275,7 +276,7 @@
                 {
                   # T14
                   publicKey = "UbMkKrSqVgxwdnkkeOwCz23H0/tcXaG17fceTwW2RgQ=";
-                  allowedIPs = [ "10.100.0.6/32" ];
+                  allowedIPs = [ "10.200.0.6/32" ];
                 }
               ];
             }
