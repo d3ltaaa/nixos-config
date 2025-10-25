@@ -6,17 +6,16 @@
 }:
 {
   options = {
-    hardware.wooting = {
+    hardware.Wooting = {
       enable = lib.mkEnableOption "Enables wootility";
     };
   };
 
   config =
     let
-      cfg = config.hardware.wooting;
+      cfg = config.hardware.Wooting;
     in
     lib.mkIf cfg.enable {
-      environment.systemPackages = with pkgs; [ wootility ];
-      services.udev.packages = [ pkgs.wooting-udev-rules ];
+      hardware.wooting.enable = true;
     };
 }

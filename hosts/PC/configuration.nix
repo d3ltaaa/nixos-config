@@ -192,7 +192,7 @@
       enable = false;
       # package = ;
     };
-    wooting = {
+    Wooting = {
       enable = true;
     };
     drawingTablet = {
