@@ -192,6 +192,9 @@
       enable = false;
       # package = ;
     };
+    wooting = {
+      enable = true;
+    };
     drawingTablet = {
       enable = true;
     };

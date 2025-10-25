@@ -12,5 +12,6 @@
     ./powerManagement.nix
     ./printing.nix
     ./usb.nix
+    ./wooting.nix
   ];
 }
