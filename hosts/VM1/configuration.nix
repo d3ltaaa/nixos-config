@@ -331,7 +331,7 @@
 
           folders = {
             "Dokumente" = {
-              path = "/home/${config.system.user.general.primary}/Dokumente";
+              path = "/mnt/syncthing/Dokumente";
               devices = [
                 "PC"
                 # "PX8"
@@ -342,7 +342,7 @@
               ];
             }; # a
             "Bilder" = {
-              path = "/home/${config.system.user.general.primary}/Bilder";
+              path = "/mnt/syncthing/Bilder";
               devices = [
                 "PC"
                 # "PX8"
