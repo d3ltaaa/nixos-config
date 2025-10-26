@@ -50,6 +50,33 @@
         enable = true;
         openFirewall = true;
       };
+
+      users.users =
+        let
+          # collect all force user names (may be multiple shares per item!)
+          allForceUsers = builtins.concatMap (
+            item:
+            builtins.concatMap (
+              shareName:
+              let
+                s = item.share.${shareName};
+              in
+              lib.optional (s ? "force user") s."force user"
+            ) (builtins.attrNames item.share)
+          ) cfg.items;
+          uniqueForceUsers = lib.unique allForceUsers;
+        in
+        builtins.listToAttrs (
+          map (username: {
+            name = username;
+            value = lib.mkDefault {
+              isSystemUser = true;
+              home = "/var/empty";
+              shell = "${pkgs.shadow}/bin/nologin";
+            };
+          }) uniqueForceUsers
+        );
+
       services.samba = {
         enable = true;
         package = pkgs.samba;
