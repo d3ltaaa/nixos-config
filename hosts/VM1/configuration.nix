@@ -288,6 +288,15 @@
             }
             {
               share = {
+                cloud-gh = {
+                  path = "/mnt/shared/cloud-gh";
+                  "force user" = "gerhard";
+                  "force group" = "users";
+                };
+              };
+            }
+            {
+              share = {
                 public = {
                   path = "/mnt/shared/public";
                   "guest ok" = "yes";
