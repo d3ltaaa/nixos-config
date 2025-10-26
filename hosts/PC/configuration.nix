@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 {
@@ -251,6 +252,12 @@
   applications = {
     configurations = {
       server = {
+        ollama = {
+          enable = true;
+          dualSetup = true;
+          modelDir = "/mnt/share/ollama/models";
+          homeDir = "/mnt/share/ollama/home";
+        };
       };
       client = {
         fileSharing = {
@@ -404,4 +411,7 @@
       };
     };
   };
+  environment.systemPackages = with pkgs; [
+    ytdownloader
+  ];
 }
