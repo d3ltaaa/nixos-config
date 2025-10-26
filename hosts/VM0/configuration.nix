@@ -278,8 +278,13 @@
                   publicKey = "UbMkKrSqVgxwdnkkeOwCz23H0/tcXaG17fceTwW2RgQ=";
                   allowedIPs = [ "10.200.0.2/32" ];
                 }
+                {
+                  # PX8G
+                  publicKey = "XsNEnllDfv77wDa25PXaGTczkGI/tankq8s/B4y9jEM=";
+                  allowedIPs = [ "10.200.0.3/32" ];
+                }
                 # {
-                #   # PHONE
+                #   # PX8F
                 #   publicKey = "f2ZM5TywmrAK/19tZcrQZKzO71A5TH7k5Z/2kOa1VG4=";
                 #   allowedIPs = [ "10.200.0.3/32" ];
                 # }
