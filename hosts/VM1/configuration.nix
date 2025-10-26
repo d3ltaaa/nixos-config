@@ -331,7 +331,7 @@
 
           folders = {
             "Dokumente" = {
-              path = "/mnt/syncthing/Dokumente";
+              path = "/mnt/shared/syncthing/Dokumente";
               devices = [
                 "PC"
                 # "PX8"
@@ -342,7 +342,7 @@
               ];
             }; # a
             "Bilder" = {
-              path = "/mnt/syncthing/Bilder";
+              path = "/mnt/shared/syncthing/Bilder";
               devices = [
                 "PC"
                 # "PX8"
@@ -352,6 +352,28 @@
                 # "SERVER"
               ];
             };
+            "PX8/Dokumente" = {
+              path = "/mnt/shared/syncthing/PX8/Dokumente";
+              devices = [
+                # "PC"
+                "PX8"
+                # "FW13"
+                # "T480"
+                # "T440P"
+                # "SERVER"
+              ];
+            }; # a
+            "PX8/DCIM" = {
+              path = "/mnt/shared/syncthing/PX8/DCIM";
+              devices = [
+                # "PC"
+                "PX8"
+                # "FW13"
+                # "T480"
+                # "T440P"
+                # "SERVER"
+              ];
+            }; # a
           }; # a
         };
       };
