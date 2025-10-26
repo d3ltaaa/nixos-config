@@ -265,8 +265,8 @@
           items = [
             {
               share = {
-                "/mnt/private" = {
-                  device = "//192.168.2.12/private";
+                "/mnt/cloud-fh" = {
+                  device = "//192.168.2.12/cloud-fh";
                 };
               };
             }
