@@ -279,8 +279,8 @@
           items = [
             {
               share = {
-                private = {
-                  path = "/mnt/shared/private";
+                cloud-fh = {
+                  path = "/mnt/shared/cloud-fh";
                   "force user" = "falk";
                   "force group" = "users";
                 };
