@@ -83,6 +83,8 @@
                   "workgroup" = "WORKGROUP";
                   "server string" = "nixos-smb";
                   "netbios name" = "nixos-smb";
+                  "preferred master" = "yes";
+                  "os level" = "100";
                   "security" = "user";
                   "hosts allow" = "192.168.2. 127.0.0.1 localhost";
                   "hosts deny" = "0.0.0.0/0";
