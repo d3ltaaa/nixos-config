@@ -384,20 +384,17 @@
         pkgs = {
           system = {
             default = true; # a
-            base = false; # a
-            lang = false; # a
-            tool = false; # a
-            hypr = false; # a
-            desk = false; # a
-            power = false; # a
+            base = true; # a
+            lang = true; # a
+            tool = true; # a
           };
-          user.default = false; # a
-          font.default = false; # a
+          user.default = true; # a
+          font.default = true; # a
         };
         pkgs-alt = {
-          system.default = false; # a
-          user.default = false; # a
-          font.default = false; # a
+          system.default = true; # a
+          user.default = true; # a
+          font.default = true; # a
         };
       };
       flatpaks = {
