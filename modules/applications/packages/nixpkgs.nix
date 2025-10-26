@@ -55,6 +55,7 @@
       ];
 
       lang-pkgs = with pkgs; [
+        jq
         clang
         cmake
         meson
