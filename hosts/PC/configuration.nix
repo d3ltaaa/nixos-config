@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }:
 {
@@ -192,6 +191,9 @@
     fingerprint = {
       enable = false;
       # package = ;
+    };
+    Wooting = {
+      enable = true;
     };
     drawingTablet = {
       enable = true;
@@ -392,6 +394,14 @@
       };
     };
   };
-  # environment.systemPackages = with pkgs; [ localsend ];
-  # networking.firewall.allowedTCPPorts = [ 53317 ]; # localsend
+
+  specialisation = {
+    Hyprland.configuration = {
+      system.desktop.desktop-environments = {
+        gnome-desktop.enable = lib.mkForce false;
+        hyprland-desktop.enable = lib.mkForce true;
+        niri-desktop.enable = lib.mkForce false;
+      };
+    };
+  };
 }

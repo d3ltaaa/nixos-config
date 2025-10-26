@@ -376,8 +376,8 @@
       };
     };
   };
-
   services.hardware.bolt.enable = true; # Thunderbolt device manager
+
   specialisation = {
     Hyprland.configuration = {
       system.desktop.desktop-environments = {
