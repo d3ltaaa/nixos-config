@@ -8,6 +8,25 @@
   options = {
     system.desktop.components.niri = {
       enable = lib.mkEnableOption "Enables the niri";
+      outputs = lib.mkOption {
+        type = lib.types.str;
+        default = ''
+          output "DP-3" {
+              // off
+              mode "2560x1440"
+              scale 1
+              transform "normal" // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+              position x=0 y=0
+          }
+          output "DP-2" {
+              // off
+              mode "1920x1080"
+              scale 1
+              transform "normal" // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+              position x=2560 y=0
+          }
+        '';
+      };
     };
   };
   config =
@@ -83,20 +102,8 @@
                   hide-when-typing
               }
 
-              output "DP-3" {
-                  // off
-                  mode "2560x1440"
-                  scale 1
-                  transform "normal" // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-                  position x=0 y=0
-              }
-              output "DP-2" {
-                  // off
-                  mode "1920x1080"
-                  scale 1
-                  transform "normal" // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-                  position x=2560 y=0
-              }
+              ${cfg.outputs}
+
 
               layout {
                   gaps 16

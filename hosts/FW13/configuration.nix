@@ -50,6 +50,23 @@
         hyprland-desktop.enable = false;
         niri-desktop.enable = true;
       };
+      components.niri.outputs = ''
+        output "eDP-1" {
+            // off
+            mode "2880x1920"
+            scale 2
+            transform "normal" // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+            position x=0 y=0
+        }
+        output "DP-2" {
+            // off
+            mode "1920x1080"
+            scale 1
+            transform "normal" // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+            position x=0 y=-1080
+        }
+      '';
+
       theme = {
         colorSchemes = null; # a
         gtk = {
