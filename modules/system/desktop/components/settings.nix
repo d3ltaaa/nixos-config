@@ -26,8 +26,16 @@
         (import ./settings/get_system_stats.nix { inherit pkgs; })
         (import ./settings/get_brightness.nix { inherit pkgs; })
         (import ./settings/get_vpn.nix { inherit pkgs; })
+        (import ./settings/get_idle_status.nix {
+          inherit pkgs;
+          inherit config;
+        })
         (import ./settings/script_vpn.nix { inherit pkgs; })
         (import ./settings/script_light.nix {
+          inherit pkgs;
+          inherit config;
+        })
+        (import ./settings/script_idle.nix {
           inherit pkgs;
           inherit config;
         })

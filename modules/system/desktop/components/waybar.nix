@@ -202,8 +202,8 @@
                 signal = 6;
                 format = "{}";
                 tooltip = true;
-                on-click = "toggle_hypridle.sh";
-                exec = "hypridle_icon.sh";
+                on-click = "script_idle";
+                exec = "get_idle_status";
                 return-type = "json";
               };
 
