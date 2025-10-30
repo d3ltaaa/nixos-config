@@ -73,6 +73,7 @@
               isSystemUser = true;
               home = "/var/empty";
               shell = "${pkgs.shadow}/bin/nologin";
+              group = "users";
             };
           }) uniqueForceUsers
         );
