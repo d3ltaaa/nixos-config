@@ -89,11 +89,8 @@
   applications = {
     configurations = {
       server = {
-        # grafana = {
-        #   enable = true;
-        # };
         jellyfin.enable = true; # a
-        n8n.enable = false; # a
+        n8n.enable = true; # a
         litellm.enable = true; # a
         radicale.enable = true; # a
         vaultwarden.enable = true; # a
@@ -247,12 +244,12 @@
                     href = "https://jf.${config.secrets.serverAddress}";
                   };
                 }
-                {
-                  "Grafana" = {
-                    icon = "grafana.png";
-                    href = "https://grafana.${config.secrets.serverAddress}";
-                  };
-                }
+                # {
+                #   "Grafana" = {
+                #     icon = "grafana.png";
+                #     href = "https://grafana.${config.secrets.serverAddress}";
+                #   };
+                # }
               ];
             }
             {
