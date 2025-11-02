@@ -54,7 +54,7 @@
                 inherit inputs;
               };
               home-manager.users.${user}.imports = [
-                inputs.nixvim.homeManagerModules.nixvim
+                inputs.nixvim.homeModules.nixvim
               ];
             }
           ];
@@ -80,7 +80,7 @@
                 inherit inputs;
               };
               home-manager.users.${user}.imports = [
-                inputs.nixvim.homeManagerModules.nixvim
+                inputs.nixvim.homeModules.nixvim
                 inputs.nvf.homeManagerModules.default
               ];
             }
@@ -107,7 +107,7 @@
                 inherit inputs;
               };
               home-manager.users.${user}.imports = [
-                inputs.nixvim.homeManagerModules.nixvim
+                inputs.nixvim.homeModules.nixvim
               ];
             }
           ];
@@ -133,7 +133,7 @@
                 inherit inputs;
               };
               home-manager.users.${user}.imports = [
-                inputs.nixvim.homeManagerModules.nixvim
+                inputs.nixvim.homeModules.nixvim
               ];
             }
           ];

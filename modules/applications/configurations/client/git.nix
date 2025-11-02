@@ -32,17 +32,19 @@
         config.credential.credentialstore = "cache";
       };
 
-      home-manager.users.${config.system.user.general.primary} =
-        let
-          nixos-config = config;
-        in
-        { config, ... }:
-        {
-          programs.git = {
-            enable = true;
-            userName = nixos-config.applications.configurations.client.git.username;
-            userEmail = nixos-config.applications.configurations.client.git.email;
-          };
-        };
+      # home-manager.users.${config.system.user.general.primary} =
+      #   let
+      #     nixos-config = config;
+      #   in
+      #   { config, ... }:
+      #   {
+      #     programs.git = {
+      #       enable = true;
+      #       settings = {
+      #         userName = nixos-config.applications.configurations.client.git.username;
+      #         userEmail = nixos-config.applications.configurations.client.git.email;
+      #       };
+      #     };
+      #   };
     };
 }

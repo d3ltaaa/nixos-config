@@ -90,7 +90,7 @@
     configurations = {
       server = {
         jellyfin.enable = true; # a
-        n8n.enable = true; # a
+        n8n.enable = false; # a
         litellm.enable = true; # a
         radicale.enable = true; # a
         vaultwarden.enable = true; # a
