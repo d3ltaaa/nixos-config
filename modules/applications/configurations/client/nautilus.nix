@@ -49,7 +49,7 @@
               "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
               "inode/mount-point" = [ "org.gnome.Nautilus.desktop" ];
               "x-scheme-handler/file" = [ "org.gnome.Nautilus.desktop" ];
-              "applications/x-gnome-saved-search" = [ "org.gnome.Nautilus.desktop" ];
+              "application/x-gnome-saved-search" = [ "org.gnome.Nautilus.desktop" ];
             };
           };
 

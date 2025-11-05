@@ -14,5 +14,15 @@
         ELECTRON_OZONE_PLATFORM_HINT = "auto";
         WLR_RENDERER_ALLOW_SOFTWARE = 1;
       };
+      home-manager.users.${config.system.user.general.primary} =
+        { config, ... }:
+        {
+          xdg.mimeApps = {
+            enable = true;
+            defaultApplications = {
+              "application/gzip" = [ "com.github.flxzt.rnote.desktop" ];
+            };
+          };
+        };
     };
 }
