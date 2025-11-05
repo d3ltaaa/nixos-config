@@ -224,8 +224,8 @@
                   Mod+U              { focus-workspace-up; }
                   Mod+Shift+I         { move-window-to-workspace-down; }
                   Mod+Shift+U         { move-window-to-workspace-up; }
-                  Mod+ISO_Level3_Shift+U         { move-workspace-down; }
-                  Mod+ISO_Level3_Shift+I         { move-workspace-up; }
+                  Mod+ISO_Level3_Shift+U         { move-workspace-up; }
+                  Mod+ISO_Level3_Shift+I         { move-workspace-down; }
                   Mod+ISO_Level3_Shift+K         { move-workspace-to-monitor-up; }
                   Mod+ISO_Level3_Shift+J         { move-workspace-to-monitor-down; }
                   Mod+ISO_Level3_Shift+H         { move-workspace-to-monitor-left; }
