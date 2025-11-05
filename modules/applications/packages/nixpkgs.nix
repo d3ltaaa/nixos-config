@@ -119,7 +119,6 @@
         arduino-ide
         telegram-desktop
         vlc
-        remnote
         tor-browser-bundle-bin
         bottles
       ];
@@ -143,6 +142,7 @@
       alt-system-pkgs = with pkgs-alt; [
         freecad-wayland
         orca-slicer
+        remnote
       ];
 
       user-pkgs = with pkgs; [
