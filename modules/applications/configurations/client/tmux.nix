@@ -27,9 +27,14 @@
             {
               enable = true;
               package = pkgs.tmux;
-              plugins = [
-                pkgs.tmuxPlugins.better-mouse-mode
-                # pkgs.tmuxPlugins.catppuccin
+              plugins = with pkgs.tmuxPlugins; [
+                {
+                  plugin = power-theme;
+                  extraConfig = ''
+                    set -g @tmux_power_theme 'snow'
+                  '';
+                }
+                better-mouse-mode
               ];
               keyMode = "vi";
               clock24 = true;
@@ -46,6 +51,9 @@
                 # pane number display
                 set-option -g display-panes-active-colour "#${palette.base0B}"  # base0B (strings, inherited class)
                 set-option -g display-panes-colour "#${palette.base0A}"  # base0A (classes, search background)
+
+                # status-bar theme
+                set-option -g @tmux_power_theme 'snow'
 
                 # clock
                 set-window-option -g clock-mode-colour "#${palette.base0B}"  # base0B (strings)
