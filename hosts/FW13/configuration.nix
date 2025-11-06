@@ -258,7 +258,7 @@
             {
               share = {
                 "/mnt/private" = {
-                  device = "//192.168.2.12/private";
+                  device = "//192.168.2.12/cloud-fh";
                 };
               };
             }
