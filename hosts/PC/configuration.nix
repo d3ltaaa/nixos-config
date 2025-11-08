@@ -413,5 +413,6 @@
   };
   environment.systemPackages = with pkgs; [
     ytdownloader
+    lunar-client
   ];
 }
