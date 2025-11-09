@@ -11,7 +11,7 @@
       cfg = config.applications.configurations.server.searx;
     in
     lib.mkIf cfg.enable {
-      searx = {
+      services.searx = {
         enable = true;
         redisCreateLocally = true;
         settings = {
