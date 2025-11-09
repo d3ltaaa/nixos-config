@@ -10,6 +10,7 @@
     privateWireguardKey = lib.strings.trim (
       builtins.readFile "/etc/credentials/wireguard-keys/private"
     );
+    searxSecret = lib.strings.trim (builtins.readFile "/etc/credentials/searx/secret");
   };
 
   imports = [
@@ -96,6 +97,7 @@
         vaultwarden.enable = true; # a
         homeassistant.enable = true; # a
         open-webui.enable = true;
+        searx.enable = true;
         ntfy = {
           enable = true; # a
           base-url = "https://ntfy.${config.secrets.serverAddress}"; # a
