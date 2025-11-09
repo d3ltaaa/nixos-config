@@ -306,11 +306,25 @@
                   publicKey = "VG4OX54Yr5GDktU9u9gf6MMqnUHpAXo4aGXrIf4qsRs=";
                   allowedIPs = [ "10.150.0.2/32" ];
                 }
+                {
+                  # EMMANUEL
+                  publicKey = "cOO+K/Y+hyTDp4RCweDPKpQfYSMUU2jFoeP61JZmwls=";
+                  allowedIPs = [ "10.150.0.3/32" ];
+                }
+                {
+                  # JOEL
+                  publicKey = "8hFsFEnQRzHA43mE/e4sqF/z7QHAOP9xQndVvveM4Fs=";
+                  allowedIPs = [ "10.150.0.4/32" ];
+                }
+                {
+                  # FELIX
+                  publicKey = "pGPpCeoZR32aR9Rhx3VL+KaZUbvywQZvPOekwEy7tUo=";
+                  allowedIPs = [ "10.150.0.5/32" ];
+                }
               ];
               postSetup = ''
                 # NAT/Masquerade: only allow NAT for traffic to 192.168.2.20
                 ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.150.0.0/24 -d 192.168.2.20 -j MASQUERADE
-                ${pkgs.iptables}/bin/iptables -I INPUT -i wg3 -d 192.168.2.11 -j DROP
 
                 # FORWARD: Only allow forwarding from wg3 to 192.168.2.20, block to anything else
                 ${pkgs.iptables}/bin/iptables -I FORWARD 1 -i wg3 -d 192.168.2.20 -j ACCEPT
@@ -331,7 +345,7 @@
                 ${pkgs.iptables}/bin/iptables -D FORWARD -i wg3 ! -d 192.168.2.20 -j DROP
 
                 # Remove INPUT DROP rule
-                ${pkgs.iptables}/bin/iptables -D INPUT -i wg3 -d 192.168.2.11 -j DROP
+                ${pkgs.iptables}/bin/iptables -D INPUT 1 -i wg3 -d 192.168.2.11 -j DROP
               '';
             }
           ];
@@ -376,6 +390,5 @@
     };
   };
 
-  networking.firewall.checkReversePath = false; # TODO does it change anything?
-  # allowedIPsAsRoutes = true; # Helps create the route automatically # TODO
+  # networking.firewall.checkReversePath = false; # TODO does it change anything?
 }
