@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 {
@@ -159,6 +160,18 @@
       };
       vpn = {
         wireguard = {
+          # client = {
+          #   enable = true;
+          #   address = [ "10.150.0.2/32" ];
+          #   port = 51940;
+          #   allowedIPs = [
+          #     "192.168.2.20/32"
+          #   ];
+          #   dns = [
+          #     "1.1.1.1"
+          #   ];
+          #   serverPublicKey = "J81wnH/Os46cc2cGRcH7LiBxZJkMrVuh1Xvaqp1IpkQ=";
+          # };
           client = {
             enable = true;
             address = [ "10.100.0.5/32" ];
@@ -404,4 +417,5 @@
       };
     };
   };
+  environment.systemPackages = with pkgs; [ lunar-client ];
 }
