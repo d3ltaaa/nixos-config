@@ -72,6 +72,14 @@
                 default = [ ];
                 description = "List of WireGuard peers.";
               };
+              postSetup = lib.mkOption {
+                type = lib.types.nullOr lib.types.str;
+                default = null;
+              };
+              postShutdown = lib.mkOption {
+                type = lib.types.nullOr lib.types.str;
+                default = null;
+              };
             };
           }
         );
@@ -142,8 +150,16 @@
                   peers = cfg-attr.serverPeers;
                 }
                 // lib.optionalAttrs true {
-                  postSetup = ''${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${cfg-attr.subnet} -o ${config.system.networking.general.lanInterface} -j MASQUERADE'';
-                  postShutdown = ''${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s ${cfg-attr.subnet} -o ${config.system.networking.general.lanInterface} -j MASQUERADE'';
+                  postSetup =
+                    if (cfg-attr.postSetup != null) then
+                      cfg-attr.postSetup
+                    else
+                      ''${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${cfg-attr.subnet} -o ${config.system.networking.general.lanInterface} -j MASQUERADE'';
+                  postShutdown =
+                    if (cfg-attr.postShutdown != null) then
+                      cfg-attr.postShutdown
+                    else
+                      ''${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s ${cfg-attr.subnet} -o ${config.system.networking.general.lanInterface} -j MASQUERADE'';
                 };
               }) enabledServers
             );
