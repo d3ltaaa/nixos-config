@@ -38,6 +38,10 @@
         type = lib.types.str;
         default = "";
       };
+      searxSecret = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+      };
     };
   };
 }

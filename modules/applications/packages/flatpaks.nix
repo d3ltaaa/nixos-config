@@ -16,6 +16,7 @@
       cfg = config.applications.packages.flatpaks;
       flatpak-pkgs = [
         "org.gnome.Calculator"
+        "org.gnome.clocks"
         "com.github.flxzt.rnote"
         "com.usebottles.bottles"
         "org.gnome.Connections"

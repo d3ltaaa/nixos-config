@@ -11,6 +11,7 @@
     ./ollama.nix
     ./open-webui.nix
     ./radicale.nix
+    ./searx.nix
     ./vaultwarden.nix
   ];
 }
