@@ -17,6 +17,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     winboat.url = "github:TibixDev/winboat";
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     # scripts.url = "github:d3ltaaa/fscripts";
     # scripts.flake = false;
