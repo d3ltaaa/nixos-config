@@ -255,11 +255,13 @@
               serverPeers = [
                 {
                   # FW13
+                  name = "FW13";
                   publicKey = "HmfK0Mlqu22xaIpvwf5CI+J5jvvJBt5q5hfTAHm4yHY=";
                   allowedIPs = [ "10.100.0.5/32" ];
                 }
                 {
                   # PHONE
+                  name = "PX8";
                   publicKey = "Am+PSLEvczLPxaoI/x2QEiQCe1N5/LwSzVqPD/CUDF4=";
                   allowedIPs = [ "10.100.0.3/32" ];
                 }
@@ -276,11 +278,13 @@
               serverPeers = [
                 {
                   # T14
+                  name = "T14";
                   publicKey = "UbMkKrSqVgxwdnkkeOwCz23H0/tcXaG17fceTwW2RgQ=";
                   allowedIPs = [ "10.200.0.2/32" ];
                 }
                 {
                   # PX8G
+                  name = "PX8G";
                   publicKey = "XsNEnllDfv77wDa25PXaGTczkGI/tankq8s/B4y9jEM=";
                   allowedIPs = [ "10.200.0.3/32" ];
                 }
@@ -303,23 +307,39 @@
               serverPeers = [
                 {
                   # FW13
+                  name = "FW13";
                   publicKey = "VG4OX54Yr5GDktU9u9gf6MMqnUHpAXo4aGXrIf4qsRs=";
                   allowedIPs = [ "10.150.0.2/32" ];
                 }
                 {
-                  # EMMANUEL
+                  # EMANUEL
+                  name = "EMANUEL";
                   publicKey = "cOO+K/Y+hyTDp4RCweDPKpQfYSMUU2jFoeP61JZmwls=";
                   allowedIPs = [ "10.150.0.3/32" ];
                 }
                 {
                   # JOEL
+                  name = "JOEL";
                   publicKey = "8hFsFEnQRzHA43mE/e4sqF/z7QHAOP9xQndVvveM4Fs=";
                   allowedIPs = [ "10.150.0.4/32" ];
                 }
                 {
                   # FELIX
+                  name = "FELIX";
                   publicKey = "pGPpCeoZR32aR9Rhx3VL+KaZUbvywQZvPOekwEy7tUo=";
                   allowedIPs = [ "10.150.0.5/32" ];
+                }
+                {
+                  # JONAS
+                  name = "JONAS";
+                  publicKey = "AHRFJHgGOwUAuyxfqxLjKEy9SP2Xh/XS2Zt2ty34Mh8=";
+                  allowedIPs = [ "10.150.0.6/32" ];
+                }
+                {
+                  # MARIO
+                  name = "MARIO";
+                  publicKey = "3TVgrPPqf9liLXTtIBvJD5oFSyzzsiXfX5BEk8wAfjg=";
+                  allowedIPs = [ "10.150.0.7/32" ];
                 }
               ];
               postSetup = ''

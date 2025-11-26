@@ -65,6 +65,10 @@
                         type = lib.types.listOf lib.types.str;
                         description = "List of allowed IPs for the peer.";
                       };
+                      name = lib.mkOption {
+                        type = lib.types.str;
+                        default = "";
+                      };
                     };
                   }
                 );
