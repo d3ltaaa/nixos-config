@@ -7,6 +7,7 @@
   # accessible for root at /etc/credentials
   imports = [
     ./hardware-configuration.nix
+    ./minecraft.nix
   ];
   secrets = {
     githubUsername = lib.strings.trim (builtins.readFile "/etc/credentials/github/username");
@@ -116,23 +117,4 @@
       };
     };
   };
-  services.minecraft-server = {
-    enable = true;
-    eula = true;
-    openFirewall = true; # Opens the port the server is running on (by default 25565 but in this case 43000)
-    declarative = true;
-    whitelist = {
-    };
-    serverProperties = {
-      server-port = 43000;
-      difficulty = 3;
-      gamemode = 1;
-      max-players = 5;
-      motd = "NixOS Minecraft server!";
-      white-list = false;
-      allow-cheats = true;
-    };
-    jvmOpts = "-Xms2048M -Xmx4096M";
-  };
-
 }
