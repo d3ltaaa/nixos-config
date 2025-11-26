@@ -137,6 +137,7 @@
       system-pkgs = with pkgs; [
         libreoffice
         xdg-desktop-portal-hyprland
+        geogebra6
       ];
 
       alt-system-pkgs = with pkgs-alt; [

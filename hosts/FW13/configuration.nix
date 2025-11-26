@@ -57,14 +57,14 @@
             mode "2880x1920"
             scale 2
             transform "normal" // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-            position x=0 y=0
+            position x=0 y=1200
         }
         output "DP-2" {
             // off
             mode "1920x1200"
             scale 1
             transform "normal" // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-            position x=0 y=-1200
+            position x=0 y=0
         }
       '';
 
