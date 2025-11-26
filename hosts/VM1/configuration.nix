@@ -64,7 +64,7 @@
         fail2ban.enable = true; # monitored
         clamav = {
           enable = true; # monitored
-          interval = "*-*-* 17:00:00";
+          interval = "*-*-* 6:00:00";
         };
       };
     };
