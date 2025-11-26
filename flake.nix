@@ -16,9 +16,9 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    winboat.url = "github:TibixDev/winboat";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
+    # winboat.url = "github:TibixDev/winboat";
     # scripts.url = "github:d3ltaaa/fscripts";
     # scripts.flake = false;
   };
