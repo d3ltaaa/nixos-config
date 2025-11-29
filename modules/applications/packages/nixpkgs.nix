@@ -21,6 +21,7 @@
           hypr = lib.mkEnableOption "Enables hypr-pkgs";
           desk = lib.mkEnableOption "Enables desk-pkgs";
           power = lib.mkEnableOption "Enables power-pkgs";
+          game = lib.mkEnableOption "Enables game-pkgs";
         };
         user.default = lib.mkEnableOption "Enables user-pkgs";
         font.default = lib.mkEnableOption "Enables font-pkgs";
@@ -134,6 +135,10 @@
         auto-cpufreq
       ];
 
+      game-pkgs = with pkgs; [
+        prismlauncher
+      ];
+
       system-pkgs = with pkgs; [
         libreoffice
         xdg-desktop-portal-hyprland
@@ -177,6 +182,7 @@
         ++ (pkgs.lib.optionals cfg.pkgs.system.hypr hypr-pkgs)
         ++ (pkgs.lib.optionals cfg.pkgs.system.desk desk-pkgs)
         ++ (pkgs.lib.optionals cfg.pkgs.system.power power-pkgs)
+        ++ (pkgs.lib.optionals cfg.pkgs.system.power game-pkgs)
         ++ (pkgs.lib.optionals cfg.pkgs-alt.system.default alt-system-pkgs);
 
       # Install user packages

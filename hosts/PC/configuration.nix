@@ -383,6 +383,7 @@
             hypr = true;
             desk = true;
             power = true;
+            game = true;
           };
           user.default = true;
           font.default = true;
@@ -411,8 +412,4 @@
       };
     };
   };
-  environment.systemPackages = with pkgs; [
-    ytdownloader
-    lunar-client
-  ];
 }

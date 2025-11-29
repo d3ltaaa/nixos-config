@@ -388,6 +388,7 @@
             hypr = true; # a
             desk = true; # a
             power = true; # a
+            game = true;
           };
           user.default = true; # a
           font.default = true; # a
@@ -406,7 +407,6 @@
       };
     };
   };
-  services.hardware.bolt.enable = true; # Thunderbolt device manager
 
   specialisation = {
     Hyprland.configuration = {
@@ -417,5 +417,6 @@
       };
     };
   };
-  environment.systemPackages = with pkgs; [ lunar-client ];
+
+  services.hardware.bolt.enable = true; # Thunderbolt device manager
 }
