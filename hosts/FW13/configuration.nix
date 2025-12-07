@@ -314,7 +314,7 @@
           enable = false; # a
         };
         winboat = {
-          enable = true; # a
+          enable = false; # a
         };
         qemu = {
           enable = false; # a

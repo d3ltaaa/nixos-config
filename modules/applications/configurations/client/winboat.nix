@@ -17,11 +17,11 @@
       cfg = config.applications.configurations.client.winboat;
     in
     lib.mkIf cfg.enable {
-      environment.systemPackages = [
-        inputs.winboat.packages.${pkgs.system}.winboat
-        pkgs.freerdp
-      ];
-      users.groups.docker.members = [ "${config.system.user.general.primary}" ];
-      virtualisation.docker.enable = true;
+      # environment.systemPackages = [
+      #   inputs.winboat.packages.${pkgs.system}.winboat
+      #   pkgs.freerdp
+      # ];
+      # users.groups.docker.members = [ "${config.system.user.general.primary}" ];
+      # virtualisation.docker.enable = true;
     };
 }
