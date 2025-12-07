@@ -1,7 +1,7 @@
 {
   inputs = {
     # unstable -> pkgs
-    pkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    pkgs.url = "github:nixos/nixpkgs/nixos-25.11";
 
     # stable -> pkgs-alt
     pkgs-alt.url = "github:nixos/nixpkgs/nixos-unstable";

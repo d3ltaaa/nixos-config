@@ -12,7 +12,7 @@ pkgs.writeShellApplication {
       cfg-applications = config.applications.configurations.client;
       menu =
         if cfg-components.rofi.enable then
-          "${pkgs.rofi-wayland}/bin/rofi -dmenu -i -theme-str '@import \"settings\"'"
+          "${pkgs.rofi}/bin/rofi -dmenu -i -theme-str '@import \"settings\"'"
         else
           "";
       terminal = if cfg-applications.foot.enable then "${pkgs.foot}/bin/foot" else "";

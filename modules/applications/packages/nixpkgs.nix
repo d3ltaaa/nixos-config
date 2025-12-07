@@ -120,12 +120,11 @@
         arduino-ide
         telegram-desktop
         vlc
-        tor-browser-bundle-bin
+        tor-browser
         bottles
       ];
 
       power-pkgs = with pkgs; [
-        furmark
         powertop
         ncdu
         htop

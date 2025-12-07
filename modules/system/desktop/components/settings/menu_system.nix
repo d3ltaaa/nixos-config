@@ -8,7 +8,7 @@ pkgs.writeShellApplication {
       menu =
         if cfg-components.rofi.enable then
           ''
-            ${pkgs.rofi-wayland}/bin/rofi -dmenu -i -theme-str '@theme "powermenu"'
+            ${pkgs.rofi}/bin/rofi -dmenu -i -theme-str '@theme "powermenu"'
           ''
         else
           "";
