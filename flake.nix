@@ -87,6 +87,32 @@
             }
           ];
         };
+        "SV" = pkgs.lib.nixosSystem {
+          # pkgs-alt -> pkgs
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            pkgs-alt = import pkgs-alt {
+              config.allowUnfree = true;
+            };
+          };
+          modules = [
+            ./hosts/SV/configuration.nix
+            ./modules/default.nix
+            inputs.nix-flatpak.nixosModules.nix-flatpak
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+              };
+              home-manager.users.${user}.imports = [
+                inputs.nixvim.homeModules.nixvim
+              ];
+            }
+          ];
+        };
         "VM0" = pkgs.lib.nixosSystem {
           # pkgs-alt -> pkgs
           system = "x86_64-linux";
